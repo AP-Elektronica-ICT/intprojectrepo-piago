@@ -1,0 +1,5 @@
+Goal of the project: 
+Make a rollmat on which you can play piano and even other instruments
+Mat can be placed on a surface, is connected via USB (also powersource) and maybe bluetooth connection
+
+All members have shared their contact information: whatsapp, email, discord

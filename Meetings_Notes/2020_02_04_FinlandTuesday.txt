@@ -45,7 +45,7 @@ As a user, I want scores of how well i played a song
 As a user, I want my scores to be sent to my phone or vice versa
 As a user, I want to see which keys i need to press
 
-Hardware
+Hardware: 
 As a user, i want to be able to use it wirelessly/bluetooth
 As a user, I want a clear piano overlay
 As a user, I want an on/off button(s) => 1 point

@@ -16,5 +16,10 @@ namespace PiaGo_CSharp
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

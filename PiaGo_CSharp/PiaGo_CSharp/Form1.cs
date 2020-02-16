@@ -21,5 +21,10 @@ namespace PiaGo_CSharp
         {
 
         }
+
+        private void btnBT_Click(object sender, EventArgs e)
+        {
+            Console.Beep(500,500);
+        }
     }
 }

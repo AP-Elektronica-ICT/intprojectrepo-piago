@@ -26,5 +26,10 @@ namespace PiaGo_CSharp
         {
             Console.Beep(500,500);
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

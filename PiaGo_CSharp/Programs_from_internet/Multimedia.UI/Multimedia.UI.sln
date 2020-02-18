@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multimedia.UI", "Multimedia.UI\Multimedia.UI.csproj", "{2D8A7C62-D77B-4FBD-A9AA-70B08C8CF56A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Driver", "Driver\Driver.csproj", "{5606AF10-A268-49D6-8970-FFED4DBCCF48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D8A7C62-D77B-4FBD-A9AA-70B08C8CF56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8A7C62-D77B-4FBD-A9AA-70B08C8CF56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8A7C62-D77B-4FBD-A9AA-70B08C8CF56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8A7C62-D77B-4FBD-A9AA-70B08C8CF56A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5606AF10-A268-49D6-8970-FFED4DBCCF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5606AF10-A268-49D6-8970-FFED4DBCCF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5606AF10-A268-49D6-8970-FFED4DBCCF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5606AF10-A268-49D6-8970-FFED4DBCCF48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38115599-1605-4AF5-8FA6-8A5675B40EA0}
+	EndGlobalSection
+EndGlobal

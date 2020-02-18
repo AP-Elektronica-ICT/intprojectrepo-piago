@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void loginActivity(View view) {
+    public void loginActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), PiagoMainScreen.class);
         startActivity(intent);
     }
@@ -42,5 +42,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void passwordRecovery(View view) {
-    }*/
+    }
 }

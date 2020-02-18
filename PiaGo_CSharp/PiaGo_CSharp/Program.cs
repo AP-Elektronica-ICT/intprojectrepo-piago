@@ -1,8 +1,16 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.Devices.Bluetooth;
+using InTheHand;
+using InTheHand.Net.Bluetooth;
+using InTheHand.Net.Ports;
+using InTheHand.Net.Sockets;
+
 
 namespace PiaGo_CSharp
 {

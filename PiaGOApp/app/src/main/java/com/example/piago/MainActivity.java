@@ -17,6 +17,16 @@ public class MainActivity extends AppCompatActivity {
     public void loginActivity(View view) {
         Intent intent = new Intent(getApplicationContext(), PiagoMainScreen.class);
         startActivity(intent);
+    }
 
+    public void playOffline(View view) {
+        Intent intent = new Intent(getApplicationContext(), PlayPiago.class);
+        startActivity(intent);
+    }
+
+    public void signupActivity(View view) {
+    }
+
+    public void passwordRecovery(View view) {
     }
 }

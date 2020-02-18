@@ -2,6 +2,7 @@ package com.example.piago;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,6 +15,8 @@ public class PiagoMainScreen extends AppCompatActivity {
     }
 
     public void launchJam(View view) {
+        Intent intent = new Intent(getApplicationContext(), PlayPiago.class);
+        startActivity(intent);
     }
 
     public void launchLearn(View view) {

@@ -28,25 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnUser = new System.Windows.Forms.Button();
+            this.canvas = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.rbLearn = new System.Windows.Forms.RadioButton();
+            this.btnCustomize = new System.Windows.Forms.Button();
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.rbJam = new System.Windows.Forms.RadioButton();
-            this.btnCustomize = new System.Windows.Forms.Button();
+            this.rbLearn = new System.Windows.Forms.RadioButton();
             this.btnBT = new System.Windows.Forms.Button();
+            this.btnUser = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.gb1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnUser
+            // canvas
             // 
-            this.btnUser.Location = new System.Drawing.Point(12, 12);
-            this.btnUser.Name = "btnUser";
-            this.btnUser.Size = new System.Drawing.Size(96, 23);
-            this.btnUser.TabIndex = 0;
-            this.btnUser.Text = "Login / User info";
-            this.btnUser.UseVisualStyleBackColor = true;
-            this.btnUser.Click += new System.EventHandler(this.button1_Click);
+            this.canvas.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(0, 104);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(800, 346);
+            this.canvas.TabIndex = 6;
+            this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
             // comboBox1
             // 
@@ -55,21 +58,19 @@
             "Classic Piano",
             "Trumpet",
             "..."});
-            this.comboBox1.Location = new System.Drawing.Point(218, 12);
+            this.comboBox1.Location = new System.Drawing.Point(218, 14);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
             // 
-            // rbLearn
+            // btnCustomize
             // 
-            this.rbLearn.AutoSize = true;
-            this.rbLearn.Location = new System.Drawing.Point(6, 19);
-            this.rbLearn.Name = "rbLearn";
-            this.rbLearn.Size = new System.Drawing.Size(52, 17);
-            this.rbLearn.TabIndex = 2;
-            this.rbLearn.TabStop = true;
-            this.rbLearn.Text = "Learn";
-            this.rbLearn.UseVisualStyleBackColor = true;
+            this.btnCustomize.Location = new System.Drawing.Point(345, 14);
+            this.btnCustomize.Name = "btnCustomize";
+            this.btnCustomize.Size = new System.Drawing.Size(96, 23);
+            this.btnCustomize.TabIndex = 4;
+            this.btnCustomize.Text = "Customize keys";
+            this.btnCustomize.UseVisualStyleBackColor = true;
             // 
             // gb1
             // 
@@ -92,18 +93,20 @@
             this.rbJam.Text = "Jam";
             this.rbJam.UseVisualStyleBackColor = true;
             // 
-            // btnCustomize
+            // rbLearn
             // 
-            this.btnCustomize.Location = new System.Drawing.Point(345, 10);
-            this.btnCustomize.Name = "btnCustomize";
-            this.btnCustomize.Size = new System.Drawing.Size(96, 23);
-            this.btnCustomize.TabIndex = 4;
-            this.btnCustomize.Text = "Customize keys";
-            this.btnCustomize.UseVisualStyleBackColor = true;
+            this.rbLearn.AutoSize = true;
+            this.rbLearn.Location = new System.Drawing.Point(6, 19);
+            this.rbLearn.Name = "rbLearn";
+            this.rbLearn.Size = new System.Drawing.Size(52, 17);
+            this.rbLearn.TabIndex = 2;
+            this.rbLearn.TabStop = true;
+            this.rbLearn.Text = "Learn";
+            this.rbLearn.UseVisualStyleBackColor = true;
             // 
             // btnBT
             // 
-            this.btnBT.Location = new System.Drawing.Point(692, 12);
+            this.btnBT.Location = new System.Drawing.Point(692, 14);
             this.btnBT.Name = "btnBT";
             this.btnBT.Size = new System.Drawing.Size(96, 23);
             this.btnBT.TabIndex = 5;
@@ -111,34 +114,57 @@
             this.btnBT.UseVisualStyleBackColor = true;
             this.btnBT.Click += new System.EventHandler(this.btnBT_Click);
             // 
+            // btnUser
+            // 
+            this.btnUser.Location = new System.Drawing.Point(12, 12);
+            this.btnUser.Name = "btnUser";
+            this.btnUser.Size = new System.Drawing.Size(96, 23);
+            this.btnUser.TabIndex = 0;
+            this.btnUser.Text = "Login / User info";
+            this.btnUser.UseVisualStyleBackColor = true;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnUser);
+            this.panel1.Controls.Add(this.btnBT);
+            this.panel1.Controls.Add(this.gb1);
+            this.panel1.Controls.Add(this.btnCustomize);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 104);
+            this.panel1.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnBT);
-            this.Controls.Add(this.btnCustomize);
-            this.Controls.Add(this.gb1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.btnUser);
+            this.Controls.Add(this.canvas);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "PiaGo";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnUser;
+        private System.Windows.Forms.Panel canvas;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RadioButton rbLearn;
+        private System.Windows.Forms.Button btnCustomize;
         private System.Windows.Forms.GroupBox gb1;
         private System.Windows.Forms.RadioButton rbJam;
-        private System.Windows.Forms.Button btnCustomize;
+        private System.Windows.Forms.RadioButton rbLearn;
         private System.Windows.Forms.Button btnBT;
+        private System.Windows.Forms.Button btnUser;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

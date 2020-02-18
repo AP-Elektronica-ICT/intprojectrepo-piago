@@ -43,7 +43,7 @@
             // 
             // canvas
             // 
-            this.canvas.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 104);
             this.canvas.Name = "canvas";

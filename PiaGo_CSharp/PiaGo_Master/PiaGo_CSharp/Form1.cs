@@ -13,6 +13,7 @@ namespace PiaGo_CSharp
     public partial class Form1 : Form
     {
         //CODE FOR GRAPHICAL PIANO
+        int multiplier = 5;
         Pen blackPen = new Pen(Color.Black);
         Pen whitePen = new Pen(Color.White);
         Brush blackBrush = new SolidBrush(Color.Black);
@@ -47,32 +48,71 @@ namespace PiaGo_CSharp
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            DrawBlackNote(20, 10);          
-            DrawLNote(30,10);
-            //DrawBLNote(30, 10);
-            //DrawTNote(20,70);
+            int var = 70;
+            //DrawWhiteNote(10, 10);
+            DrawLNote(var, 10);
+            var += 60;
+            //DrawBlackNote(105, 10);
+            DrawTNote(var, 10);
+            var += 60;
+            //DrawBlackNote(165, 10);
+            DrawTNote(var, 10);
+            var += 60;
+            //DrawBlackNote(165, 10);
+            DrawBLNote(var, 10);
+            var += 60;
+            DrawLNote(var, 10);
+            var += 60;
+            //DrawBlackNote(105, 10);
+            DrawTNote(var, 10);
+            var += 60;
+            //DrawBlackNote(165, 10);
+            DrawBLNote(var, 10);
+            var += 60;
+
+
+
+
 
         }
 
-        private void DrawBlackNote(int X,int Y)
+        private void DrawBlackNote(int X, int Y)
         {
-            g.FillRectangle(blackBrush,X, Y, 10, 60);
+            g.FillRectangle(blackBrush, X, Y, 10 * multiplier, 29 * multiplier);
+        }
+        private void DrawWhiteNote(int X, int Y)
+        {
+            g.DrawRectangle(blackPen, X, Y, 12 * multiplier, 42 * multiplier);
         }
         private void DrawLNote(int X, int Y)
         {
-            g.DrawLine(whitePen, X, Y, X, 69);
-            //g.DrawLine(blackPen, X+60,Y,X+60,Y+10);
-            //g.DrawLine(blackPen, X + 60, Y + 10, X + 40, Y + 10);
-            //g.DrawLine(blackPen, X+40,Y+10,X+40,Y+5);
-            //g.DrawLine(blackPen, X + 40, Y + 5, X, Y + 5);
-            //g.DrawLine(blackPen, X, Y + 5, X, Y);
+            g.DrawLine(blackPen, X      , Y     , X     , Y + 42 * multiplier);
+            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
+            g.DrawLine(blackPen, X + 7 * multiplier, Y     , X     , Y);
         }
         private void DrawBLNote(int X, int Y)
         {
+            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y     , X + 5 * multiplier, Y);
+            g.DrawLine(blackPen, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
+            g.DrawLine(blackPen, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
 
         }
         private void DrawTNote(int X, int Y)
         {
+            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
+            g.DrawLine(blackPen, X + 7 * multiplier, Y     , X + 5 * multiplier, Y);
+            g.DrawLine(blackPen, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(blackPen, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
+            g.DrawLine(blackPen, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
 
         }
     }

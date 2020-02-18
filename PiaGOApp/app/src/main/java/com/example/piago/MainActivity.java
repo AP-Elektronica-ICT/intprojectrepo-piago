@@ -8,10 +8,23 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button testButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        testButton = findViewById(R.id.titlescreen_offline);
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),BluetoothActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void loginActivity(View view) {

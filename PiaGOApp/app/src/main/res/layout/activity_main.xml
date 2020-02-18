@@ -39,17 +39,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
-        android:id="@+id/titlescreen_title"
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="67dp"
-        android:layout_marginTop="80dp"
-        android:text="PiaGO"
-        android:textSize="50dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/piago_logo_black"/>
 
+    <Button
+        android:id="@+id/titlescreen_loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:onClick="loginActivity"
+        android:text="Login"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlescreen_password" />
     <TextView
         android:id="@+id/titlescreen_signup"
         android:layout_width="wrap_content"
@@ -58,8 +65,9 @@
         android:text="Not a member yet? Signup!"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titlescreen_password"
-        android:alpha="0.5"/>
+        app:layout_constraintTop_toBottomOf="@+id/titlescreen_loginButton"
+        android:alpha="0.5"
+        android:onClick="signupActivity"/>
 
     <TextView
         android:id="@+id/titlescreen_forgetpassword"
@@ -70,6 +78,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titlescreen_signup"
-        android:alpha="0.5"/>
+        android:alpha="0.5"
+        android:onClick="passwordRecovery"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

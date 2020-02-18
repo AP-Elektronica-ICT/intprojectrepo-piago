@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BluetoothActivity">
+
+    <Button
+        android:id="@+id/button_bton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BT ON"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <Button
+        android:id="@+id/button_btoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BT OFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="209dp" />
+
+    <Button
+        android:id="@+id/button_getdevices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get paired dev"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="306dp" />
+
+    <Button
+        android:id="@+id/button_discoverable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set discoverable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="394dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

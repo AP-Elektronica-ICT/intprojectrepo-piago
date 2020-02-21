@@ -68,7 +68,6 @@ public class BluetoothActivity extends AppCompatActivity {
                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(intent,REQUEST_ENABLE_BT);
                 }else{
-
                     Toast.makeText(getApplicationContext(),"Bluetooth is already ON",Toast.LENGTH_SHORT).show();
                 }
             }

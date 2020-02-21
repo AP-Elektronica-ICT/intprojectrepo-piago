@@ -9,16 +9,16 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button testButton;
+    Button mOfflineButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testButton = findViewById(R.id.titlescreen_offline);
+        mOfflineButton = findViewById(R.id.titlescreen_offline);
 
-        testButton.setOnClickListener(new View.OnClickListener() {
+        mOfflineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),BluetoothActivity.class);

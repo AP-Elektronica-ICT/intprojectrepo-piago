@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         mOfflineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),BluetoothActivity.class);
+                Intent intent = new Intent(getApplicationContext(),BTCommunication.class);
                 startActivity(intent);
             }
         });

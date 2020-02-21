@@ -3,7 +3,7 @@
     partial class Form1
     {
         /// <summary>
-        /// Required designer variable.
+        /// Required designer keyboardXiable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
@@ -47,7 +47,7 @@
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(0, 104);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(800, 346);
+            this.canvas.Size = new System.Drawing.Size(984, 257);
             this.canvas.TabIndex = 6;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
@@ -134,16 +134,17 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 104);
+            this.panel1.Size = new System.Drawing.Size(984, 104);
             this.panel1.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(984, 361);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "PiaGo";
             this.Load += new System.EventHandler(this.Form1_Load);

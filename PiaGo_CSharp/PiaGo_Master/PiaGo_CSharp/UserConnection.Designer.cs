@@ -3,7 +3,7 @@
     partial class UserConnection
     {
         /// <summary>
-        /// Required designer variable.
+        /// Required designer keyboardXiable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 

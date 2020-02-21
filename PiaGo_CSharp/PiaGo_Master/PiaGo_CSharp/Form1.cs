@@ -10,109 +10,146 @@ using System.Windows.Forms;
 
 namespace PiaGo_CSharp
 {
+    enum KeyType { BLACK_KEY,WHITE_KEY,L_KEY,RL_KEY,T_KEY }
     public partial class Form1 : Form
     {
         //CODE FOR GRAPHICAL PIANO
-        int multiplier = 5;
+        int multiplier = 4;
+        int whiteKeySpace = 12;
+        int blackKeySpace = 7;
+        static int keyboardX = 35;
+        static int keyboardY = 35;
         Pen blackPen = new Pen(Color.Black);
         Pen whitePen = new Pen(Color.White);
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
-        static int centerX, centerY;
-        static int startX, startY;
-        static int endX, endY;
-        static int angle;
         //------------------------
         public Form1()
         {
             InitializeComponent();
-            startX = canvas.Width / 2;
-            startY = canvas.Height / 2;
-        }
-
-        private void btnUser_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void btnBT_Click(object sender, EventArgs e)
-        {
-            Console.Beep(500, 500);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            startX = canvas.Width / 2;
-            startY = canvas.Height / 2;
+            whiteKeySpace *= multiplier;
+            blackKeySpace *= multiplier;
             canvas.Refresh();
         }
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            int var = 70;
-            //DrawWhiteNote(10, 10);
-            DrawLNote(var, 10);
-            var += 60;
-            //DrawBlackNote(105, 10);
-            DrawTNote(var, 10);
-            var += 60;
-            //DrawBlackNote(165, 10);
-            DrawTNote(var, 10);
-            var += 60;
-            //DrawBlackNote(165, 10);
-            DrawBLNote(var, 10);
-            var += 60;
-            DrawLNote(var, 10);
-            var += 60;
-            //DrawBlackNote(105, 10);
-            DrawTNote(var, 10);
-            var += 60;
-            //DrawBlackNote(165, 10);
-            DrawBLNote(var, 10);
-            var += 60;
+            int keyboardX = 35;
+            
+            DrawLNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX+blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
 
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
 
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawBLNote(keyboardX, keyboardY, blackPen);
+            keyboardX += whiteKeySpace;
+            //-----------------------------
+            DrawLNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawBLNote(keyboardX, keyboardY, blackPen);
+            keyboardX += whiteKeySpace;
+            //-----------------------------
+            DrawLNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawBLNote(keyboardX, keyboardY, blackPen);
+            keyboardX += whiteKeySpace;
+            //-----------------------------
+            DrawLNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawBLNote(keyboardX, keyboardY, blackPen);
+            keyboardX += whiteKeySpace;
+            //-----------------------------
+            DrawLNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawTNote(keyboardX, keyboardY, blackPen);
+            DrawBlackNote(keyboardX + blackKeySpace, keyboardY, blackBrush);
+            keyboardX += whiteKeySpace;
+
+            DrawBLNote(keyboardX, keyboardY, blackPen);
+            keyboardX += whiteKeySpace;
+            //-----------------------------
+            DrawWhiteNote(keyboardX, keyboardY, blackPen);
 
 
 
         }
 
-        private void DrawBlackNote(int X, int Y)
+        private void DrawBlackNote(int X, int Y, Brush color)
         {
-            g.FillRectangle(blackBrush, X, Y, 10 * multiplier, 29 * multiplier);
+            g.FillRectangle(color, X, Y, 10 * multiplier, 29 * multiplier);
         }
-        private void DrawWhiteNote(int X, int Y)
+        private void DrawWhiteNote(int X, int Y, Pen color)
         {
-            g.DrawRectangle(blackPen, X, Y, 12 * multiplier, 42 * multiplier);
+            g.DrawRectangle(color, X, Y, 12 * multiplier, 42 * multiplier);
         }
-        private void DrawLNote(int X, int Y)
+        private void DrawLNote(int X, int Y, Pen color)
         {
-            g.DrawLine(blackPen, X      , Y     , X     , Y + 42 * multiplier);
-            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
-            g.DrawLine(blackPen, X + 7 * multiplier, Y     , X     , Y);
+            g.DrawLine(color, X      , Y     , X     , Y + 42 * multiplier);
+            g.DrawLine(color, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(color, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
+            g.DrawLine(color, X + 7 * multiplier, Y     , X     , Y);
         }
-        private void DrawBLNote(int X, int Y)
+        private void DrawBLNote(int X, int Y, Pen color)
         {
-            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y     , X + 5 * multiplier, Y);
-            g.DrawLine(blackPen, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
-            g.DrawLine(blackPen, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
+            g.DrawLine(color, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(color, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y);
+            g.DrawLine(color, X + 12 * multiplier, Y     , X + 5 * multiplier, Y);
+            g.DrawLine(color, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
+            g.DrawLine(color, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
 
         }
-        private void DrawTNote(int X, int Y)
+        private void DrawTNote(int X, int Y, Pen color)
         {
-            g.DrawLine(blackPen, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
-            g.DrawLine(blackPen, X + 7 * multiplier, Y     , X + 5 * multiplier, Y);
-            g.DrawLine(blackPen, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(blackPen, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
-            g.DrawLine(blackPen, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
+            g.DrawLine(color, X      , Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
+            g.DrawLine(color, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 12 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 7 * multiplier, Y + 29 * multiplier, X + 7 * multiplier, Y);
+            g.DrawLine(color, X + 7 * multiplier, Y     , X + 5 * multiplier, Y);
+            g.DrawLine(color, X + 5 * multiplier, Y     , X + 5 * multiplier, Y + 29 * multiplier);
+            g.DrawLine(color, X + 5 * multiplier, Y + 29 * multiplier, X     , Y + 29 * multiplier);
+            g.DrawLine(color, X      , Y + 29 * multiplier, X     , Y + 42 * multiplier);
 
         }
     }

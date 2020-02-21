@@ -112,7 +112,6 @@
             this.btnBT.TabIndex = 5;
             this.btnBT.Text = "BLOOTOOT";
             this.btnBT.UseVisualStyleBackColor = true;
-            this.btnBT.Click += new System.EventHandler(this.btnBT_Click);
             // 
             // btnUser
             // 
@@ -122,7 +121,6 @@
             this.btnUser.TabIndex = 0;
             this.btnUser.Text = "Login / User info";
             this.btnUser.UseVisualStyleBackColor = true;
-            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
             // panel1
             // 

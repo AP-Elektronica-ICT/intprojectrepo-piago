@@ -1,4 +1,4 @@
-package com.internationalproject.piago;
+package com.example.piago;
 
 import org.junit.Test;
 

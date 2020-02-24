@@ -17,12 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="4">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="2">
+
+            <!--Hierin buttons zetten-->
+
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/piago_white_tiles"
@@ -139,6 +143,265 @@
                 android:layout_weight="1"
                 android:background="@drawable/tile_white"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+        </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
 
+            <!--Hierin buttons zetten-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/piago_black_tiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.25">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="0.5"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:id="@+id/tile_black_11"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/tile_black_12"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tile_black"
+                android:layout_weight="0.5"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

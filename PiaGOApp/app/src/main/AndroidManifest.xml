@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BTCommunication"></activity>
-        <activity android:name=".PlayPiago" />
+        <activity android:name=".PlayPiago"
+            android:screenOrientation="landscape"/>
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".PiagoMainScreen" />
         <activity android:name=".MainActivity">

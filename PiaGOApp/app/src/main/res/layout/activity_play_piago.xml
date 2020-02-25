@@ -12,7 +12,36 @@
         android:id="@+id/button_playSound"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="playSound"/>
+        android:onClick="playSound"
+        android:background="@drawable/button_piago_main"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instrument"
+        android:id="@+id/button_instrument"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:onClick="playSound"
+        android:background="@drawable/button_piago_main"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Customize Keys  "
+        android:id="@+id/button_customize_keys"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/switch_piago"
+        android:onClick="playSound"
+        android:background="@drawable/button_piago_main"/>
+
+    <Switch
+        android:id="@+id/switch_piago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/button_instrument"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Learn" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +52,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="2">
-
-            <!--Hierin buttons zetten-->
 
 
         </LinearLayout>
@@ -161,7 +188,6 @@
             android:orientation="horizontal"
             android:layout_weight="2">
 
-            <!--Hierin buttons zetten-->
 
 
         </LinearLayout>

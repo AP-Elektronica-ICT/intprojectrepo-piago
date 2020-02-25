@@ -23,7 +23,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainscreen_logo"
-        android:onClick="launchJam"/>
+        android:onClick="launchJam"
+        android:background="@drawable/button_piago_main"/>
 
     <Button
         android:id="@+id/mainscreen_button_learn"
@@ -34,7 +35,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainscreen_button_jam"
-        android:onClick="launchLearn"/>
+        android:onClick="launchLearn"
+        android:background="@drawable/button_piago_main"/>
 
     <Button
         android:id="@+id/mainscreen_button_customize"
@@ -45,7 +47,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainscreen_button_learn"
-        android:onClick="launchCustomize"/>
+        android:onClick="launchCustomize"
+        android:background="@drawable/button_piago_main"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

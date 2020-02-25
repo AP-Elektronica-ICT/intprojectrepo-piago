@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PiaGO</string>
+    <string name="read_buffer"><![CDATA[<Read buffer>]]></string>
+    <string name="bluetooth_status"><![CDATA[<Bluetooth Status>]]></string>
 </resources>

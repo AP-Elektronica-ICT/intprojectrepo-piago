@@ -112,6 +112,7 @@
             this.btnBT.TabIndex = 5;
             this.btnBT.Text = "BLOOTOOT";
             this.btnBT.UseVisualStyleBackColor = true;
+            this.btnBT.Click += new System.EventHandler(this.btnBT_Click);
             // 
             // btnUser
             // 

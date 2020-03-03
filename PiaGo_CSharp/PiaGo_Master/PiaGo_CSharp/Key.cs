@@ -8,11 +8,58 @@ using System.Drawing;
 namespace PiaGo_CSharp
 {
     enum KeyType    { BLACK_KEY, WHITE_KEY, L_KEY, RL_KEY, T_KEY }
-    enum KeyColor   { BLACK, RED, GREEN, BLUE }
+    enum KeyColor   { BLACK, RED, GREEN, BLUE, YELLOW, WHITE }
     abstract class Key
     {
-        public Pen Color { get; set; }
-        public Brush Fill { get; set; }
+        public Pen Color
+        {
+            get
+            {
+                return new Pen(System.Drawing.Color.Black);
+            }
+        }
+
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+
+        private System.Drawing.SolidBrush fill;
+
+        public void SetKeyFill(KeyColor inputColor)
+        {
+            switch (inputColor)
+            {
+                case KeyColor.BLACK:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+                    break;
+                case KeyColor.RED:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+                    break;
+                case KeyColor.GREEN:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.Green);
+                    break;
+                case KeyColor.BLUE:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.Blue);
+                    break;
+                case KeyColor.YELLOW:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
+                    break;
+                default:
+                    fill = new System.Drawing.SolidBrush(System.Drawing.Color.White);
+                    break;
+            }
+        }
+
+        public System.Drawing.SolidBrush GetKeyFill()
+        {
+            return fill;
+        }
+
         public KeyType Type { get; }
         public int X { get; }
         public int Y { get; }
@@ -24,6 +71,5 @@ namespace PiaGo_CSharp
             this.Y = inputY;
          }
         public abstract void Draw(Graphics g,int multiplier);
-        public abstract void ChangeColor(KeyColor color);
     }
 }

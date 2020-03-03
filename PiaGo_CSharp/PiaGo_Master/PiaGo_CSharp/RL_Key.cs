@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,36 +13,30 @@ namespace PiaGo_CSharp
         public RL_Key(int inputX, int inputY, KeyColor inputColor)
                : base(KeyType.T_KEY, inputX, inputY, inputColor)
         {
-            ChangeColor(inputColor);
+            this.SetKeyFill(inputColor);
         }
 
         public override void Draw(Graphics g, int multiplier)
         {
-            g.DrawLine(this.Color, X, Y + 42 * multiplier, X + 12 * multiplier, Y + 42 * multiplier);
-            g.DrawLine(this.Color, X + 12 * multiplier, Y + 42 * multiplier, X + 12 * multiplier, Y);
-            g.DrawLine(this.Color, X + 12 * multiplier, Y, X + 5 * multiplier, Y);
-            g.DrawLine(this.Color, X + 5 * multiplier, Y, X + 5 * multiplier, Y + 29 * multiplier);
-            g.DrawLine(this.Color, X + 5 * multiplier, Y + 29 * multiplier, X, Y + 29 * multiplier);
-            g.DrawLine(this.Color, X, Y + 29 * multiplier, X, Y + 42 * multiplier);
-        }
+            // Create a graphics path
+            GraphicsPath path = new GraphicsPath();
 
-        public override void ChangeColor(KeyColor color)
-        {
-            switch (color)
-            {
-                case KeyColor.BLACK:
-                    this.Color = new Pen(System.Drawing.Color.Black);
-                    break;
-                case KeyColor.RED:
-                    this.Color = new Pen(System.Drawing.Color.Red);
-                    break;
-                case KeyColor.GREEN:
-                    this.Color = new Pen(System.Drawing.Color.Green);
-                    break;
-                case KeyColor.BLUE:
-                    this.Color = new Pen(System.Drawing.Color.Blue);
-                    break;
-            }
-        }
+            path.StartFigure();
+            // Add lines
+            path.AddLine(this.X, this.Y + 42 * multiplier, this.X + 12 * multiplier, this.Y + 42 * multiplier);
+            path.AddLine(this.X + 12 * multiplier, this.Y + 42 * multiplier, this.X + 12 * multiplier, this.Y);
+            path.AddLine(this.X + 12 * multiplier, this.Y, this.X + 5 * multiplier, this.Y);
+            path.AddLine(this.X + 5 * multiplier, this.Y, this.X + 5 * multiplier, this.Y + 29 * multiplier);
+            path.AddLine(this.X + 5 * multiplier, this.Y + 29 * multiplier, this.X, this.Y + 29 * multiplier);
+            path.AddLine(this.X, this.Y + 29 * multiplier, this.X, this.Y + 42 * multiplier);
+
+            // Create Region
+            Region reg = new Region(path);
+            // Fill region
+            g.FillRegion(this.GetKeyFill(), reg);
+            // Draw contour
+            g.DrawPath(this.Color, path);
+
+        }        
     }
 }

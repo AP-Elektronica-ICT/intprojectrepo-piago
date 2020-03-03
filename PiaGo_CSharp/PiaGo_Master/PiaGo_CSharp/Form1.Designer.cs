@@ -154,6 +154,7 @@
             this.ClientSize = new System.Drawing.Size(984, 361);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";

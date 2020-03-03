@@ -37,8 +37,10 @@
             this.btnBT = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gb1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // canvas
@@ -125,6 +127,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnUser);
             this.panel1.Controls.Add(this.btnBT);
             this.panel1.Controls.Add(this.gb1);
@@ -135,6 +138,14 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 104);
             this.panel1.TabIndex = 7;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(470, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -151,6 +162,7 @@
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -166,6 +178,7 @@
         private System.Windows.Forms.Button btnBT;
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PiaGo_CSharp
-{ 
+{
     //      - To-Do List
     //      ------------
-    //      - only resfresh changing key, not complete piano
-
+    //      - use picturebox instead of canvas
     public partial class Form1 : Form
     {
+        int test = 0;
         //CODE FOR GRAPHICAL PIANO
         int multiplier = 4;
         int whiteKeySpace = 12;
@@ -35,18 +35,20 @@ namespace PiaGo_CSharp
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            int test = rnd.Next(0, keyBoard.Count);
-            keyBoard[test].SetKeyFill(KeyColor.YELLOW);
-            canvas.Refresh();
+            
+            keyBoard[test].SetKeyFill(KeyColor.BLUE);
+            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
+            test++;
+            if (test >= 32)
+                test = 0;      
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //CODE FOR GRAPHICAL PIANO
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();
-            canvas.Refresh();
+            
             //------------------------
         }
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -104,5 +106,5 @@ namespace PiaGo_CSharp
         }
 
         
-    }
+    }    
 }

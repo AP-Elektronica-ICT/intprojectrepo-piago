@@ -9,8 +9,12 @@ namespace PiaGo_CSharp
 {
     enum KeyType    { BLACK_KEY, WHITE_KEY, L_KEY, RL_KEY, T_KEY }
     enum KeyColor   { BLACK, RED, GREEN, BLUE, YELLOW, WHITE }
+
     abstract class Key
     {
+
+        public int KeyName { get; set; }
+
         public Pen Color
         {
             get

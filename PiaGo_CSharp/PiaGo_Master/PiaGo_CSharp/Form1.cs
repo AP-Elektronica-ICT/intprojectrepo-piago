@@ -42,13 +42,16 @@ namespace PiaGo_CSharp
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            //CODE FOR LOGO
+            pbLogo.Width = 623 / 4;
+            pbLogo.Height = 252 / 4;
+            //------------------------
             //CODE FOR GRAPHICAL PIANO
             StartScreen strt = new StartScreen();
             strt.ShowDialog();
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
-            CreateKeyboard();
-            
+            CreateKeyboard();          
             //------------------------
         }
         private void canvas_Paint(object sender, PaintEventArgs e)

@@ -12,8 +12,6 @@ using System.Windows.Forms;
 namespace PiaGo_CSharp
 {
     //      - To-Do List
-    //      ------------
-    //      - use picturebox instead of canvas
     public partial class Form1 : Form
     {
         int test = 0;
@@ -45,6 +43,8 @@ namespace PiaGo_CSharp
         private void Form1_Load(object sender, EventArgs e)
         {
             //CODE FOR GRAPHICAL PIANO
+            StartScreen strt = new StartScreen();
+            strt.ShowDialog();
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();

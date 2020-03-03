@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Midi;
 
 namespace PiaGo_CSharp
 {
@@ -14,9 +15,18 @@ namespace PiaGo_CSharp
         [STAThread]
         static void Main()
         {
+            OutputDevice outputDevice = ExampleUtil.ChooseOutputDeviceFromConsole();
+            if (outputDevice == null)
+            {
+                Console.WriteLine("Warning, there is no sound device found!");
+            }
+            if (outputDevice != null)
+            {
+                outputDevice.Open();
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(outputDevice));
         }
     }
 }

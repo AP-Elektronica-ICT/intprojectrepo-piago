@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Midi;
 
 namespace PiaGo_CSharp
 {
@@ -16,7 +17,9 @@ namespace PiaGo_CSharp
     //      - use picturebox instead of canvas
     public partial class Form1 : Form
     {
+
         int test = 0;
+        OutputDevice outputDevice;
         //CODE FOR GRAPHICAL PIANO
         int multiplier = 4;
         int whiteKeySpace = 12;
@@ -28,14 +31,15 @@ namespace PiaGo_CSharp
         List<Key> keyBoard = new List<Key>();
         //------------------------
         Random rnd = new Random();
-        public Form1()
+        public Form1(OutputDevice _outputDevice)
         {
             InitializeComponent();
+            outputDevice = _outputDevice;
         }
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            
+            outputDevice.SendNoteOn(Channel.Channel1, Pitch.C4, 80);
             keyBoard[test].SetKeyFill(KeyColor.BLUE);
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;

@@ -46,9 +46,7 @@ namespace PiaGo_CSharp
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
             //------------------------
-            //CODE FOR GRAPHICAL PIANO
-            StartScreen strt = new StartScreen();
-            strt.ShowDialog();
+            //CODE FOR GRAPHICAL PIANO            
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();          
@@ -108,6 +106,10 @@ namespace PiaGo_CSharp
             keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));            
         }
 
-        
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            StartScreen strt = new StartScreen();
+            strt.ShowDialog();
+        }
     }    
 }

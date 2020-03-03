@@ -13,8 +13,9 @@ namespace PiaGo_CSharp
     public partial class StartScreen : Form
     {
         //--TO DO--
-        //  FIREBASE Login implementatie
+        //  FIREBASE Login implementatie NIET BELANGRIJK
         //---------
+        //alles midi zodat 
 
 
         public StartScreen()

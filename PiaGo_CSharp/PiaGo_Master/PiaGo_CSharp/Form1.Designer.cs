@@ -38,11 +38,9 @@
             this.btnBT = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.gb1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,14 +61,14 @@
             "Classic Piano",
             "Trumpet",
             "..."});
-            this.comboBox1.Location = new System.Drawing.Point(404, 14);
+            this.comboBox1.Location = new System.Drawing.Point(290, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
             // 
             // btnCustomize
             // 
-            this.btnCustomize.Location = new System.Drawing.Point(531, 14);
+            this.btnCustomize.Location = new System.Drawing.Point(417, 10);
             this.btnCustomize.Name = "btnCustomize";
             this.btnCustomize.Size = new System.Drawing.Size(96, 23);
             this.btnCustomize.TabIndex = 4;
@@ -81,7 +79,7 @@
             // 
             this.gb1.Controls.Add(this.rbJam);
             this.gb1.Controls.Add(this.rbLearn);
-            this.gb1.Location = new System.Drawing.Point(300, 12);
+            this.gb1.Location = new System.Drawing.Point(186, 3);
             this.gb1.Name = "gb1";
             this.gb1.Size = new System.Drawing.Size(98, 77);
             this.gb1.TabIndex = 3;
@@ -121,17 +119,17 @@
             // 
             // btnUser
             // 
-            this.btnUser.Location = new System.Drawing.Point(198, 12);
+            this.btnUser.Location = new System.Drawing.Point(3, 75);
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(96, 23);
             this.btnUser.TabIndex = 0;
             this.btnUser.Text = "Login / User info";
             this.btnUser.UseVisualStyleBackColor = true;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.pbLogo);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btnUser);
             this.panel1.Controls.Add(this.btnBT);
             this.panel1.Controls.Add(this.gb1);
@@ -142,14 +140,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 104);
             this.panel1.TabIndex = 7;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(656, 21);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
             // 
             // pbLogo
             // 
@@ -177,7 +167,6 @@
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
 
@@ -194,7 +183,6 @@
         private System.Windows.Forms.Button btnBT;
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pbLogo;
     }
 }

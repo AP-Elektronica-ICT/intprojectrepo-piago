@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class PlayPiago extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_piago);
+
         mPlaySound=findViewById(R.id.button_playSound);
         mPlaySound.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +43,10 @@ public class PlayPiago extends AppCompatActivity {
    // public void playSound(View view) {
    // }
 
+    private void pause(){
+
+    }
+
     private void playSound(){
         if(ReceivedBluetoothSignal != null){
             switch (ReceivedBluetoothSignal){
@@ -53,7 +59,8 @@ public class PlayPiago extends AppCompatActivity {
                         mP.start();
                     }
 
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000001":{
@@ -64,7 +71,10 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_g3);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
+
                     break;
                 }
                 case "000010":{
@@ -74,7 +84,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_a4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000011":{
@@ -85,7 +96,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_b4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000100":{
@@ -96,7 +108,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_c4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000101":{
@@ -107,7 +120,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_d4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000110":{
@@ -118,7 +132,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_e4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "000111":{
@@ -129,7 +144,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_f4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001000":{
@@ -140,7 +156,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_g4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001001":{
@@ -151,7 +168,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_a5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001010":{
@@ -162,7 +180,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_b5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001011":{
@@ -173,7 +192,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_c5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001100":{
@@ -184,7 +204,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_d5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001101":{
@@ -195,7 +216,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_e5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001110":{
@@ -206,7 +228,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_f5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "001111":{
@@ -217,7 +240,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_g5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "010000":{
@@ -228,7 +252,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_g5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "010001":{
@@ -247,7 +272,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_g5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_white);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_white, pressedTile);
                     break;
                 }
                 case "010010":{
@@ -258,7 +284,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_gb3);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "010011":{
@@ -269,7 +296,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_ab4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "010100":{
@@ -280,7 +308,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_bb4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "010101":{
@@ -291,7 +320,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_db4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "010110":{
@@ -302,7 +332,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_eb4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "010111":{
@@ -313,7 +344,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_gb4);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011000":{
@@ -324,7 +356,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_ab5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011001":{
@@ -335,7 +368,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_bb5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011010":{
@@ -346,7 +380,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_db5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011011":{
@@ -357,7 +392,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_eb5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011100":{
@@ -368,7 +404,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_gb5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011101":{
@@ -379,7 +416,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_gb5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
                 case "011110":{
@@ -390,7 +428,8 @@ public class PlayPiago extends AppCompatActivity {
                         MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_gb5);
                         mP.start();
                     }
-                    pressedTile.setBackgroundResource(R.drawable.tile_black);
+                    //Pause for visual key update
+                    PauseMethod(R.drawable.tile_black, pressedTile);
                     break;
                 }
 
@@ -421,6 +460,20 @@ public class PlayPiago extends AppCompatActivity {
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
         playSound();
+    }
+
+    private void PauseMethod(final int tileDrawable, final Button pressedTile){
+        new CountDownTimer(500, 100) {
+            public void onFinish() {
+                // When timer is finished
+                // Execute your code here
+                pressedTile.setBackgroundResource(tileDrawable);
+            }
+
+            public void onTick(long millisUntilFinished) {
+                // millisUntilFinished    The amount of time until finished.
+            }
+        }.start();
     }
 }
 

@@ -12,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.interproject.piago.R;
+
+import org.w3c.dom.Text;
+
 import java.util.Set;
 
 public class BluetoothActivity extends AppCompatActivity {
 
-
+// NOT USED!!!!!
     private static final int REQUEST_ENABLE_BT=0;
     private static final int REQUEST_DISCOVER_BT=1;
 

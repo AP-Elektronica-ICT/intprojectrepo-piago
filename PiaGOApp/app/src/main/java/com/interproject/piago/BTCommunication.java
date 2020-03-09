@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -64,7 +65,6 @@ public class BTCommunication extends AppCompatActivity {
         setContentView(R.layout.activity_btcommunication);
 
 
-
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
         mScanBtn = (Button)findViewById(R.id.scan);
@@ -90,6 +90,7 @@ public class BTCommunication extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     mReadBuffer.setText(readMessage);
+                    //int i = Integer.parseInt(readMessage);
                     ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
                     toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
                 }
@@ -247,8 +248,9 @@ public class BTCommunication extends AppCompatActivity {
             {
                 public void run() {
                     boolean fail = false;
-
-                    BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                    // Change adress to static MAC adress
+                    //BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                    BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
 
                     try {
                         mBTSocket = createBluetoothSocket(device);
@@ -309,6 +311,7 @@ public class BTCommunication extends AppCompatActivity {
         }
 
         public void run() {
+
             byte[] buffer = new byte[1024];  // buffer store for the stream
             int bytes; // bytes returned from read()
             // Keep listening to the InputStream until an exception occurs

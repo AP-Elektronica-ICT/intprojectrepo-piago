@@ -17,6 +17,11 @@ namespace PiaGo_CSharp
             this.SetKeyFill(inputColor);
         }
 
+        public override void Clear()
+        {
+            this.SetKeyFill(KeyColor.BLACK);
+        }
+
         public override void Draw(Graphics g, int multiplier)
         {
             // Create a graphics path

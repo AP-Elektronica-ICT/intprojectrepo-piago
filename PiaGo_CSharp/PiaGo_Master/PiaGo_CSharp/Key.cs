@@ -36,6 +36,11 @@ namespace PiaGo_CSharp
             Console.Beep(freq, duration);
         }
 
+        public virtual void Clear()
+        {
+            this.SetKeyFill(KeyColor.WHITE);
+        }
+
 
         private System.Drawing.SolidBrush fill;
 

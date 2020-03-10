@@ -16,8 +16,8 @@ namespace PiaGo_CSharp
     {
         int test = 0;
         //CODE FOR GRAPHICAL PIANO
-        int multiplier = 4
-            ;
+        int multiplier = 4;
+        Key prevKey;
         int whiteKeySpace = 12;
         int blackKeySpace = 5;
         static int keyboardX = 35;
@@ -34,9 +34,21 @@ namespace PiaGo_CSharp
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            
-            keyBoard[test].SetKeyFill(KeyColor.BLUE);
-            keyBoard[test].MakeSound(37+test*37,100);
+            if (prevKey == null)
+            {
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+                
+            }
+
+            keyBoard[test].MakeSound(37+test*37,100);            
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             if (test >= 32)

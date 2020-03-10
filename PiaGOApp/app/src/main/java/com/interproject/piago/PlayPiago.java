@@ -2,6 +2,7 @@ package com.interproject.piago;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
@@ -455,11 +456,14 @@ public class PlayPiago extends AppCompatActivity {
     }
 
     public void playSoundNow(View view) {
-        //MediaPlayer mP = MediaPlayer.create(this, R.raw.piano_f4);
-        //mP.start();
+        /*
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
         playSound();
+         */
+
+        Intent intent = new Intent(getApplicationContext(), TestMidiDriver.class);
+        startActivity(intent);
     }
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){

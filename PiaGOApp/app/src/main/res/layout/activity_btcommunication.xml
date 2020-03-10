@@ -108,6 +108,14 @@
             android:layout_below="@+id/off"
             android:layout_toRightOf="@+id/checkboxLED1"
             android:layout_toEndOf="@+id/checkboxLED1" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="autoconnectbt"
+            android:id="@+id/btnautoconnectbt"
+            android:layout_below="@+id/off"
+            android:layout_toRightOf="@+id/checkboxLED1"
+            android:layout_toEndOf="@+id/checkboxLED1" />
 
         <ListView
             android:layout_width="wrap_content"

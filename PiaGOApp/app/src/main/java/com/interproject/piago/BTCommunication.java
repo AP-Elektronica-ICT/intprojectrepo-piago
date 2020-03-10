@@ -33,6 +33,8 @@ import java.util.UUID;
 
 public class BTCommunication extends AppCompatActivity {
 
+
+    private Button mBtnAutoConnect;
     // GUI Components
     private TextView mBluetoothStatus;
     private TextView mReadBuffer;
@@ -64,6 +66,51 @@ public class BTCommunication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_btcommunication);
 
+
+        mBtnAutoConnect=(Button)findViewById(R.id.btnautoconnectbt);
+
+        mBtnAutoConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread()
+                {
+                    public void run() {
+                        boolean fail = false;
+                        // Change adress to static MAC adress
+                        //BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                        BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
+
+                        try {
+                            mBTSocket = createBluetoothSocket(device);
+                        } catch (IOException e) {
+                            fail = true;
+                            Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                        }
+                        // Establish the Bluetooth socket connection.
+                        try {
+                            mBTSocket.connect();
+                        } catch (IOException e) {
+                            try {
+                                fail = true;
+                                mBTSocket.close();
+                                mHandler.obtainMessage(CONNECTING_STATUS, -1, -1)
+                                        .sendToTarget();
+                            } catch (IOException e2) {
+                                //insert code to deal with this
+                                Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        if(fail == false) {
+                            mConnectedThread = new ConnectedThread(mBTSocket);
+                            mConnectedThread.start();
+
+                            mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, "Piago Keyboard")
+                                    .sendToTarget();
+                        }
+                    }
+                }.start();
+            }
+        });
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);

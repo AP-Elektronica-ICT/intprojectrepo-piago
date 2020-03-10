@@ -31,6 +31,11 @@ namespace PiaGo_CSharp
             set { myVar = value; }
         }
 
+        public void MakeSound(int freq,int duration)
+        {
+            Console.Beep(freq, duration);
+        }
+
 
         private System.Drawing.SolidBrush fill;
 

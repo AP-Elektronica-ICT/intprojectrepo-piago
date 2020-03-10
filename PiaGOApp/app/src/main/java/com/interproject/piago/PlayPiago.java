@@ -462,7 +462,7 @@ public class PlayPiago extends AppCompatActivity {
         playSound();
          */
 
-        Intent intent = new Intent(getApplicationContext(), TestMidiDriver.class);
+        Intent intent = new Intent(getApplicationContext(), TestMidiActivity.class);
         startActivity(intent);
     }
 

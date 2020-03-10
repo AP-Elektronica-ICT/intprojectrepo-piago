@@ -40,6 +40,7 @@ public class TestMidiDriver extends AppCompatActivity implements MidiDriver.OnMi
 
         // Get the configuration.
         config = midiDriver.config();
+        config[1] = 104;
 
         // Print out the details.
         Log.d(this.getClass().getName(), "maxVoices: " + config[0]);
@@ -106,4 +107,6 @@ public class TestMidiDriver extends AppCompatActivity implements MidiDriver.OnMi
 
         return false;
     }
+
+
 }

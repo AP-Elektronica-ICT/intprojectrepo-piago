@@ -31,6 +31,16 @@ namespace PiaGo_CSharp
             set { myVar = value; }
         }
 
+        public void MakeSound(int freq,int duration)
+        {
+            Console.Beep(freq, duration);
+        }
+
+        public virtual void Clear()
+        {
+            this.SetKeyFill(KeyColor.WHITE);
+        }
+
 
         private System.Drawing.SolidBrush fill;
 

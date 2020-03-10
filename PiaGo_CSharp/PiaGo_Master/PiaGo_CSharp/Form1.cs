@@ -13,15 +13,14 @@ using Midi;
 namespace PiaGo_CSharp
 {
     //      - To-Do List
-    //      ------------
-    //      - use picturebox instead of canvas
     public partial class Form1 : Form
     {
 
         int test = 0;
         OutputDevice outputDevice;
         //CODE FOR GRAPHICAL PIANO
-        int multiplier = 4;
+        int multiplier = 4
+            ;
         int whiteKeySpace = 12;
         int blackKeySpace = 5;
         Instrument instrument = (Instrument)0 ;
@@ -50,6 +49,7 @@ namespace PiaGo_CSharp
             //outputDevice.SendNoteOn(Channel.Channel1, (Pitch) NoteNumber, 80);
             //outputDevice.SendNoteOff(Channel.Channel1, (Pitch)NoteNumber, 80);
             keyBoard[test].SetKeyFill(KeyColor.BLUE);
+            keyBoard[test].MakeSound(37+test*37,100);
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             NoteNumber++;
@@ -58,7 +58,11 @@ namespace PiaGo_CSharp
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //CODE FOR GRAPHICAL PIANO
+            //CODE FOR LOGO
+            pbLogo.Width = 623 / 4;
+            pbLogo.Height = 252 / 4;
+            //------------------------
+            //CODE FOR GRAPHICAL PIANO            
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();

@@ -85,5 +85,6 @@ namespace PiaGo_CSharp
             this.Y = inputY;
          }
         public abstract void Draw(Graphics g,int multiplier);
+
     }
 }

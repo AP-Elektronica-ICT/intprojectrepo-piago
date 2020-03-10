@@ -48,29 +48,29 @@
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(0, 104);
+            this.canvas.Location = new System.Drawing.Point(0, 128);
+            this.canvas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(984, 257);
+            this.canvas.Size = new System.Drawing.Size(1312, 316);
             this.canvas.TabIndex = 6;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Classic Piano",
-            "Trumpet",
-            "..."});
-            this.comboBox1.Location = new System.Drawing.Point(290, 12);
+            this.comboBox1.Location = new System.Drawing.Point(387, 15);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(160, 24);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btnCustomize
             // 
-            this.btnCustomize.Location = new System.Drawing.Point(417, 10);
+            this.btnCustomize.Location = new System.Drawing.Point(556, 12);
+            this.btnCustomize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCustomize.Name = "btnCustomize";
-            this.btnCustomize.Size = new System.Drawing.Size(96, 23);
+            this.btnCustomize.Size = new System.Drawing.Size(128, 28);
             this.btnCustomize.TabIndex = 4;
             this.btnCustomize.Text = "Customize keys";
             this.btnCustomize.UseVisualStyleBackColor = true;
@@ -79,18 +79,21 @@
             // 
             this.gb1.Controls.Add(this.rbJam);
             this.gb1.Controls.Add(this.rbLearn);
-            this.gb1.Location = new System.Drawing.Point(186, 3);
+            this.gb1.Location = new System.Drawing.Point(248, 4);
+            this.gb1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(98, 77);
+            this.gb1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gb1.Size = new System.Drawing.Size(131, 95);
             this.gb1.TabIndex = 3;
             this.gb1.TabStop = false;
             // 
             // rbJam
             // 
             this.rbJam.AutoSize = true;
-            this.rbJam.Location = new System.Drawing.Point(6, 42);
+            this.rbJam.Location = new System.Drawing.Point(8, 52);
+            this.rbJam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbJam.Name = "rbJam";
-            this.rbJam.Size = new System.Drawing.Size(44, 17);
+            this.rbJam.Size = new System.Drawing.Size(55, 21);
             this.rbJam.TabIndex = 3;
             this.rbJam.TabStop = true;
             this.rbJam.Text = "Jam";
@@ -99,9 +102,10 @@
             // rbLearn
             // 
             this.rbLearn.AutoSize = true;
-            this.rbLearn.Location = new System.Drawing.Point(6, 19);
+            this.rbLearn.Location = new System.Drawing.Point(8, 23);
+            this.rbLearn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbLearn.Name = "rbLearn";
-            this.rbLearn.Size = new System.Drawing.Size(52, 17);
+            this.rbLearn.Size = new System.Drawing.Size(66, 21);
             this.rbLearn.TabIndex = 2;
             this.rbLearn.TabStop = true;
             this.rbLearn.Text = "Learn";
@@ -109,9 +113,10 @@
             // 
             // btnBT
             // 
-            this.btnBT.Location = new System.Drawing.Point(878, 14);
+            this.btnBT.Location = new System.Drawing.Point(1171, 17);
+            this.btnBT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBT.Name = "btnBT";
-            this.btnBT.Size = new System.Drawing.Size(96, 23);
+            this.btnBT.Size = new System.Drawing.Size(128, 28);
             this.btnBT.TabIndex = 5;
             this.btnBT.Text = "BLOOTOOT";
             this.btnBT.UseVisualStyleBackColor = true;
@@ -119,9 +124,10 @@
             // 
             // btnUser
             // 
-            this.btnUser.Location = new System.Drawing.Point(3, 75);
+            this.btnUser.Location = new System.Drawing.Point(4, 92);
+            this.btnUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUser.Name = "btnUser";
-            this.btnUser.Size = new System.Drawing.Size(96, 23);
+            this.btnUser.Size = new System.Drawing.Size(128, 28);
             this.btnUser.TabIndex = 0;
             this.btnUser.Text = "Login / User info";
             this.btnUser.UseVisualStyleBackColor = true;
@@ -137,30 +143,33 @@
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(984, 104);
+            this.panel1.Size = new System.Drawing.Size(1312, 128);
             this.panel1.TabIndex = 7;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pbLogo
             // 
             this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
-            this.pbLogo.Location = new System.Drawing.Point(3, 3);
+            this.pbLogo.Location = new System.Drawing.Point(4, 4);
+            this.pbLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(177, 68);
+            this.pbLogo.Size = new System.Drawing.Size(236, 84);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLogo.TabIndex = 9;
             this.pbLogo.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 361);
+            this.ClientSize = new System.Drawing.Size(1312, 444);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "PiaGo";

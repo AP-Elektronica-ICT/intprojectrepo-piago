@@ -1,4 +1,4 @@
-package com.example.piago;
+package com.interproject.piago;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

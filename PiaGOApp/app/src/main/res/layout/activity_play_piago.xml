@@ -12,7 +12,6 @@
         android:id="@+id/button_playSound"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="playSound"
         android:background="@drawable/button_piago_main"
         android:visibility="gone"/>
     <Button
@@ -22,7 +21,7 @@
         android:id="@+id/button_instrument"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="playSound"
+        android:onClick="playSoundNow"
         android:background="@drawable/button_piago_main"/>
     <Button
         android:layout_width="wrap_content"
@@ -33,6 +32,13 @@
         app:layout_constraintLeft_toRightOf="@id/switch_piago"
         android:onClick="playSound"
         android:background="@drawable/button_piago_main"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/testValue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_customize_keys"/>
 
     <Switch
         android:id="@+id/switch_piago"

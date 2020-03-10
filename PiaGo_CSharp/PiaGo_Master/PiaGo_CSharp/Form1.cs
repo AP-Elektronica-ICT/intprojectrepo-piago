@@ -22,6 +22,7 @@ namespace PiaGo_CSharp
         OutputDevice outputDevice;
         //CODE FOR GRAPHICAL PIANO
         int multiplier = 4;
+        Key prevKey;
         int whiteKeySpace = 12;
         int blackKeySpace = 5;
         Instrument instrument = (Instrument)0 ;
@@ -49,7 +50,21 @@ namespace PiaGo_CSharp
             clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)NoteNumber, 80, clock.Time+1));
             //outputDevice.SendNoteOn(Channel.Channel1, (Pitch) NoteNumber, 80);
             //outputDevice.SendNoteOff(Channel.Channel1, (Pitch)NoteNumber, 80);
-            keyBoard[test].SetKeyFill(KeyColor.BLUE);
+            if (prevKey == null)
+            {
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+                
+            }
+
+            keyBoard[test].MakeSound(37+test*37,100);            
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             NoteNumber++;

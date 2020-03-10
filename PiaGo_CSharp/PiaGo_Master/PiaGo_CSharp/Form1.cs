@@ -56,10 +56,10 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[test];
                 
             }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time + 1));
+            //clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time));
+            //clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time + 1));
 
-            keyBoard[test].MakeSound(37+test*37,100);            
+            keyBoard[test].MakeSound(test,100, clock, outputDevice);            
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             if (test >= 32)

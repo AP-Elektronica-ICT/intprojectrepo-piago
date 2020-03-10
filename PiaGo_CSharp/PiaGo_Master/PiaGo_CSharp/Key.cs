@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Midi;
 
 namespace PiaGo_CSharp
 {
@@ -23,17 +24,11 @@ namespace PiaGo_CSharp
             }
         }
 
-        private int myVar;
-
-        public int MyProperty
+        public void MakeSound(int freq,int duration, Clock clock, OutputDevice outputDevice)
         {
-            get { return myVar; }
-            set { myVar = value; }
-        }
-
-        public void MakeSound(int freq,int duration)
-        {
-            Console.Beep(freq, duration);
+            //Console.Beep(freq, duration);
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + freq), 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + freq), 80, clock.Time + 1));
         }
 
         public virtual void Clear()
@@ -85,6 +80,8 @@ namespace PiaGo_CSharp
             this.Y = inputY;
          }
         public abstract void Draw(Graphics g,int multiplier);
+
+        
 
     }
 }

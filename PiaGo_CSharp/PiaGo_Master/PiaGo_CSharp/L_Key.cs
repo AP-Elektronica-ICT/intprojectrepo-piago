@@ -36,6 +36,8 @@ namespace PiaGo_CSharp
             g.FillRegion(this.GetKeyFill(), reg);
             // Draw contour
             g.DrawPath(this.Color, path);
+
+            
         }      
     }
 

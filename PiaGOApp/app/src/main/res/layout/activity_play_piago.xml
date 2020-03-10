@@ -26,11 +26,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="  Customize Keys  "
-        android:id="@+id/button_customize_keys"
+        android:text="  AutoConnectBT  "
+        android:id="@+id/button_autocnct"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/switch_piago"
-        android:onClick="playSound"
+
         android:background="@drawable/button_piago_main"/>
 
     <EditText
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/testValue"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/button_customize_keys"/>
+        app:layout_constraintLeft_toRightOf="@id/button_autocnct"/>
 
     <Switch
         android:id="@+id/switch_piago"

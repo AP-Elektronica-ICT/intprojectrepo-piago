@@ -77,7 +77,7 @@ public class BTCommunication extends AppCompatActivity {
                     public void run() {
                         boolean fail = false;
                         // Change adress to static MAC adress
-                        //BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                        // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
                         BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
 
                         try {

@@ -124,20 +124,19 @@ public class PlayPiago extends AppCompatActivity {
                     //mReadBuffer.setText(readMessage);
                     //int i = Integer.parseInt(readMessage);
                     //ReceivedBluetoothSignal=readMessage;
-                    String toneToPlay= (readMessage.substring(0,6)).toString();
+                    String toneToPlay= (readMessage.substring(0,6));
                     ReceivedBluetoothSignal="1";
                     playSound(toneToPlay);
                     Log.d("BTRECEIVED", "handleMessage: reveiving msg from arduino"+toneToPlay);
-                    /*ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);*/
+
                 }
 
-                if(msg.what == CONNECTING_STATUS){
-                    /*if(msg.arg1 == 1)
-                        //mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-                    else
-                        //mBluetoothStatus.setText("Connection Failed");*/
-                }
+//                if(msg.what == CONNECTING_STATUS){
+//                    /*if(msg.arg1 == 1)
+//                        //mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+//                    else
+//                        //mBluetoothStatus.setText("Connection Failed");*/
+//                }
             }
         };
 
@@ -162,7 +161,7 @@ public class PlayPiago extends AppCompatActivity {
     }
 
     private void playSound(String sound){
-        if(ReceivedBluetoothSignal != null){
+        //if(ReceivedBluetoothSignal != null){
             switch (sound){
                 case "000000":{
                     Button pressedTile = findViewById(R.id.tile_white_0);
@@ -554,9 +553,9 @@ public class PlayPiago extends AppCompatActivity {
 
                 default:
                     break;
-            }
+            //}
 
-            ReceivedBluetoothSignal = null;
+            //ReceivedBluetoothSignal = null;
         }
     }
 

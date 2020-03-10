@@ -24,6 +24,10 @@ namespace PiaGo_CSharp
         int multiplier = 4;
         int whiteKeySpace = 12;
         int blackKeySpace = 5;
+        Instrument instrument = (Instrument)0 ;
+        int NoteNumber = 60;
+        Clock clock;
+
         static int keyboardX = 35;
         static int keyboardY = 35;
         Brush blackBrush = new SolidBrush(Color.Black);
@@ -35,14 +39,19 @@ namespace PiaGo_CSharp
         {
             InitializeComponent();
             outputDevice = _outputDevice;
+            outputDevice.SendProgramChange(Channel.Channel1, instrument);
         }
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            outputDevice.SendNoteOn(Channel.Channel1, Pitch.C4, 80);
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel10, (Pitch)NoteNumber, 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel10, (Pitch)NoteNumber, 80, clock.Time+1));
+            //outputDevice.SendNoteOn(Channel.Channel1, (Pitch) NoteNumber, 80);
+            //outputDevice.SendNoteOff(Channel.Channel1, (Pitch)NoteNumber, 80);
             keyBoard[test].SetKeyFill(KeyColor.BLUE);
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
+            NoteNumber++;
             if (test >= 32)
                 test = 0;      
         }
@@ -52,8 +61,17 @@ namespace PiaGo_CSharp
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();
-            
-            //------------------------
+            //Initialize instrument-list
+            for (int i = 0; i < 128; i++)
+            {
+                Instrument tempInstrument = (Instrument)i;
+                string listItem = tempInstrument.Name();
+                comboBox1.Items.Add(listItem);
+            }
+            comboBox1.SelectedIndex = 0;
+            //Initialize Clock for piano
+            clock = new Clock(120);
+            clock.Start();
         }
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
@@ -109,6 +127,13 @@ namespace PiaGo_CSharp
             keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));            
         }
 
-        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedInstrument = (string)comboBox1.SelectedItem;
+            int resultIndex;
+            resultIndex = comboBox1.FindStringExact(selectedInstrument);
+            Instrument tempInstrument = (Instrument)resultIndex;
+            outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
+        }
     }    
 }

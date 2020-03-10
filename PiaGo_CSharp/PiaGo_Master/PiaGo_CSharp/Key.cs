@@ -58,6 +58,15 @@ namespace PiaGo_CSharp
                     break;
             }
         }
+        public void MakeSound(int freq, int duration)
+        {
+            Console.Beep(freq, duration);
+        }
+
+        public virtual void Clear()
+        {
+            this.SetKeyFill(KeyColor.WHITE);
+        }
 
         public System.Drawing.SolidBrush GetKeyFill()
         {

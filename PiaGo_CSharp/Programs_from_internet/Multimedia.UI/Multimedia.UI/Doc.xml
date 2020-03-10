@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Multimedia.UI</name>
+    </assembly>
+    <members>
+        <member name="T:Multimedia.UI.PianoKeyOrientation">
+            <summary>
+            Specifies the orientation of the piano keys.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyOrientation.Vertical">
+            <summary>
+            Piano key is oriented vertically.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyOrientation.HorizontalLeft">
+            <summary>
+            Piano key is oriented horizontally with the back of the key facing
+            left.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyOrientation.HorizontalRight">
+            <summary>
+            Piano key is oriented horizontally with the back of the key facing
+            right.
+            </summary>
+        </member>
+        <member name="T:Multimedia.UI.PianoKeyShape">
+            <summary>
+            Specifies the shape of piano keys.
+            </summary>
+            <remarks>
+            There are four basic shapes for piano keys. The <b>L</b> shape 
+            represents keys C and F, and the backwards version represents keys E 
+            and B. The upside down <b>T</b> shape represents keys D, G, and A. 
+            And finally, the rectangular shape represents all flat keys.  
+            </remarks>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyShape.LShape">
+            <summary>
+            The shape of the piano key will resemble the letter L.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyShape.LShapeBackwards">
+            <summary>
+            The shape of the piano key will resemble the letter L.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyShape.TShape">
+            <summary>
+            The shape of the piano key will resemble the letter T upside down.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKeyShape.RectShape">
+            <summary>
+            The shape of the piano key will be that of a rectangle.
+            </summary>
+        </member>
+        <member name="T:Multimedia.UI.PianoKey">
+            <summary>
+            Represents a piano key.
+            </summary>
+        </member>
+        <member name="F:Multimedia.UI.PianoKey.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="E:Multimedia.UI.PianoKey.StateChanged">
+            <summary>
+            Occurs when the state of the piano key changes.
+            </summary>
+            <remarks>
+            This event is triggered when the state of the piano key changes 
+            from on to off and vice versa.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.#ctor">
+            <summary>
+            Initializes a new instance of the PianoKey class.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.TurnKeyOn">
+            <summary>
+            Turns the piano key on.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.TurnKeyOff">
+            <summary>
+            Turns the piano key off.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.IsKeyOn">
+            <summary>
+            Indicates whether or not the piano key is on.
+            </summary>
+            <returns>
+            <b>true</b> if the piano key is on; otherwise, <b>false</b>.
+            </returns>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnMouseEnter(System.EventArgs)">
+            <summary>
+            Raises the MouseEnter event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data. 
+            </param>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnMouseLeave(System.EventArgs)">
+            <summary>
+            Raises the MouseLeave event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data. 
+            </param>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the MouseDown event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data. 
+            </param>
+            <remarks>
+            This event turns the piano key on.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the MouseUp event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data. 
+            </param>
+            <remarks>
+            This event turns the piano key off.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the MouseMove event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data. 
+            </param>
+            <remarks>
+            If the mouse moves outside of the piano key and the key is on,
+            the key is turned off and the mouse is released.
+            </remarks>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the Paint event.
+            </summary>
+            <param name="pe">
+            A PaintEventArgs that contains the event data. 
+            </param>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.OnSizeChanged(System.EventArgs)">
+            <summary>
+            Raises the SizeChanged event.
+            </summary>
+            <param name="e">
+            An EventArgs that contains the event data.
+            </param>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPoints">
+            <summary>
+            Initializes the points that make up the piano key's region based
+            on its shape and orientation.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsHorz">
+            <summary>
+            Initialize points for horizontal orientation.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsVert">
+            <summary>
+            Initializes points for vertical orientation.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsHorzLShape">
+            <summary>
+            Initialize points for horizontal L shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsHorzLShapeBackwards">
+            <summary>
+            Initialize points for horizontal backward L shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsVertLShape">
+            <summary>
+            Initialize points for vertical L shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsVertLShapeBackwards">
+            <summary>
+            Initialize points for vertical backward L shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsHorzTShape">
+            <summary>
+            Initialize points for horizontal T shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsVertTShape">
+            <summary>
+            Initialize points for vertical T shaped piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.InitPointsRectShape">
+            <summary>
+            Initialize points for rectangular piano keys.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.FlipHorizontally">
+            <summary>
+            Flip points horizontally.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.FlipVertically">
+            <summary>
+            Flip points vertically.
+            </summary>
+        </member>
+        <member name="M:Multimedia.UI.PianoKey.CreateRegion">
+            <summary>
+            Create region for piano key based on initialized points.
+            </summary>
+        </member>
+        <member name="P:Multimedia.UI.PianoKey.Orientation">
+            <summary>
+            Gets or sets a value indicating the horizontal or vertical 
+            orientation of the piano key.
+            </summary>
+            <value>
+            One of the Orientation values.
+            </value>
+        </member>
+        <member name="P:Multimedia.UI.PianoKey.Shape">
+            <summary>
+            Gets or sets the shape of the piano key.
+            </summary>
+            <remarks>
+            Piano keys have several basic shapes: An <b>L</b> shape, both 
+            forwards and backwards, an upside down <b>T</b> shape, and a 
+            rectangle shape. The <b>L</b> shape is used for notes C and F, and
+            the backwards <b>L</b> is used for notes E and B. The upside down
+            <b>T</b> is used for notes D, G, and A, and the rectangle shape
+            is used for all of the flat keys. After setting the piano key's 
+            shape, you may need to adjust its alignment to get the exact shape
+            you are looking for.  
+            </remarks>
+        </member>
+        <member name="P:Multimedia.UI.PianoKey.KeyOnColor">
+            <summary>
+            Gets or sets the color used to draw the piano key when it is on.
+            </summary>
+            <value>
+            A Color that represents the color used to paint the piano key when
+            it is in the on state. The default is Color.Blue.
+            </value>
+        </member>
+        <member name="P:Multimedia.UI.PianoKey.KeyOffColor">
+            <summary>
+            Gets or sets the color used to paint the piano key when it is off.
+            </summary>
+            <value>
+            A Color that represents the color used to paint the piano key when
+            it is in the off state. The default is Color.White.
+            </value>
+        </member>
+    </members>
+</doc>

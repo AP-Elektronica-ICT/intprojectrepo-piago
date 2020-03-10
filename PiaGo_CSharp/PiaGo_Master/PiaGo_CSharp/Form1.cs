@@ -44,8 +44,9 @@ namespace PiaGo_CSharp
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel10, (Pitch)NoteNumber, 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel10, (Pitch)NoteNumber, 80, clock.Time+1));
+            //LOTS OF TESTCODE
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)NoteNumber, 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)NoteNumber, 80, clock.Time+1));
             //outputDevice.SendNoteOn(Channel.Channel1, (Pitch) NoteNumber, 80);
             //outputDevice.SendNoteOff(Channel.Channel1, (Pitch)NoteNumber, 80);
             keyBoard[test].SetKeyFill(KeyColor.BLUE);

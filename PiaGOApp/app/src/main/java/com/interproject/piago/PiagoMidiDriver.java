@@ -1,26 +1,66 @@
 package com.interproject.piago;
+import android.app.Activity;
+
 import org.billthefarmer.mididriver.MidiDriver;
 
 public class PiagoMidiDriver {
     private MidiDriver midiDriver;
     private byte[] event;
-    //private int[] config;
+    private byte ActiveInstrument;
+    public byte MaxVelocity;
 
     public PiagoMidiDriver(MidiDriver _midiDriver){
         midiDriver = _midiDriver;
+        InstantiateInstruments();
+        MaxVelocity = (byte) 0x7F;
     }
 
-    public void playNote(byte channel, byte chord, byte maxVelocity){
+    public void InstrumentSelection(String instrument){
+        switch (instrument) {
+            case "Piano":
+                ActiveInstrument = (byte) 0x01;
+                break;
+            case "Trumpet":
+                ActiveInstrument = (byte) 0x02;
+                event = new byte[2];
+                event[0]=(byte)0xC2;    //Channel 2
+                event[1]=(byte)0x38;    //Trumpet
+                midiDriver.write(event);
+                break;
+            case "Harmonica":
+                ActiveInstrument = (byte) 0x03;
+                event = new byte[2];
+                event[0]=(byte)0xC3;    //Channel 3
+                event[1]=(byte)0x77;    //Harmonica //CHANGED
+                midiDriver.write(event);
+                break;
+                default:
+                    break;
+        }
+    }
+
+    private void InstantiateInstruments(){
         event = new byte[2];
-        event[0]=(byte)0xC2; //New instrument on channel 2
-        event[1]=(byte)0x28; //Instrument with hex 0x28 (+1)
+        event[0]=(byte)0xC2;    //Channel 2
+        event[1]=(byte)0x38;    //Trumpet
         midiDriver.write(event);
 
+        event = new byte[2];
+        event[0]=(byte)0xC3;    //Channel 3
+        event[1]=(byte)0x16;    //Harmonica
+        midiDriver.write(event);
+
+        //Other instrument codes:
+        //http://www.ccarh.org/courses/253/handout/gminstruments/
+        //Convert decimal -1 to hexadecimal
+    }
+
+    public void playNote(byte chord){
         //Note on
         event = new byte[3];
-        event[0] = (byte) (0x90 | channel);  // 0x90 = note On, 0x00 = channel 1
+        event[0] = (byte) (0x90 | ActiveInstrument);  // 0x90 = note On, 0x00 = channel 1
         event[1] = (byte) chord;  // 0x3C = middle C
-        event[2] = (byte) maxVelocity;  // 0x7F = the maximum velocity (127)
+        event[2] = MaxVelocity;  // 0x7F = the maximum velocity (127)
 
         // Internally this just calls write() and can be considered obsoleted:
         //midiDriver.queueEvent(event);
@@ -30,9 +70,9 @@ public class PiagoMidiDriver {
 
         //Note off
         event = new byte[3];
-        event[0] = (byte) (0x80 | channel);  // 0x90 = note On, 0x00 = channel 1
+        event[0] = (byte) (0x80 | ActiveInstrument);  // 0x90 = note On, 0x00 = channel 1
         event[1] = (byte) chord;  // 0x3C = middle C
-        event[2] = (byte) maxVelocity;  // 0x7F = the maximum velocity (127)
+        event[2] = MaxVelocity;  // 0x7F = the maximum velocity (127)
 
         // Internally this just calls write() and can be considered obsoleted:
         //midiDriver.queueEvent(event);

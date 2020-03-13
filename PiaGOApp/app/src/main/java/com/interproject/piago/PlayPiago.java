@@ -352,7 +352,7 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
-    public void playSoundNow(View view) {
+/*    public void playSoundNow(View view) {
 
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
@@ -362,7 +362,7 @@ public class PlayPiago extends AppCompatActivity {
 
         //Intent intent = new Intent(getApplicationContext(), TestMidiActivity.class);
         //startActivity(intent);
-    }
+    }*/
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
         pressedTile.setBackgroundResource(R.drawable.tile_pressed);

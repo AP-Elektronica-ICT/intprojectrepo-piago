@@ -35,6 +35,8 @@ public class BTCommunication extends AppCompatActivity {
 
 
     private Button mBtnAutoConnect;
+
+
     // GUI Components
     private TextView mBluetoothStatus;
     private TextView mReadBuffer;

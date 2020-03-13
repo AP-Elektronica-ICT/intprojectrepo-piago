@@ -46,7 +46,7 @@ public class TestMidiActivity extends AppCompatActivity {
 
 
     public void playIsIets(View view){
-        piagoMidiDriver.playNote((byte)0x02, (byte)0x3C, (byte)0x7F);
+        piagoMidiDriver.playNote((byte)0x3C);
 
         //0x09 tennisracket
 

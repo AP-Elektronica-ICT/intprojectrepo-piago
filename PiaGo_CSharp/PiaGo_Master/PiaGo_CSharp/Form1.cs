@@ -161,5 +161,187 @@ namespace PiaGo_CSharp
             Instrument tempInstrument = (Instrument)resultIndex;
             outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
         }
+
+        
+
+        private void btnKey32_Click(object sender, EventArgs e)
+        {
+            ActivateKey(31);          
+        }
+
+        private void btnKey31_Click(object sender, EventArgs e)
+        {
+            ActivateKey(30);
+        }
+
+        private void btnKey30_Click(object sender, EventArgs e)
+        {
+            ActivateKey(29);
+        }
+
+        private void btnKey29_Click(object sender, EventArgs e)
+        {
+            ActivateKey(28);
+        }
+
+        private void btnKey28_Click(object sender, EventArgs e)
+        {
+            ActivateKey(27);
+        }
+
+        private void btnKey27_Click(object sender, EventArgs e)
+        {
+            ActivateKey(26);
+        }
+
+        private void btnKey26_Click(object sender, EventArgs e)
+        {
+            ActivateKey(25);
+        }
+
+        private void btnKey25_Click(object sender, EventArgs e)
+        {
+            ActivateKey(24);
+        }
+
+        private void btnKey24_Click(object sender, EventArgs e)
+        {
+            ActivateKey(23);
+        }
+
+        private void btnKey23_Click(object sender, EventArgs e)
+        {
+            ActivateKey(22);
+        }
+
+        private void btnKey22_Click(object sender, EventArgs e)
+        {
+            ActivateKey(21);
+        }
+
+        private void btnKey21_Click(object sender, EventArgs e)
+        {
+            ActivateKey(20);
+        }
+
+        private void btnKey20_Click(object sender, EventArgs e)
+        {
+            ActivateKey(19);
+        }
+
+        private void btnKey19_Click(object sender, EventArgs e)
+        {
+            ActivateKey(18);
+        }
+
+        private void btnKey18_Click(object sender, EventArgs e)
+        {
+            ActivateKey(17);
+        }
+
+        private void btnKey17_Click(object sender, EventArgs e)
+        {
+            ActivateKey(16);
+        }
+
+        private void btnKey16_Click(object sender, EventArgs e)
+        {
+            ActivateKey(15);
+        }
+
+        private void btnKey15_Click(object sender, EventArgs e)
+        {
+            ActivateKey(14);
+        }
+
+        private void btnKey14_Click(object sender, EventArgs e)
+        {
+            ActivateKey(13);
+        }
+
+        private void btnKey13_Click(object sender, EventArgs e)
+        {
+            ActivateKey(12);
+        }
+
+        private void btnKey12_Click(object sender, EventArgs e)
+        {
+            ActivateKey(11);
+        }
+        private void btnKey11_Click(object sender, EventArgs e)
+        {
+            ActivateKey(10);
+        }
+
+        private void btnKey10_Click(object sender, EventArgs e)
+        {
+            ActivateKey(9);
+        }
+
+        private void btnKey9_Click(object sender, EventArgs e)
+        {
+            ActivateKey(8);
+        }
+
+        private void btnKey8_Click(object sender, EventArgs e)
+        {
+            ActivateKey(7);
+        }
+
+        private void btnKey7_Click(object sender, EventArgs e)
+        {
+            ActivateKey(6);
+        }
+
+        private void btnKey6_Click(object sender, EventArgs e)
+        {
+            ActivateKey(5);
+        }
+
+        private void btnKey5_Click(object sender, EventArgs e)
+        {
+            ActivateKey(4);
+        }
+
+        private void btnKey4_Click(object sender, EventArgs e)
+        {
+            ActivateKey(3);
+        }
+        private void btnKey3_Click(object sender, EventArgs e)
+        {
+            ActivateKey(2);
+        }
+
+        private void btnKey2_Click(object sender, EventArgs e)
+        {
+            ActivateKey(1);
+        }
+
+        private void btnKey1_Click(object sender, EventArgs e)
+        {
+            ActivateKey(0);
+        }
+
+        private void ActivateKey(int key)
+        {
+            if (prevKey == null)
+            {
+                keyBoard[key].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[key];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[key].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[key];
+
+            }
+            //clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
+            //clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
+
+            keyBoard[key].MakeSound(37 + key * 37, 100);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+        }
     }    
 }

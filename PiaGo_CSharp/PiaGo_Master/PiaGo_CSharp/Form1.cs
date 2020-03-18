@@ -13,7 +13,7 @@ using Midi;
 namespace PiaGo_CSharp
 {
     //      - To-Do List
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         int test = 0;
         OutputDevice outputDevice;
@@ -33,8 +33,7 @@ namespace PiaGo_CSharp
         Clock clock;
         Random rnd = new Random();
 
-
-        public Form1(OutputDevice _outputDevice)
+        public frmMain(OutputDevice _outputDevice)
         {
             InitializeComponent();
             outputDevice = _outputDevice;
@@ -43,6 +42,9 @@ namespace PiaGo_CSharp
 
         private void btnBT_Click(object sender, EventArgs e)
         {
+            
+            
+            
             if (prevKey == null)
             {
                 keyBoard[test].SetKeyFill(KeyColor.BLUE);
@@ -162,11 +164,10 @@ namespace PiaGo_CSharp
             outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
         }
 
-        
-
+       
         private void btnKey32_Click(object sender, EventArgs e)
         {
-            ActivateKey(31);          
+            ActivateKey(31);        
         }
 
         private void btnKey31_Click(object sender, EventArgs e)
@@ -342,6 +343,40 @@ namespace PiaGo_CSharp
 
             keyBoard[key].MakeSound(37 + key * 37, 100);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            SettingsScreen settings = new SettingsScreen();
+            settings.ShowDialog();            
+        }
+
+        public void ChangeControlPanelBGImage(string strFileName)
+        {
+            try
+            {
+                pnlMainInfo.BackgroundImage = Image.FromFile(strFileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Wrong image type", "ERROR",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+        }
+
+        public void ChangePianoBGImage(string strFileName)
+        {
+            try
+            {
+                canvas.BackgroundImage = Image.FromFile(strFileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }    
 }

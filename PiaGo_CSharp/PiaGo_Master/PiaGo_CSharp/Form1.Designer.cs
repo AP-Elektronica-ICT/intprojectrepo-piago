@@ -1,6 +1,6 @@
 ﻿namespace PiaGo_CSharp
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer keyboardXiable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.canvas = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnCustomize = new System.Windows.Forms.Button();
@@ -37,7 +37,7 @@
             this.rbLearn = new System.Windows.Forms.RadioButton();
             this.btnBT = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlMainInfo = new System.Windows.Forms.Panel();
             this.btnKey11 = new System.Windows.Forms.Button();
             this.btnKey32 = new System.Windows.Forms.Button();
             this.btnKey31 = new System.Windows.Forms.Button();
@@ -71,8 +71,9 @@
             this.btnKey3 = new System.Windows.Forms.Button();
             this.btnKey1 = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.gb1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,9 +81,9 @@
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvas.Location = new System.Drawing.Point(0, 233);
+            this.canvas.Location = new System.Drawing.Point(0, 236);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(984, 236);
+            this.canvas.Size = new System.Drawing.Size(984, 233);
             this.canvas.TabIndex = 6;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
@@ -156,52 +157,54 @@
             this.btnUser.UseVisualStyleBackColor = true;
             this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
-            // panel1
+            // pnlMainInfo
             // 
-            this.panel1.Controls.Add(this.btnKey11);
-            this.panel1.Controls.Add(this.btnKey32);
-            this.panel1.Controls.Add(this.btnKey31);
-            this.panel1.Controls.Add(this.btnKey30);
-            this.panel1.Controls.Add(this.btnKey29);
-            this.panel1.Controls.Add(this.btnKey28);
-            this.panel1.Controls.Add(this.btnKey27);
-            this.panel1.Controls.Add(this.btnKey26);
-            this.panel1.Controls.Add(this.btnKey25);
-            this.panel1.Controls.Add(this.btnKey24);
-            this.panel1.Controls.Add(this.btnKey23);
-            this.panel1.Controls.Add(this.btnKey22);
-            this.panel1.Controls.Add(this.btnKey21);
-            this.panel1.Controls.Add(this.btnKey20);
-            this.panel1.Controls.Add(this.btnKey19);
-            this.panel1.Controls.Add(this.btnKey18);
-            this.panel1.Controls.Add(this.btnKey17);
-            this.panel1.Controls.Add(this.btnKey16);
-            this.panel1.Controls.Add(this.btnKey15);
-            this.panel1.Controls.Add(this.btnKey14);
-            this.panel1.Controls.Add(this.btnKey13);
-            this.panel1.Controls.Add(this.btnKey12);
-            this.panel1.Controls.Add(this.btnKey10);
-            this.panel1.Controls.Add(this.btnKey9);
-            this.panel1.Controls.Add(this.btnKey8);
-            this.panel1.Controls.Add(this.btnKey7);
-            this.panel1.Controls.Add(this.btnKey6);
-            this.panel1.Controls.Add(this.btnKey5);
-            this.panel1.Controls.Add(this.btnKey4);
-            this.panel1.Controls.Add(this.btnKey2);
-            this.panel1.Controls.Add(this.btnKey3);
-            this.panel1.Controls.Add(this.btnKey1);
-            this.panel1.Controls.Add(this.pbLogo);
-            this.panel1.Controls.Add(this.btnUser);
-            this.panel1.Controls.Add(this.btnBT);
-            this.panel1.Controls.Add(this.gb1);
-            this.panel1.Controls.Add(this.btnCustomize);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(984, 233);
-            this.panel1.TabIndex = 7;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlMainInfo.Controls.Add(this.btnSettings);
+            this.pnlMainInfo.Controls.Add(this.btnKey11);
+            this.pnlMainInfo.Controls.Add(this.btnKey32);
+            this.pnlMainInfo.Controls.Add(this.btnKey31);
+            this.pnlMainInfo.Controls.Add(this.btnKey30);
+            this.pnlMainInfo.Controls.Add(this.btnKey29);
+            this.pnlMainInfo.Controls.Add(this.btnKey28);
+            this.pnlMainInfo.Controls.Add(this.btnKey27);
+            this.pnlMainInfo.Controls.Add(this.btnKey26);
+            this.pnlMainInfo.Controls.Add(this.btnKey25);
+            this.pnlMainInfo.Controls.Add(this.btnKey24);
+            this.pnlMainInfo.Controls.Add(this.btnKey23);
+            this.pnlMainInfo.Controls.Add(this.btnKey22);
+            this.pnlMainInfo.Controls.Add(this.btnKey21);
+            this.pnlMainInfo.Controls.Add(this.btnKey20);
+            this.pnlMainInfo.Controls.Add(this.btnKey19);
+            this.pnlMainInfo.Controls.Add(this.btnKey18);
+            this.pnlMainInfo.Controls.Add(this.btnKey17);
+            this.pnlMainInfo.Controls.Add(this.btnKey16);
+            this.pnlMainInfo.Controls.Add(this.btnKey15);
+            this.pnlMainInfo.Controls.Add(this.btnKey14);
+            this.pnlMainInfo.Controls.Add(this.btnKey13);
+            this.pnlMainInfo.Controls.Add(this.btnKey12);
+            this.pnlMainInfo.Controls.Add(this.btnKey10);
+            this.pnlMainInfo.Controls.Add(this.btnKey9);
+            this.pnlMainInfo.Controls.Add(this.btnKey8);
+            this.pnlMainInfo.Controls.Add(this.btnKey7);
+            this.pnlMainInfo.Controls.Add(this.btnKey6);
+            this.pnlMainInfo.Controls.Add(this.btnKey5);
+            this.pnlMainInfo.Controls.Add(this.btnKey4);
+            this.pnlMainInfo.Controls.Add(this.btnKey2);
+            this.pnlMainInfo.Controls.Add(this.btnKey3);
+            this.pnlMainInfo.Controls.Add(this.btnKey1);
+            this.pnlMainInfo.Controls.Add(this.pbLogo);
+            this.pnlMainInfo.Controls.Add(this.btnUser);
+            this.pnlMainInfo.Controls.Add(this.btnBT);
+            this.pnlMainInfo.Controls.Add(this.gb1);
+            this.pnlMainInfo.Controls.Add(this.btnCustomize);
+            this.pnlMainInfo.Controls.Add(this.comboBox1);
+            this.pnlMainInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMainInfo.Location = new System.Drawing.Point(0, 0);
+            this.pnlMainInfo.Name = "pnlMainInfo";
+            this.pnlMainInfo.Size = new System.Drawing.Size(984, 236);
+            this.pnlMainInfo.TabIndex = 7;
+            this.pnlMainInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnKey11
             // 
@@ -546,22 +549,32 @@
             this.pbLogo.TabIndex = 9;
             this.pbLogo.TabStop = false;
             // 
-            // Form1
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(879, 43);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(93, 23);
+            this.btnSettings.TabIndex = 42;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 469);
             this.Controls.Add(this.canvas);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlMainInfo);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "frmMain";
             this.Text = "PiaGo";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.pnlMainInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
 
@@ -577,7 +590,7 @@
         private System.Windows.Forms.RadioButton rbLearn;
         private System.Windows.Forms.Button btnBT;
         private System.Windows.Forms.Button btnUser;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMainInfo;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Button btnKey11;
         private System.Windows.Forms.Button btnKey32;
@@ -611,6 +624,7 @@
         private System.Windows.Forms.Button btnKey2;
         private System.Windows.Forms.Button btnKey3;
         private System.Windows.Forms.Button btnKey1;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

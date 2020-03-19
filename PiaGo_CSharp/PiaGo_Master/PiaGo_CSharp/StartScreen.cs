@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PiaGo_CSharp
 {
-    public partial class StartScreen : Form
+    public partial class StartScreen : MetroFramework.Forms.MetroForm
     {
         //--TO DO--
         //  FIREBASE Login implementatie NIET BELANGRIJK
@@ -25,27 +25,28 @@ namespace PiaGo_CSharp
 
         private void StartScreen_Load(object sender, EventArgs e)
         {
+            this.StyleManager = metroSMUser;
             pbLogo.Width = 623 / 3;
             pbLogo.Height = 252 / 3;
             pbLogo.Left = (this.ClientSize.Width - pbLogo.Width) / 2;
             pbLogo.Top = 10;
             
             
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
+        }       
+        public void ChangeTheme(string input)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            switch (input)
+            {
+                case "light":
+                    metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
+                    break;
+                case "dark":
+                    metroSMUser.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    break;
+                default:
+                    metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
+                    break;
+            }
         }
     }
 }

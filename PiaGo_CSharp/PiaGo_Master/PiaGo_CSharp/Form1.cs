@@ -9,11 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
-
+public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
+
     //      - To-Do List
-    public partial class frmMain : Form
+    public partial class frmMain : MetroFramework.Forms.MetroForm
     {
         int test = 0;
         OutputDevice outputDevice;
@@ -42,33 +43,12 @@ namespace PiaGo_CSharp
 
         private void btnBT_Click(object sender, EventArgs e)
         {
-            
-            
-            
-            if (prevKey == null)
-            {
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-            }
-            else
-            {
-                prevKey.Clear();
-                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-                
-            }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53+test), 80, clock.Time + 1));
 
-            keyBoard[test].MakeSound(37+test*37,100);            
-            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
-            test++;
-            if (test >= 32)
-                test = 0;      
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            //CODE FOR THEME
+            this.StyleManager = metroSMMainForm;
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
@@ -76,16 +56,16 @@ namespace PiaGo_CSharp
             //CODE FOR GRAPHICAL PIANO            
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
-            CreateKeyboard();          
+            CreateKeyboard();
             //------------------------
             //Initialize instrument-list
             for (int i = 0; i < 128; i++)
             {
                 Instrument tempInstrument = (Instrument)i;
                 string listItem = tempInstrument.Name();
-                comboBox1.Items.Add(listItem);
+                cbMetroInstruments.Items.Add(listItem);
             }
-            comboBox1.SelectedIndex = 0;
+            cbMetroInstruments.SelectedIndex = 0;
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
@@ -95,6 +75,7 @@ namespace PiaGo_CSharp
             g = e.Graphics;
             DrawKeyboard();
         }
+
         private void DrawKeyboard()
         {
             for (int i = 0; i < keyBoard.Count; i++)
@@ -102,72 +83,53 @@ namespace PiaGo_CSharp
                 keyBoard[i].Draw(g, multiplier);
             }
         }
-        void CreateKeyboard()
+
+        void CreateKeyboard() //Creation of individual keys of piano
         {
             int whiteKeys = 0;
             keyBoard.Add(new L_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys)-blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new RL_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
 
             keyBoard.Add(new L_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new RL_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
 
             keyBoard.Add(new L_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new RL_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
 
             keyBoard.Add(new L_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new RL_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
 
             keyBoard.Add(new L_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new T_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
-                keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
+            keyBoard.Add(new BlackKey(keyboardX + (whiteKeySpace * whiteKeys) - blackKeySpace, keyboardY, KeyColor.BLACK));
             keyBoard.Add(new RL_Key(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE)); whiteKeys++;
 
-            keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));            
+            keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));
         }
 
-        private void btnUser_Click(object sender, EventArgs e)
-        {
-            StartScreen strt = new StartScreen();
-            strt.ShowDialog();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedInstrument = (string)comboBox1.SelectedItem;
-            int resultIndex;
-            resultIndex = comboBox1.FindStringExact(selectedInstrument);
-            Instrument tempInstrument = (Instrument)resultIndex;
-            outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
-        }
-
-       
+        #region ALL DEBUG KEYS (32)
         private void btnKey32_Click(object sender, EventArgs e)
         {
-            ActivateKey(31);        
+            ActivateKey(31);
         }
 
         private void btnKey31_Click(object sender, EventArgs e)
@@ -322,6 +284,8 @@ namespace PiaGo_CSharp
         {
             ActivateKey(0);
         }
+        #endregion
+
 
         private void ActivateKey(int key)
         {
@@ -345,10 +309,55 @@ namespace PiaGo_CSharp
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 
-        private void btnSettings_Click(object sender, EventArgs e)
+        private void btnMetroUser_Click(object sender, EventArgs e)
+        {
+            StartScreen strt = new StartScreen();
+            strt.ShowDialog();
+        }
+
+        private void btnMetroCustomize_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedInstrument = (string)cbMetroInstruments.SelectedItem;
+            int resultIndex;
+            resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
+            Instrument tempInstrument = (Instrument)resultIndex;
+            outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
+        }
+
+        private void btnMetroTest_Click(object sender, EventArgs e)
+        {
+            if (prevKey == null)
+            {
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+
+            }
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
+
+            keyBoard[test].MakeSound(37 + test * 37, 100);
+            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
+            test++;
+            if (test >= 32)
+                test = 0;
+        }
+
+        private void btnMetroSettings_Click(object sender, EventArgs e)
         {
             SettingsScreen settings = new SettingsScreen();
-            settings.ShowDialog();            
+            settings.ShowDialog();
         }
 
         public void ChangeControlPanelBGImage(string strFileName)
@@ -360,9 +369,9 @@ namespace PiaGo_CSharp
             catch (Exception)
             {
 
-                MessageBox.Show("Wrong image type", "ERROR",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
 
         public void ChangePianoBGImage(string strFileName)
@@ -376,7 +385,38 @@ namespace PiaGo_CSharp
 
                 MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
+
+        public void ChangeTheme(string input)
+        {
+            switch (input)
+            {
+                case "light":
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+                case "dark":
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    canvas.BackColor = Color.Black;
+                    break;
+                default:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+            }
+        }
+
+        private ThemeType mainTheme;
+
+        public ThemeType GetTheme()
+        {
+            return mainTheme;
+        }
+        public void SetTheme(ThemeType input)
+        {
+            mainTheme = input;
+        }
+
     }    
 }

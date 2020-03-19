@@ -25,6 +25,7 @@ namespace PiaGo_CSharp
                 if (oForm1.GetTheme() == ThemeType.DARK)
                 {
                     metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    tglMetroTheme.Checked = true;
                 }
                 else
                 {
@@ -33,35 +34,39 @@ namespace PiaGo_CSharp
             }
         }
 
+        public void UpdateTheme(ThemeType input)
+        {
+            switch (input)
+            {
+                case ThemeType.LIGHT:
+                    metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Light;
+                    break;
+                case ThemeType.DARK:
+                    metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    break;
+                default:
+                    metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Light;
+                    break;
+            }
+        }
+
         private void metroToggle1_CheckedChanged(object sender, EventArgs e)
         {
-
-            
-            if (metroToggle1.Checked == true)
-            {
-                metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Dark;
                 foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
                 {
-                    oForm1.SetTheme(ThemeType.DARK);
-
+                    if (tglMetroTheme.Checked == true)
+                    {
+                        oForm1.SetTheme(ThemeType.DARK);
+                        oForm1.UpdateTheme();
+                        this.UpdateTheme(oForm1.GetTheme());
                 }
-                foreach (StartScreen oForm1 in Application.OpenForms.OfType<StartScreen>())
-                {
-                    oForm1.ChangeTheme("dark");
+                    else
+                    {
+                        oForm1.SetTheme(ThemeType.LIGHT);
+                        oForm1.UpdateTheme();
+                        this.UpdateTheme(oForm1.GetTheme());
+                    }
                 }
-            }
-            else
-            {
-                metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Light;
-                foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
-                {
-                    oForm1.ChangeTheme("light");
-                }
-                foreach (StartScreen oForm1 in Application.OpenForms.OfType<StartScreen>())
-                {
-                    oForm1.ChangeTheme("light");
-                }
-            }
         }
 
         private void btnMetroPiaonoBG_Click(object sender, EventArgs e)

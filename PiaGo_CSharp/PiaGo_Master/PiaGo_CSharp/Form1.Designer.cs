@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.canvas = new System.Windows.Forms.Panel();
-            this.gb1 = new System.Windows.Forms.GroupBox();
-            this.rbJam = new System.Windows.Forms.RadioButton();
-            this.rbLearn = new System.Windows.Forms.RadioButton();
             this.btnUser = new System.Windows.Forms.Button();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
             this.btnMetroUser = new MetroFramework.Controls.MetroButton();
@@ -76,7 +73,7 @@
             this.btnKey1 = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.metroSMMainForm = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.gb1.SuspendLayout();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.pnlMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroSMMainForm)).BeginInit();
@@ -92,38 +89,6 @@
             this.canvas.TabIndex = 6;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
-            // gb1
-            // 
-            this.gb1.Controls.Add(this.rbJam);
-            this.gb1.Controls.Add(this.rbLearn);
-            this.gb1.Location = new System.Drawing.Point(186, 3);
-            this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(98, 77);
-            this.gb1.TabIndex = 3;
-            this.gb1.TabStop = false;
-            // 
-            // rbJam
-            // 
-            this.rbJam.AutoSize = true;
-            this.rbJam.Location = new System.Drawing.Point(6, 42);
-            this.rbJam.Name = "rbJam";
-            this.rbJam.Size = new System.Drawing.Size(44, 17);
-            this.rbJam.TabIndex = 3;
-            this.rbJam.TabStop = true;
-            this.rbJam.Text = "Jam";
-            this.rbJam.UseVisualStyleBackColor = true;
-            // 
-            // rbLearn
-            // 
-            this.rbLearn.AutoSize = true;
-            this.rbLearn.Location = new System.Drawing.Point(6, 19);
-            this.rbLearn.Name = "rbLearn";
-            this.rbLearn.Size = new System.Drawing.Size(52, 17);
-            this.rbLearn.TabIndex = 2;
-            this.rbLearn.TabStop = true;
-            this.rbLearn.Text = "Learn";
-            this.rbLearn.UseVisualStyleBackColor = true;
-            // 
             // btnUser
             // 
             this.btnUser.Location = new System.Drawing.Point(0, 0);
@@ -134,6 +99,7 @@
             // pnlMainInfo
             // 
             this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlMainInfo.Controls.Add(this.metroLabel1);
             this.pnlMainInfo.Controls.Add(this.btnMetroUser);
             this.pnlMainInfo.Controls.Add(this.cbMetroInstruments);
             this.pnlMainInfo.Controls.Add(this.btnMetroCustomize);
@@ -174,7 +140,6 @@
             this.pnlMainInfo.Controls.Add(this.btnKey1);
             this.pnlMainInfo.Controls.Add(this.pbLogo);
             this.pnlMainInfo.Controls.Add(this.btnUser);
-            this.pnlMainInfo.Controls.Add(this.gb1);
             this.pnlMainInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainInfo.Location = new System.Drawing.Point(20, 60);
             this.pnlMainInfo.Name = "pnlMainInfo";
@@ -225,12 +190,13 @@
             // tglMetroMode
             // 
             this.tglMetroMode.AutoSize = true;
-            this.tglMetroMode.Location = new System.Drawing.Point(192, 83);
+            this.tglMetroMode.Location = new System.Drawing.Point(192, 35);
             this.tglMetroMode.Name = "tglMetroMode";
             this.tglMetroMode.Size = new System.Drawing.Size(80, 17);
             this.tglMetroMode.TabIndex = 44;
             this.tglMetroMode.Text = "Off";
             this.tglMetroMode.UseSelectable = true;
+            this.tglMetroMode.CheckedChanged += new System.EventHandler(this.tglMetroMode_CheckedChanged);
             // 
             // btnMetroTest
             // 
@@ -589,6 +555,15 @@
             // 
             this.metroSMMainForm.Owner = this;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(192, 12);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(80, 19);
+            this.metroLabel1.TabIndex = 50;
+            this.metroLabel1.Text = "Learn Mode";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,9 +575,8 @@
             this.Name = "frmMain";
             this.Resizable = false;
             this.Text = "PiaGo";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.gb1.ResumeLayout(false);
-            this.gb1.PerformLayout();
             this.pnlMainInfo.ResumeLayout(false);
             this.pnlMainInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
@@ -614,9 +588,6 @@
         #endregion
 
         private System.Windows.Forms.Panel canvas;
-        private System.Windows.Forms.GroupBox gb1;
-        private System.Windows.Forms.RadioButton rbJam;
-        private System.Windows.Forms.RadioButton rbLearn;
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Panel pnlMainInfo;
         private System.Windows.Forms.PictureBox pbLogo;
@@ -659,6 +630,7 @@
         private MetroFramework.Controls.MetroButton btnMetroSettings;
         private MetroFramework.Controls.MetroButton btnMetroUser;
         private MetroFramework.Controls.MetroComboBox cbMetroInstruments;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }
 

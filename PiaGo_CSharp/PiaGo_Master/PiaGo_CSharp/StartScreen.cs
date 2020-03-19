@@ -26,27 +26,38 @@ namespace PiaGo_CSharp
         private void StartScreen_Load(object sender, EventArgs e)
         {
             this.StyleManager = metroSMUser;
-            pbLogo.Width = 623 / 3;
-            pbLogo.Height = 252 / 3;
-            pbLogo.Left = (this.ClientSize.Width - pbLogo.Width) / 2;
-            pbLogo.Top = 10;
-            
-            
-        }       
-        public void ChangeTheme(string input)
+            foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
+            {
+                if (oForm1.GetTheme() == ThemeType.DARK)
+                {
+                    metroSMUser.Theme = MetroFramework.MetroThemeStyle.Dark;
+                }
+                else
+                {
+                    metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
+                }
+            }
+        }
+
+        public void UpdateTheme(ThemeType input)
         {
             switch (input)
             {
-                case "light":
+                case ThemeType.LIGHT:
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
                     break;
-                case "dark":
+                case ThemeType.DARK:
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Dark;
                     break;
                 default:
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
                     break;
             }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

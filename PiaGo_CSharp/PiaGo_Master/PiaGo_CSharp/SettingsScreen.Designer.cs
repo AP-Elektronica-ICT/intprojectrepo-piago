@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.metroSMSettings = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
+            this.tglMetroTheme = new MetroFramework.Controls.MetroToggle();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.btnMetroCPBG = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
@@ -43,16 +43,16 @@
             // 
             this.metroSMSettings.Owner = this;
             // 
-            // metroToggle1
+            // tglMetroTheme
             // 
-            this.metroToggle1.AutoSize = true;
-            this.metroToggle1.Location = new System.Drawing.Point(227, 130);
-            this.metroToggle1.Name = "metroToggle1";
-            this.metroToggle1.Size = new System.Drawing.Size(80, 17);
-            this.metroToggle1.TabIndex = 7;
-            this.metroToggle1.Text = "Off";
-            this.metroToggle1.UseSelectable = true;
-            this.metroToggle1.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
+            this.tglMetroTheme.AutoSize = true;
+            this.tglMetroTheme.Location = new System.Drawing.Point(227, 130);
+            this.tglMetroTheme.Name = "tglMetroTheme";
+            this.tglMetroTheme.Size = new System.Drawing.Size(80, 17);
+            this.tglMetroTheme.TabIndex = 7;
+            this.tglMetroTheme.Text = "Off";
+            this.tglMetroTheme.UseSelectable = true;
+            this.tglMetroTheme.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
             // 
             // metroLabel1
             // 
@@ -111,7 +111,7 @@
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.btnMetroCPBG);
             this.Controls.Add(this.metroLabel1);
-            this.Controls.Add(this.metroToggle1);
+            this.Controls.Add(this.tglMetroTheme);
             this.Name = "SettingsScreen";
             this.Text = "SettingsScreen";
             this.Load += new System.EventHandler(this.SettingsScreen_Load);
@@ -123,7 +123,7 @@
 
         #endregion
         private MetroFramework.Components.MetroStyleManager metroSMSettings;
-        private MetroFramework.Controls.MetroToggle metroToggle1;
+        private MetroFramework.Controls.MetroToggle tglMetroTheme;
         private MetroFramework.Controls.MetroButton btnMetroCPBG;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel3;

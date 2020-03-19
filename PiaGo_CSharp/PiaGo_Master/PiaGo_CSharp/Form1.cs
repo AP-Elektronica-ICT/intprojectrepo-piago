@@ -12,8 +12,6 @@ using Midi;
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
-
-    //      - To-Do List
     public partial class frmMain : MetroFramework.Forms.MetroForm
     {
         int test = 0;
@@ -30,7 +28,6 @@ namespace PiaGo_CSharp
         List<Key> keyBoard = new List<Key>();
         //------------------------
         Instrument instrument = (Instrument)0;
-        int NoteNumber = 60;
         Clock clock;
         Random rnd = new Random();
 
@@ -41,14 +38,11 @@ namespace PiaGo_CSharp
             outputDevice.SendProgramChange(Channel.Channel1, instrument);
         }
 
-        private void btnBT_Click(object sender, EventArgs e)
-        {
-
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             //CODE FOR THEME
             this.StyleManager = metroSMMainForm;
+            this.UpdateTheme();
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
@@ -70,6 +64,7 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
         }
+
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
@@ -125,6 +120,59 @@ namespace PiaGo_CSharp
 
             keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));
         }
+
+        #region Buttons & combobox
+        private void btnMetroUser_Click(object sender, EventArgs e)
+        {
+            StartScreen strt = new StartScreen();
+            strt.ShowDialog();
+        }
+
+        private void btnMetroCustomize_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedInstrument = (string)cbMetroInstruments.SelectedItem;
+            int resultIndex;
+            resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
+            Instrument tempInstrument = (Instrument)resultIndex;
+            outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
+        }
+
+        private void btnMetroTest_Click(object sender, EventArgs e)
+        {
+            if (prevKey == null)
+            {
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                prevKey = keyBoard[test];
+
+            }
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
+
+            //keyBoard[test].MakeSound(37 + test * 37, 100);
+            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
+            test++;
+            if (test >= 32)
+                test = 0;
+        }
+
+        private void btnMetroSettings_Click(object sender, EventArgs e)
+        {
+            SettingsScreen settings = new SettingsScreen();
+            settings.ShowDialog();
+        }
+        #endregion
 
         #region ALL DEBUG KEYS (32)
         private void btnKey32_Click(object sender, EventArgs e)
@@ -286,6 +334,38 @@ namespace PiaGo_CSharp
         }
         #endregion
 
+        #region Theme  
+        private ThemeType mainTheme = ThemeType.LIGHT;
+
+        public ThemeType GetTheme()
+        {
+            return mainTheme;
+        }
+
+        public void SetTheme(ThemeType input)
+        {
+            mainTheme = input;
+        }
+
+        public void UpdateTheme()
+        {
+            switch (this.mainTheme)
+            {
+                case ThemeType.LIGHT:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+                case ThemeType.DARK:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    canvas.BackColor = Color.Black;
+                    break;
+                default:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+            }
+        }
+        #endregion
 
         private void ActivateKey(int key)
         {
@@ -307,57 +387,6 @@ namespace PiaGo_CSharp
 
             keyBoard[key].MakeSound(37 + key * 37, 100);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-        }
-
-        private void btnMetroUser_Click(object sender, EventArgs e)
-        {
-            StartScreen strt = new StartScreen();
-            strt.ShowDialog();
-        }
-
-        private void btnMetroCustomize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedInstrument = (string)cbMetroInstruments.SelectedItem;
-            int resultIndex;
-            resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
-            Instrument tempInstrument = (Instrument)resultIndex;
-            outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
-        }
-
-        private void btnMetroTest_Click(object sender, EventArgs e)
-        {
-            if (prevKey == null)
-            {
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-            }
-            else
-            {
-                prevKey.Clear();
-                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-
-            }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
-
-            keyBoard[test].MakeSound(37 + test * 37, 100);
-            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
-            test++;
-            if (test >= 32)
-                test = 0;
-        }
-
-        private void btnMetroSettings_Click(object sender, EventArgs e)
-        {
-            SettingsScreen settings = new SettingsScreen();
-            settings.ShowDialog();
         }
 
         public void ChangeControlPanelBGImage(string strFileName)
@@ -388,35 +417,14 @@ namespace PiaGo_CSharp
 
         }
 
-        public void ChangeTheme(string input)
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            switch (input)
-            {
-                case "light":
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
-                    canvas.BackColor = Color.White;
-                    break;
-                case "dark":
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
-                    canvas.BackColor = Color.Black;
-                    break;
-                default:
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
-                    canvas.BackColor = Color.White;
-                    break;
-            }
+            System.Environment.Exit(1);
         }
 
-        private ThemeType mainTheme;
-
-        public ThemeType GetTheme()
+        private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
-            return mainTheme;
-        }
-        public void SetTheme(ThemeType input)
-        {
-            mainTheme = input;
-        }
 
-    }    
+        }
+    }
 }

@@ -17,7 +17,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instrument"
+        android:text="Play sound"
         android:id="@+id/button_instrument"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -39,6 +39,25 @@
         android:id="@+id/testValue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/button_change_instrument"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lower"
+        android:id="@+id/button_octave_lower"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_octave_higher"
+        android:onClick="octaveLower"
+        android:background="@drawable/button_piago_main"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Higher"
+        android:id="@+id/button_octave_higher"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="octaveHigher"
+        android:background="@drawable/button_piago_main"/>
 
     <Switch
         android:id="@+id/switch_piago"

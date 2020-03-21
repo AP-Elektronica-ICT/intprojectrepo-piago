@@ -29,7 +29,7 @@ public class PlayPiago extends AppCompatActivity {
 
     public String ReceivedBluetoothSignal;
 
-
+    public OctaveSelector octaveSelector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,9 @@ public class PlayPiago extends AppCompatActivity {
         midiDriver = new MidiDriver();
         piagoMidiDriver = new PiagoMidiDriver(midiDriver);
         instrumentButton = findViewById(R.id.button_change_instrument);
+
+        //Lower / Higher notes
+        octaveSelector = new OctaveSelector();
     }
 
     @Override

@@ -282,6 +282,12 @@ public class PlayPiago extends AppCompatActivity {
         piagoMidiDriver.playNote(note);
         PauseMethod(tileDrawable, pressedTile);
     }
+
+    public void octaveLower(View view) {
+    }
+
+    public void octaveHigher(View view) {
+    }
 }
 
 

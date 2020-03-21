@@ -29,6 +29,8 @@ public class PlayPiago extends AppCompatActivity {
 
     public String ReceivedBluetoothSignal;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

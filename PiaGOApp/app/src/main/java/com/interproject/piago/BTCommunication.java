@@ -35,6 +35,8 @@ public class BTCommunication extends AppCompatActivity {
 
 
     private Button mBtnAutoConnect;
+
+
     // GUI Components
     private TextView mBluetoothStatus;
     private TextView mReadBuffer;
@@ -77,7 +79,7 @@ public class BTCommunication extends AppCompatActivity {
                     public void run() {
                         boolean fail = false;
                         // Change adress to static MAC adress
-                        //BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                        // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
                         BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
 
                         try {
@@ -100,7 +102,7 @@ public class BTCommunication extends AppCompatActivity {
                                 Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        if(fail == false) {
+                        if(!fail) {
                             mConnectedThread = new ConnectedThread(mBTSocket);
                             mConnectedThread.start();
 

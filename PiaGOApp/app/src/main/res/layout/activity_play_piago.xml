@@ -32,6 +32,16 @@
         app:layout_constraintLeft_toRightOf="@id/switch_piago"
         android:onClick="changeInstrument"
         android:background="@drawable/button_piago_main"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="AUTOCNCT"
+        android:id="@+id/button_autocnct"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/switch_piago"
+        android:onClick="changeInstrument"
+        android:background="@drawable/button_piago_main"/>
 
     <EditText
         android:layout_width="200dp"
@@ -212,7 +222,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="2">
-
 
 
         </LinearLayout>

@@ -26,6 +26,7 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
+        KeyColor mainKeyColor = KeyColor.BLUE;
         //------------------------
         Instrument instrument = (Instrument)0;
         Clock clock;
@@ -146,14 +147,14 @@ namespace PiaGo_CSharp
         {
             if (prevKey == null)
             {
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                keyBoard[test].SetKeyFill(mainKeyColor);
                 prevKey = keyBoard[test];
             }
             else
             {
                 prevKey.Clear();
                 canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
+                keyBoard[test].SetKeyFill(mainKeyColor);
                 prevKey = keyBoard[test];
 
             }
@@ -365,29 +366,6 @@ namespace PiaGo_CSharp
                     break;
             }
         }
-        #endregion
-
-        private void ActivateKey(int key)
-        {
-            if (prevKey == null)
-            {
-                keyBoard[key].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[key];
-            }
-            else
-            {
-                prevKey.Clear();
-                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[key].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[key];
-
-            }
-            //clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
-            //clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
-
-            keyBoard[key].MakeSound(37 + key * 37, 100);
-            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-        }
 
         public void ChangeControlPanelBGImage(string strFileName)
         {
@@ -416,15 +394,71 @@ namespace PiaGo_CSharp
             }
 
         }
+        #endregion
+
+        #region Color  
+        private MetroFramework.MetroColorStyle mainColor = MetroFramework.MetroColorStyle.Black;
+
+        public MetroFramework.MetroColorStyle GetColor()
+        {
+            return mainColor;
+        }
+
+        public void SetColor(MetroFramework.MetroColorStyle input)
+        {
+            mainColor = input;
+        }
+
+        public void UpdateColor()
+        {
+            metroSMMainForm.Style = mainColor;
+            switch (mainColor)
+            {
+                case MetroFramework.MetroColorStyle.Red:
+                    mainKeyColor = KeyColor.RED;
+                    break;
+                case MetroFramework.MetroColorStyle.Green:
+                    mainKeyColor = KeyColor.GREEN;
+                    break;
+                case MetroFramework.MetroColorStyle.Blue:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+                case MetroFramework.MetroColorStyle.Yellow:
+                    mainKeyColor = KeyColor.YELLOW;
+                    break;
+                default:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+            }       
+        }
+        #endregion
+
+
+        private void ActivateKey(int key)
+        {
+            if (prevKey == null)
+            {
+                keyBoard[key].SetKeyFill(mainKeyColor);
+                prevKey = keyBoard[key];
+            }
+            else
+            {
+                prevKey.Clear();
+                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
+                keyBoard[key].SetKeyFill(mainKeyColor);
+                prevKey = keyBoard[key];
+
+            }
+            //clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
+            //clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
+
+            keyBoard[key].MakeSound(37 + key * 37, 100);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+        }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Environment.Exit(1);
-        }
-
-        private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

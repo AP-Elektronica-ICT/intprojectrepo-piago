@@ -36,6 +36,8 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.btnMetroPiaonoBG = new MetroFramework.Controls.MetroButton();
+            this.cbmetroColor = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.metroSMSettings)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,11 +103,38 @@
             this.btnMetroPiaonoBG.UseSelectable = true;
             this.btnMetroPiaonoBG.Click += new System.EventHandler(this.btnMetroPiaonoBG_Click);
             // 
+            // cbmetroColor
+            // 
+            this.cbmetroColor.FormattingEnabled = true;
+            this.cbmetroColor.ItemHeight = 23;
+            this.cbmetroColor.Items.AddRange(new object[] {
+            "RED",
+            "GREEN",
+            "BLUE",
+            "YELLOW"});
+            this.cbmetroColor.Location = new System.Drawing.Point(186, 163);
+            this.cbmetroColor.Name = "cbmetroColor";
+            this.cbmetroColor.Size = new System.Drawing.Size(121, 29);
+            this.cbmetroColor.TabIndex = 13;
+            this.cbmetroColor.UseSelectable = true;
+            this.cbmetroColor.SelectedIndexChanged += new System.EventHandler(this.cbmetroColor_SelectedIndexChanged);
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(15, 163);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(90, 19);
+            this.metroLabel4.TabIndex = 14;
+            this.metroLabel4.Text = "Theme Color:";
+            // 
             // SettingsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 230);
+            this.Controls.Add(this.metroLabel4);
+            this.Controls.Add(this.cbmetroColor);
             this.Controls.Add(this.btnMetroPiaonoBG);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel2);
@@ -129,5 +158,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton btnMetroPiaonoBG;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
+        private MetroFramework.Controls.MetroComboBox cbmetroColor;
     }
 }

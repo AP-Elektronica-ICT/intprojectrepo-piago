@@ -33,6 +33,7 @@
             this.canvas = new System.Windows.Forms.Panel();
             this.btnUser = new System.Windows.Forms.Button();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.btnMetroUser = new MetroFramework.Controls.MetroButton();
             this.cbMetroInstruments = new MetroFramework.Controls.MetroComboBox();
             this.btnMetroCustomize = new MetroFramework.Controls.MetroButton();
@@ -73,7 +74,6 @@
             this.btnKey1 = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.metroSMMainForm = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.pnlMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroSMMainForm)).BeginInit();
@@ -146,6 +146,15 @@
             this.pnlMainInfo.Size = new System.Drawing.Size(985, 211);
             this.pnlMainInfo.TabIndex = 7;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(192, 12);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(80, 19);
+            this.metroLabel1.TabIndex = 50;
+            this.metroLabel1.Text = "Learn Mode";
+            // 
             // btnMetroUser
             // 
             this.btnMetroUser.Location = new System.Drawing.Point(3, 77);
@@ -179,11 +188,14 @@
             // 
             // btnMetroSettings
             // 
+            this.btnMetroSettings.BackColor = System.Drawing.Color.Transparent;
+            this.btnMetroSettings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnMetroSettings.Location = new System.Drawing.Point(878, 35);
             this.btnMetroSettings.Name = "btnMetroSettings";
             this.btnMetroSettings.Size = new System.Drawing.Size(96, 23);
             this.btnMetroSettings.TabIndex = 45;
             this.btnMetroSettings.Text = "Settings";
+            this.btnMetroSettings.UseCustomForeColor = true;
             this.btnMetroSettings.UseSelectable = true;
             this.btnMetroSettings.Click += new System.EventHandler(this.btnMetroSettings_Click);
             // 
@@ -196,7 +208,6 @@
             this.tglMetroMode.TabIndex = 44;
             this.tglMetroMode.Text = "Off";
             this.tglMetroMode.UseSelectable = true;
-            this.tglMetroMode.CheckedChanged += new System.EventHandler(this.tglMetroMode_CheckedChanged);
             // 
             // btnMetroTest
             // 
@@ -554,15 +565,6 @@
             // metroSMMainForm
             // 
             this.metroSMMainForm.Owner = this;
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(192, 12);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(80, 19);
-            this.metroLabel1.TabIndex = 50;
-            this.metroLabel1.Text = "Learn Mode";
             // 
             // frmMain
             // 

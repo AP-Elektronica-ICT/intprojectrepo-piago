@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
+
+
+
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
@@ -165,6 +168,10 @@ namespace PiaGo_CSharp
             test++;
             if (test >= 32)
                 test = 0;
+
+
+            Bluetooth btscr = new Bluetooth();
+            btscr.ShowDialog();
         }
 
         private void btnMetroSettings_Click(object sender, EventArgs e)

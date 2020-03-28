@@ -33,12 +33,11 @@
             this.canvas = new System.Windows.Forms.Panel();
             this.btnUser = new System.Windows.Forms.Button();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
-            this.OctaveDownBtn = new System.Windows.Forms.Button();
-            this.OctaveUpBtn = new System.Windows.Forms.Button();
+            this.OctaveDownBtn = new MetroFramework.Controls.MetroButton();
+            this.OctaveUpBtn = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.btnMetroUser = new MetroFramework.Controls.MetroButton();
             this.cbMetroInstruments = new MetroFramework.Controls.MetroComboBox();
-            this.btnMetroCustomize = new MetroFramework.Controls.MetroButton();
             this.btnMetroSettings = new MetroFramework.Controls.MetroButton();
             this.tglMetroMode = new MetroFramework.Controls.MetroToggle();
             this.btnMetroTest = new MetroFramework.Controls.MetroButton();
@@ -76,6 +75,9 @@
             this.btnKey1 = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.metroSMMainForm = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.PreviewSongBtn = new MetroFramework.Controls.MetroButton();
+            this.LearnSongBtn = new MetroFramework.Controls.MetroButton();
+            this.cbMetroSongs = new MetroFramework.Controls.MetroComboBox();
             this.pnlMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroSMMainForm)).BeginInit();
@@ -103,12 +105,14 @@
             // pnlMainInfo
             // 
             this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlMainInfo.Controls.Add(this.cbMetroSongs);
+            this.pnlMainInfo.Controls.Add(this.LearnSongBtn);
+            this.pnlMainInfo.Controls.Add(this.PreviewSongBtn);
             this.pnlMainInfo.Controls.Add(this.OctaveDownBtn);
             this.pnlMainInfo.Controls.Add(this.OctaveUpBtn);
             this.pnlMainInfo.Controls.Add(this.metroLabel1);
             this.pnlMainInfo.Controls.Add(this.btnMetroUser);
             this.pnlMainInfo.Controls.Add(this.cbMetroInstruments);
-            this.pnlMainInfo.Controls.Add(this.btnMetroCustomize);
             this.pnlMainInfo.Controls.Add(this.btnMetroSettings);
             this.pnlMainInfo.Controls.Add(this.tglMetroMode);
             this.pnlMainInfo.Controls.Add(this.btnMetroTest);
@@ -155,23 +159,23 @@
             // 
             // OctaveDownBtn
             // 
-            this.OctaveDownBtn.Location = new System.Drawing.Point(371, 95);
+            this.OctaveDownBtn.Location = new System.Drawing.Point(729, 10);
             this.OctaveDownBtn.Name = "OctaveDownBtn";
-            this.OctaveDownBtn.Size = new System.Drawing.Size(126, 28);
-            this.OctaveDownBtn.TabIndex = 52;
+            this.OctaveDownBtn.Size = new System.Drawing.Size(126, 30);
+            this.OctaveDownBtn.TabIndex = 54;
             this.OctaveDownBtn.Text = "Octave down";
-            this.OctaveDownBtn.UseVisualStyleBackColor = true;
-            this.OctaveDownBtn.Click += new System.EventHandler(this.OctaveDownBtn_Click);
+            this.OctaveDownBtn.UseSelectable = true;
+            this.OctaveDownBtn.Click += new System.EventHandler(this.OctaveDownBtn_Click_1);
             // 
             // OctaveUpBtn
             // 
-            this.OctaveUpBtn.Location = new System.Drawing.Point(252, 95);
+            this.OctaveUpBtn.Location = new System.Drawing.Point(607, 10);
             this.OctaveUpBtn.Name = "OctaveUpBtn";
-            this.OctaveUpBtn.Size = new System.Drawing.Size(121, 28);
-            this.OctaveUpBtn.TabIndex = 51;
+            this.OctaveUpBtn.Size = new System.Drawing.Size(121, 30);
+            this.OctaveUpBtn.TabIndex = 53;
             this.OctaveUpBtn.Text = "Octave up";
-            this.OctaveUpBtn.UseVisualStyleBackColor = true;
-            this.OctaveUpBtn.Click += new System.EventHandler(this.OctaveUpBtn_Click);
+            this.OctaveUpBtn.UseSelectable = true;
+            this.OctaveUpBtn.Click += new System.EventHandler(this.OctaveUpBtn_Click_1);
             // 
             // metroLabel1
             // 
@@ -206,17 +210,6 @@
             this.cbMetroInstruments.UseSelectable = true;
             this.cbMetroInstruments.SelectedIndexChanged += new System.EventHandler(this.cbMetroInstruments_SelectedIndexChanged);
             // 
-            // btnMetroCustomize
-            // 
-            this.btnMetroCustomize.Location = new System.Drawing.Point(609, 10);
-            this.btnMetroCustomize.Margin = new System.Windows.Forms.Padding(4);
-            this.btnMetroCustomize.Name = "btnMetroCustomize";
-            this.btnMetroCustomize.Size = new System.Drawing.Size(128, 36);
-            this.btnMetroCustomize.TabIndex = 46;
-            this.btnMetroCustomize.Text = "Customize Keys";
-            this.btnMetroCustomize.UseSelectable = true;
-            this.btnMetroCustomize.Click += new System.EventHandler(this.btnMetroCustomize_Click);
-            // 
             // btnMetroSettings
             // 
             this.btnMetroSettings.Location = new System.Drawing.Point(1171, 43);
@@ -231,7 +224,7 @@
             // tglMetroMode
             // 
             this.tglMetroMode.AutoSize = true;
-            this.tglMetroMode.Location = new System.Drawing.Point(256, 43);
+            this.tglMetroMode.Location = new System.Drawing.Point(260, 50);
             this.tglMetroMode.Margin = new System.Windows.Forms.Padding(4);
             this.tglMetroMode.Name = "tglMetroMode";
             this.tglMetroMode.Size = new System.Drawing.Size(80, 21);
@@ -631,6 +624,39 @@
             // 
             this.metroSMMainForm.Owner = this;
             // 
+            // PreviewSongBtn
+            // 
+            this.PreviewSongBtn.Location = new System.Drawing.Point(607, 43);
+            this.PreviewSongBtn.Name = "PreviewSongBtn";
+            this.PreviewSongBtn.Size = new System.Drawing.Size(121, 28);
+            this.PreviewSongBtn.TabIndex = 55;
+            this.PreviewSongBtn.Text = "Preview Song";
+            this.PreviewSongBtn.UseSelectable = true;
+            this.PreviewSongBtn.Visible = false;
+            this.PreviewSongBtn.Click += new System.EventHandler(this.PreviewSongBtn_Click);
+            // 
+            // LearnSongBtn
+            // 
+            this.LearnSongBtn.Location = new System.Drawing.Point(729, 43);
+            this.LearnSongBtn.Name = "LearnSongBtn";
+            this.LearnSongBtn.Size = new System.Drawing.Size(126, 28);
+            this.LearnSongBtn.TabIndex = 56;
+            this.LearnSongBtn.Text = "Learn Song";
+            this.LearnSongBtn.UseSelectable = true;
+            this.LearnSongBtn.Visible = false;
+            // 
+            // cbMetroSongs
+            // 
+            this.cbMetroSongs.FormattingEnabled = true;
+            this.cbMetroSongs.ItemHeight = 24;
+            this.cbMetroSongs.Location = new System.Drawing.Point(387, 43);
+            this.cbMetroSongs.Name = "cbMetroSongs";
+            this.cbMetroSongs.Size = new System.Drawing.Size(213, 30);
+            this.cbMetroSongs.TabIndex = 57;
+            this.cbMetroSongs.UseSelectable = true;
+            this.cbMetroSongs.Visible = false;
+            this.cbMetroSongs.SelectedIndexChanged += new System.EventHandler(this.cbMetroSongs_SelectedIndexChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -695,13 +721,15 @@
         private MetroFramework.Components.MetroStyleManager metroSMMainForm;
         private MetroFramework.Controls.MetroToggle tglMetroMode;
         private MetroFramework.Controls.MetroButton btnMetroTest;
-        private MetroFramework.Controls.MetroButton btnMetroCustomize;
         private MetroFramework.Controls.MetroButton btnMetroSettings;
         private MetroFramework.Controls.MetroButton btnMetroUser;
         private MetroFramework.Controls.MetroComboBox cbMetroInstruments;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.Button OctaveUpBtn;
-        private System.Windows.Forms.Button OctaveDownBtn;
+        private MetroFramework.Controls.MetroButton OctaveDownBtn;
+        private MetroFramework.Controls.MetroButton OctaveUpBtn;
+        private MetroFramework.Controls.MetroButton LearnSongBtn;
+        private MetroFramework.Controls.MetroButton PreviewSongBtn;
+        private MetroFramework.Controls.MetroComboBox cbMetroSongs;
     }
 }
 

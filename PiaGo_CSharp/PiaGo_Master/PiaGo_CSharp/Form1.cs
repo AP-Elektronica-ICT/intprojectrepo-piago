@@ -27,12 +27,13 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
-        //------------------------
+        //CODE FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
         Random rnd = new Random();
         NoteScheduler noteScheduler;
         List<PianoKey> pianoKeys;
+        LearnHandler learnHandler;
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -63,10 +64,16 @@ namespace PiaGo_CSharp
                 cbMetroInstruments.Items.Add(listItem);
             }
             cbMetroInstruments.SelectedIndex = 0;
+            //Initialize song-list
+            cbMetroSongs.Items.Add("Frere Jacques");
+            //cbMetroSongs.SelectedIndex = 0;
+
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
+            learnHandler = new LearnHandler(noteScheduler);
+            
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
             for (int i = 0; i < 32; i++)
@@ -146,8 +153,7 @@ namespace PiaGo_CSharp
         private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedInstrument = (string)cbMetroInstruments.SelectedItem;
-            int resultIndex;
-            resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
+            int resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
             Instrument tempInstrument = (Instrument)resultIndex;
             outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
         }
@@ -426,12 +432,22 @@ namespace PiaGo_CSharp
             System.Environment.Exit(1);
         }
 
+        #region Learn Song
+
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
-
+            PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
+            LearnSongBtn.Visible = !LearnSongBtn.Visible;
+            OctaveDownBtn.Visible = !OctaveDownBtn.Visible;
+            OctaveUpBtn.Visible = !OctaveUpBtn.Visible;
+            cbMetroSongs.Visible = !cbMetroSongs.Visible;
+            foreach (var pianoKey in pianoKeys)
+            {
+                pianoKey.pitch = pianoKey.originalpitch;
+            }
         }
 
-        private void OctaveUpBtn_Click(object sender, EventArgs e)
+        private void OctaveUpBtn_Click_1(object sender, EventArgs e)
         {
             foreach (var pianokey in pianoKeys)
             {
@@ -439,12 +455,25 @@ namespace PiaGo_CSharp
             }
         }
 
-        private void OctaveDownBtn_Click(object sender, EventArgs e)
+        private void OctaveDownBtn_Click_1(object sender, EventArgs e)
         {
             foreach (var pianokey in pianoKeys)
             {
                 pianokey.pitch -= 12;
             }
+        }
+
+        private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedSong = (string)cbMetroSongs.SelectedItem;
+            learnHandler.SelectSong(selectedSong);
+        }
+
+        #endregion
+
+        private void PreviewSongBtn_Click(object sender, EventArgs e)
+        {
+            learnHandler.PreviewSong();
         }
     }
 }

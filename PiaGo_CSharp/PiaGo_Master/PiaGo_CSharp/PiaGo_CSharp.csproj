@@ -64,6 +64,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Key.cs" />
+    <Compile Include="LearnHandler.cs" />
     <Compile Include="L_Key.cs" />
     <Compile Include="NoteScheduler.cs" />
     <Compile Include="PianoKey.cs" />

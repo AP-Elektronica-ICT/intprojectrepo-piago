@@ -9,7 +9,7 @@ namespace PiaGo_CSharp
 {
     class NoteScheduler
     {
-        Clock clock;
+        public Clock clock;
         OutputDevice outputDevice;
         public NoteScheduler (Clock _clock, OutputDevice _outputDevice)
         {
@@ -26,6 +26,11 @@ namespace PiaGo_CSharp
         {
             clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
             clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time + 1));
+        }
+        public void Schedule(Pitch pitch, float noteStart, float noteEnd)
+        {
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, pitch, 80, noteStart));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, pitch, 80, noteEnd));
         }
 
     }

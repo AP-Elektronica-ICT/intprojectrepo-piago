@@ -10,9 +10,11 @@ namespace PiaGo_CSharp
     class PianoKey
     {
         public Pitch pitch;
+        public Pitch originalpitch;
         public PianoKey(int _pitch)
         {
             pitch = (Pitch)(_pitch+53);
+            originalpitch = pitch;
         }
 
     }

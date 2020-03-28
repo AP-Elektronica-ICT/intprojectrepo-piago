@@ -31,6 +31,8 @@ namespace PiaGo_CSharp
         Instrument instrument = (Instrument)0;
         Clock clock;
         Random rnd = new Random();
+        NoteScheduler noteScheduler;
+        List<PianoKey> pianoKeys;
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -64,6 +66,13 @@ namespace PiaGo_CSharp
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
+            noteScheduler = new NoteScheduler(clock, outputDevice);
+            //Initialize pianokeys
+            pianoKeys = new List<PianoKey>();
+            for (int i = 0; i < 32; i++)
+            {
+                pianoKeys.Add(new PianoKey(i));
+            }
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -158,10 +167,7 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[test];
 
             }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
-
-            //keyBoard[test].MakeSound(37 + test * 37, 100);
+            noteScheduler.Play(test);
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             if (test >= 32)
@@ -383,8 +389,7 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[key];
 
             }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time + 1));
+            noteScheduler.Play(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 
@@ -424,6 +429,22 @@ namespace PiaGo_CSharp
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void OctaveUpBtn_Click(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch += 12;
+            }
+        }
+
+        private void OctaveDownBtn_Click(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch -= 12;
+            }
         }
     }
 }

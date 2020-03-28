@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
+
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
@@ -382,10 +383,8 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[key];
 
             }
-            //clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
-            //clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
-
-            keyBoard[key].MakeSound(37 + key * 37, 100);
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time));
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time + 1));
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 

@@ -66,6 +66,9 @@ public class PlayPiago extends AppCompatActivity {
 
     public OctaveSelector octaveSelector;
 
+    //LearnSongs
+    public LearnSongs learn = new LearnSongs();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -361,9 +364,10 @@ public class PlayPiago extends AppCompatActivity {
     //TEst method
     public void playSoundNow(View view) {
 
-        EditText eT = (EditText)findViewById(R.id.testValue);
-        ReceivedBluetoothSignal = eT.getText().toString();
-        playSound(ReceivedBluetoothSignal);
+        //EditText eT = (EditText)findViewById(R.id.testValue);
+        //ReceivedBluetoothSignal = eT.getText().toString();
+        //playSound(ReceivedBluetoothSignal);
+        PlayFatherJacob(learn.FatherJacob);
 
 
 
@@ -482,6 +486,23 @@ public class PlayPiago extends AppCompatActivity {
             try {
                 mmSocket.close();
             } catch (IOException e) { }
+        }
+    }
+
+
+
+
+    public Boolean notePlayed = false;
+    //Learn
+    public void PlayFatherJacob(byte[] array){
+        for(byte note : array){
+            piagoMidiDriver.playNote(note);
+            try{
+                Thread.sleep(500);
+            }catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+            notePlayed = false;
         }
     }
 }

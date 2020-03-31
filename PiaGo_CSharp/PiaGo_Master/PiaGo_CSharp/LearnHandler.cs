@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 using System.Reflection;
 using Midi;
+using System.Drawing;
 
 namespace PiaGo_CSharp 
 {
@@ -17,12 +18,20 @@ namespace PiaGo_CSharp
         string chosenSong;
         public Boolean previewing = false;
         List<Key> keyBoard;
-        
-        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard)
+        public int LastKeyPlayed = 0;
+        System.Windows.Forms.Panel canvas;
+        int multiplier = 4;
+        public int KeyToPlay = 50;
+        public Boolean Learning = false;
+        public string LearnBtnText = "Learn Song";
+        Thread learnThread;
+
+        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas)
         {
             noteScheduler = ns;
             MidiFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "MidiTextFiles");
             keyBoard = _Keyboard;
+            canvas = _canvas;
             //songlines = File.ReadAllLines(Path.Combine(MidiFileDirectory, "SimpleBrotherJabok.txt"));
         }
         public void SelectSong(string song)
@@ -65,16 +74,50 @@ namespace PiaGo_CSharp
         }
         public void LearnSong()
         {
-            foreach (string songline in songlines)
+            if (songlines != null)
             {
-                string[] songinfo = songline.Split(' ');
-                int keyToPlay = Convert.ToInt32(songinfo[0])-48;
-                bool correct = false;
-                keyBoard[keyToPlay].SetKeyFill(KeyColor.GREEN);
-                //canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-                while (!correct)
+                Learning = true;
+                foreach (string songline in songlines)
                 {
+                    LastKeyPlayed = 50;
+                    string[] songinfo = songline.Split(' ');
+                    KeyToPlay = Convert.ToInt32(songinfo[0]) - 48; //MODIFIED FOR BROTHER JAKOB IN WRONG KEY, IS NORMALLY 53
+                    bool correct = false;
+                    keyBoard[KeyToPlay].SetKeyFill(KeyColor.GREEN);
+                    canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                    while (!correct)
+                    {
+                        if (LastKeyPlayed == KeyToPlay)
+                        {
+                            correct = true;
+                        }
+                    }
 
+                }
+            }
+            Learning = false;
+            LearnBtnText = "Learn Song";
+        }
+        public void LearnSongHandler()
+        {
+            if (Learning == false)
+            {
+                learnThread = new Thread(LearnSong);
+                learnThread.Start();
+                Console.WriteLine("Thread started");
+                Learning = true;
+                LearnBtnText = "Stop Learning";
+            }
+            else
+            {
+                learnThread.Abort();
+                learnThread = null;
+                Learning = false;
+                LearnBtnText = "Learn Song";
+                foreach(Key key in keyBoard)
+                {
+                    key.Clear();
+                    canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                 }
 
             }

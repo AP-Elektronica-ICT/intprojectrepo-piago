@@ -97,6 +97,7 @@ namespace PiaGo_CSharp
             }
             Learning = false;
             LearnBtnText = "Learn Song";
+            learnThread = null;
         }
         public void LearnSongHandler()
         {

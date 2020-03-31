@@ -278,18 +278,7 @@
             this.btnMetroTest.Text = "TEST BUTTON";
             this.btnMetroTest.UseSelectable = true;
             this.btnMetroTest.Click += new System.EventHandler(this.btnMetroTest_Click);
-            // 
-            // btnKey11
-            // 
-            this.btnKey11.BackColor = System.Drawing.Color.Teal;
-            this.btnKey11.Location = new System.Drawing.Point(412, 139);
-            this.btnKey11.Margin = new System.Windows.Forms.Padding(4);
-            this.btnKey11.Name = "btnKey11";
-            this.btnKey11.Size = new System.Drawing.Size(44, 106);
-            this.btnKey11.TabIndex = 41;
-            this.btnKey11.Text = "Key11";
-            this.btnKey11.UseVisualStyleBackColor = false;
-            this.btnKey11.Click += new System.EventHandler(this.btnKey11_Click);
+            
             // 
             // btnKey32
             // 
@@ -300,7 +289,8 @@
             this.btnKey32.TabIndex = 40;
             this.btnKey32.Text = "Key32";
             this.btnKey32.UseVisualStyleBackColor = true;
-            this.btnKey32.Click += new System.EventHandler(this.btnKey32_Click);
+            this.btnKey32.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey32_MouseDown);
+            this.btnKey32.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey32_MouseUp);
             // 
             // btnKey31
             // 
@@ -311,7 +301,8 @@
             this.btnKey31.TabIndex = 39;
             this.btnKey31.Text = "Key31";
             this.btnKey31.UseVisualStyleBackColor = true;
-            this.btnKey31.Click += new System.EventHandler(this.btnKey31_Click);
+            this.btnKey31.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey31_MouseDown);
+            this.btnKey31.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey31_MouseUp);
             // 
             // btnKey30
             // 
@@ -323,7 +314,8 @@
             this.btnKey30.TabIndex = 38;
             this.btnKey30.Text = "Key30";
             this.btnKey30.UseVisualStyleBackColor = false;
-            this.btnKey30.Click += new System.EventHandler(this.btnKey30_Click);
+            this.btnKey30.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey30_MouseDown);
+            this.btnKey30.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey30_MouseUp);
             // 
             // btnKey29
             // 
@@ -334,7 +326,8 @@
             this.btnKey29.TabIndex = 37;
             this.btnKey29.Text = "Key29";
             this.btnKey29.UseVisualStyleBackColor = true;
-            this.btnKey29.Click += new System.EventHandler(this.btnKey29_Click);
+            this.btnKey29.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey29_MouseDown);
+            this.btnKey29.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey29_MouseUp);
             // 
             // btnKey28
             // 
@@ -346,7 +339,8 @@
             this.btnKey28.TabIndex = 36;
             this.btnKey28.Text = "Key28";
             this.btnKey28.UseVisualStyleBackColor = false;
-            this.btnKey28.Click += new System.EventHandler(this.btnKey28_Click);
+            this.btnKey28.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey28_MouseDown);
+            this.btnKey28.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey28_MouseUp);
             // 
             // btnKey27
             // 
@@ -357,7 +351,8 @@
             this.btnKey27.TabIndex = 35;
             this.btnKey27.Text = "Key27";
             this.btnKey27.UseVisualStyleBackColor = true;
-            this.btnKey27.Click += new System.EventHandler(this.btnKey27_Click);
+            this.btnKey27.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey27_MouseDown);
+            this.btnKey27.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey27_MouseUp);
             // 
             // btnKey26
             // 
@@ -369,7 +364,8 @@
             this.btnKey26.TabIndex = 34;
             this.btnKey26.Text = "Key26";
             this.btnKey26.UseVisualStyleBackColor = false;
-            this.btnKey26.Click += new System.EventHandler(this.btnKey26_Click);
+            this.btnKey26.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey26_MouseDown);
+            this.btnKey26.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey26_MouseUp);
             // 
             // btnKey25
             // 
@@ -380,7 +376,8 @@
             this.btnKey25.TabIndex = 33;
             this.btnKey25.Text = "Key25";
             this.btnKey25.UseVisualStyleBackColor = true;
-            this.btnKey25.Click += new System.EventHandler(this.btnKey25_Click);
+            this.btnKey25.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey25_MouseDown);
+            this.btnKey25.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey25_MouseUp);
             // 
             // btnKey24
             // 
@@ -391,7 +388,8 @@
             this.btnKey24.TabIndex = 32;
             this.btnKey24.Text = "Key24";
             this.btnKey24.UseVisualStyleBackColor = true;
-            this.btnKey24.Click += new System.EventHandler(this.btnKey24_Click);
+            this.btnKey24.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey24_MouseDown);
+            this.btnKey24.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey24_MouseUp);
             // 
             // btnKey23
             // 
@@ -403,7 +401,8 @@
             this.btnKey23.TabIndex = 31;
             this.btnKey23.Text = "Key23";
             this.btnKey23.UseVisualStyleBackColor = false;
-            this.btnKey23.Click += new System.EventHandler(this.btnKey23_Click);
+            this.btnKey23.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey23_MouseDown);
+            this.btnKey23.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey23_MouseUp);
             // 
             // btnKey22
             // 
@@ -414,7 +413,8 @@
             this.btnKey22.TabIndex = 30;
             this.btnKey22.Text = "Key22";
             this.btnKey22.UseVisualStyleBackColor = true;
-            this.btnKey22.Click += new System.EventHandler(this.btnKey22_Click);
+            this.btnKey22.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey22_MouseDown);
+            this.btnKey22.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey22_MouseUp);
             // 
             // btnKey21
             // 
@@ -426,7 +426,8 @@
             this.btnKey21.TabIndex = 29;
             this.btnKey21.Text = "Key21";
             this.btnKey21.UseVisualStyleBackColor = false;
-            this.btnKey21.Click += new System.EventHandler(this.btnKey21_Click);
+            this.btnKey21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey21_MouseDown);
+            this.btnKey21.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey21_MouseUp);
             // 
             // btnKey20
             // 
@@ -437,7 +438,8 @@
             this.btnKey20.TabIndex = 28;
             this.btnKey20.Text = "Key20";
             this.btnKey20.UseVisualStyleBackColor = true;
-            this.btnKey20.Click += new System.EventHandler(this.btnKey20_Click);
+            this.btnKey20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey20_MouseDown);
+            this.btnKey20.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey20_MouseUp);
             // 
             // btnKey19
             // 
@@ -448,7 +450,8 @@
             this.btnKey19.TabIndex = 27;
             this.btnKey19.Text = "Key19";
             this.btnKey19.UseVisualStyleBackColor = true;
-            this.btnKey19.Click += new System.EventHandler(this.btnKey19_Click);
+            this.btnKey19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey19_MouseDown);
+            this.btnKey19.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey19_MouseUp);
             // 
             // btnKey18
             // 
@@ -460,7 +463,8 @@
             this.btnKey18.TabIndex = 26;
             this.btnKey18.Text = "Key18";
             this.btnKey18.UseVisualStyleBackColor = false;
-            this.btnKey18.Click += new System.EventHandler(this.btnKey18_Click);
+            this.btnKey18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey18_MouseDown);
+            this.btnKey18.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey18_MouseUp);
             // 
             // btnKey17
             // 
@@ -471,7 +475,8 @@
             this.btnKey17.TabIndex = 25;
             this.btnKey17.Text = "Key17";
             this.btnKey17.UseVisualStyleBackColor = true;
-            this.btnKey17.Click += new System.EventHandler(this.btnKey17_Click);
+            this.btnKey17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey17_MouseDown);
+            this.btnKey17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey17_MouseUp);
             // 
             // btnKey16
             // 
@@ -483,7 +488,8 @@
             this.btnKey16.TabIndex = 24;
             this.btnKey16.Text = "Key16";
             this.btnKey16.UseVisualStyleBackColor = false;
-            this.btnKey16.Click += new System.EventHandler(this.btnKey16_Click);
+            this.btnKey16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey16_MouseDown);
+            this.btnKey16.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey16_MouseUp);
             // 
             // btnKey15
             // 
@@ -494,7 +500,8 @@
             this.btnKey15.TabIndex = 23;
             this.btnKey15.Text = "Key15";
             this.btnKey15.UseVisualStyleBackColor = true;
-            this.btnKey15.Click += new System.EventHandler(this.btnKey15_Click);
+            this.btnKey15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey15_MouseDown);
+            this.btnKey15.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey15_MouseUp);
             // 
             // btnKey14
             // 
@@ -506,7 +513,8 @@
             this.btnKey14.TabIndex = 22;
             this.btnKey14.Text = "Key14";
             this.btnKey14.UseVisualStyleBackColor = false;
-            this.btnKey14.Click += new System.EventHandler(this.btnKey14_Click);
+            this.btnKey14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey14_MouseDown);
+            this.btnKey14.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey14_MouseUp);
             // 
             // btnKey13
             // 
@@ -517,7 +525,8 @@
             this.btnKey13.TabIndex = 21;
             this.btnKey13.Text = "Key13";
             this.btnKey13.UseVisualStyleBackColor = true;
-            this.btnKey13.Click += new System.EventHandler(this.btnKey13_Click);
+            this.btnKey13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey13_MouseDown);
+            this.btnKey13.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey13_MouseUp);
             // 
             // btnKey12
             // 
@@ -528,7 +537,21 @@
             this.btnKey12.TabIndex = 20;
             this.btnKey12.Text = "Key12";
             this.btnKey12.UseVisualStyleBackColor = true;
-            this.btnKey12.Click += new System.EventHandler(this.btnKey12_Click);
+            this.btnKey12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey12_MouseDown);
+            this.btnKey12.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey12_MouseUp);
+            // 
+            // btnKey11
+            // 
+            this.btnKey11.BackColor = System.Drawing.Color.Teal;
+            this.btnKey11.Location = new System.Drawing.Point(412, 139);
+            this.btnKey11.Margin = new System.Windows.Forms.Padding(4);
+            this.btnKey11.Name = "btnKey11";
+            this.btnKey11.Size = new System.Drawing.Size(44, 106);
+            this.btnKey11.TabIndex = 41;
+            this.btnKey11.Text = "Key11";
+            this.btnKey11.UseVisualStyleBackColor = false;
+            this.btnKey11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey11_MouseDown);
+            this.btnKey11.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey11_MouseUp);
             // 
             // btnKey10
             // 
@@ -539,7 +562,8 @@
             this.btnKey10.TabIndex = 19;
             this.btnKey10.Text = "Key10";
             this.btnKey10.UseVisualStyleBackColor = true;
-            this.btnKey10.Click += new System.EventHandler(this.btnKey10_Click);
+            this.btnKey10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey10_MouseDown);
+            this.btnKey10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey10_MouseUp);
             // 
             // btnKey9
             // 
@@ -551,7 +575,8 @@
             this.btnKey9.TabIndex = 18;
             this.btnKey9.Text = "Key9";
             this.btnKey9.UseVisualStyleBackColor = false;
-            this.btnKey9.Click += new System.EventHandler(this.btnKey9_Click);
+            this.btnKey9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey9_MouseDown);
+            this.btnKey9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey9_MouseUp);
             // 
             // btnKey8
             // 
@@ -562,7 +587,8 @@
             this.btnKey8.TabIndex = 17;
             this.btnKey8.Text = "Key8";
             this.btnKey8.UseVisualStyleBackColor = true;
-            this.btnKey8.Click += new System.EventHandler(this.btnKey8_Click);
+            this.btnKey8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey8_MouseDown);
+            this.btnKey8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey8_MouseUp);
             // 
             // btnKey7
             // 
@@ -573,7 +599,8 @@
             this.btnKey7.TabIndex = 16;
             this.btnKey7.Text = "Key7";
             this.btnKey7.UseVisualStyleBackColor = true;
-            this.btnKey7.Click += new System.EventHandler(this.btnKey7_Click);
+            this.btnKey7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey7_MouseDown);
+            this.btnKey7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey7_MouseUp);
             // 
             // btnKey6
             // 
@@ -585,7 +612,8 @@
             this.btnKey6.TabIndex = 15;
             this.btnKey6.Text = "Key6";
             this.btnKey6.UseVisualStyleBackColor = false;
-            this.btnKey6.Click += new System.EventHandler(this.btnKey6_Click);
+            this.btnKey6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey6_MouseDown);
+            this.btnKey6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey6_MouseUp);
             // 
             // btnKey5
             // 
@@ -596,7 +624,8 @@
             this.btnKey5.TabIndex = 14;
             this.btnKey5.Text = "Key5";
             this.btnKey5.UseVisualStyleBackColor = true;
-            this.btnKey5.Click += new System.EventHandler(this.btnKey5_Click);
+            this.btnKey5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey5_MouseDown);
+            this.btnKey5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey5_MouseUp);
             // 
             // btnKey4
             // 
@@ -608,7 +637,8 @@
             this.btnKey4.TabIndex = 13;
             this.btnKey4.Text = "Key4";
             this.btnKey4.UseVisualStyleBackColor = false;
-            this.btnKey4.Click += new System.EventHandler(this.btnKey4_Click);
+            this.btnKey4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey4_MouseDown);
+            this.btnKey4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey4_MouseUp);
             // 
             // btnKey2
             // 
@@ -620,7 +650,8 @@
             this.btnKey2.TabIndex = 12;
             this.btnKey2.Text = "Key2";
             this.btnKey2.UseVisualStyleBackColor = false;
-            this.btnKey2.Click += new System.EventHandler(this.btnKey2_Click);
+            this.btnKey2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey2_MouseDown);
+            this.btnKey2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey2_MouseUp);
             // 
             // btnKey3
             // 
@@ -631,7 +662,8 @@
             this.btnKey3.TabIndex = 11;
             this.btnKey3.Text = "Key3";
             this.btnKey3.UseVisualStyleBackColor = true;
-            this.btnKey3.Click += new System.EventHandler(this.btnKey3_Click);
+            this.btnKey3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey3_MouseDown);
+            this.btnKey3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey3_MouseUp);
             // 
             // btnKey1
             // 
@@ -642,7 +674,8 @@
             this.btnKey1.TabIndex = 10;
             this.btnKey1.Text = "Key1";
             this.btnKey1.UseVisualStyleBackColor = true;
-            this.btnKey1.Click += new System.EventHandler(this.btnKey1_Click);
+            this.btnKey1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnKey1_MouseDown);
+            this.btnKey1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnKey1_MouseUp);
             // 
             // pbLogo
             // 

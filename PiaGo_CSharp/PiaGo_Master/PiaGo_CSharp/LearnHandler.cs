@@ -7,9 +7,9 @@ using System.IO;
 using System.Reflection;
 using Midi;
 
-namespace PiaGo_CSharp
+namespace PiaGo_CSharp 
 {
-    class LearnHandler
+    class LearnHandler // WARNING THE SONGLINE READER IS COMPENSATING FOR THE KEY IN WHICH BROTHER JAKOB IS WRITTEN!
     {
         NoteScheduler noteScheduler;
         string MidiFileDirectory;
@@ -52,7 +52,7 @@ namespace PiaGo_CSharp
                     foreach (string songline in songlines)
                     {
                         string[] songinfo = songline.Split(' ');
-                        Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0])+5;
+                        Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0])+5; //THE BROTHER JAKOB FILE IS IN THE WRONG KEY!!!!
                         float noteStart = float.Parse(songinfo[1]) / 128;
                         float noteEnd = float.Parse(songinfo[2]) / 128 + noteStart;
                         noteScheduler.Schedule(pitch, noteStart, noteEnd);

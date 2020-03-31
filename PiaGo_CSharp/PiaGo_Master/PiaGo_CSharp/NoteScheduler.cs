@@ -32,6 +32,13 @@ namespace PiaGo_CSharp
             clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, pitch, 80, noteStart));
             clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, pitch, 80, noteEnd));
         }
+        public void StopAll()
+        {
+            clock.Stop();
+            clock.Reset();
+            outputDevice.SilenceAllNotes();
+            clock.Start();
+        }
 
     }
 }

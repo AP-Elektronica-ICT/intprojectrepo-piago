@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -34,6 +35,7 @@ namespace PiaGo_CSharp
         NoteScheduler noteScheduler;
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
+        Thread learnThread;
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -64,7 +66,7 @@ namespace PiaGo_CSharp
                 cbMetroInstruments.Items.Add(listItem);
             }
             cbMetroInstruments.SelectedIndex = 0;
-            //Initialize song-list
+            //Initialize song-list //TOEDIT
             cbMetroSongs.Items.Add("Frere Jacques");
             //cbMetroSongs.SelectedIndex = 0;
 
@@ -72,8 +74,8 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler);
-            
+            learnHandler = new LearnHandler(noteScheduler, keyBoard);
+
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
             for (int i = 0; i < 32; i++)
@@ -432,7 +434,7 @@ namespace PiaGo_CSharp
             System.Environment.Exit(1);
         }
 
-        #region Learn Song
+
 
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
@@ -462,18 +464,33 @@ namespace PiaGo_CSharp
                 pianokey.pitch -= 12;
             }
         }
-
+        #region Learn Song
         private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedSong = (string)cbMetroSongs.SelectedItem;
             learnHandler.SelectSong(selectedSong);
         }
 
-        #endregion
+
 
         private void PreviewSongBtn_Click(object sender, EventArgs e)
         {
-            learnHandler.PreviewSong();
+            PreviewSongBtn.Text = learnHandler.HandlePreview();
+        }
+        #endregion
+
+        private void LearnSongBtn_Click(object sender, EventArgs e)
+        {
+            if (learnThread == null)
+            {
+                learnThread = new Thread(learnHandler.LearnSong);
+                learnThread.Start();
+                Console.WriteLine("Thread started");
+            }
+            if (!learnThread.IsAlive)
+            {
+                learnThread.Start();
+            } 
         }
     }
 }

@@ -33,6 +33,9 @@
             this.canvas = new System.Windows.Forms.Panel();
             this.btnUser = new System.Windows.Forms.Button();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
+            this.cbMetroSongs = new MetroFramework.Controls.MetroComboBox();
+            this.LearnSongBtn = new MetroFramework.Controls.MetroButton();
+            this.PreviewSongBtn = new MetroFramework.Controls.MetroButton();
             this.OctaveDownBtn = new MetroFramework.Controls.MetroButton();
             this.OctaveUpBtn = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -75,9 +78,6 @@
             this.btnKey1 = new System.Windows.Forms.Button();
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.metroSMMainForm = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.PreviewSongBtn = new MetroFramework.Controls.MetroButton();
-            this.LearnSongBtn = new MetroFramework.Controls.MetroButton();
-            this.cbMetroSongs = new MetroFramework.Controls.MetroComboBox();
             this.pnlMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroSMMainForm)).BeginInit();
@@ -156,6 +156,41 @@
             this.pnlMainInfo.Name = "pnlMainInfo";
             this.pnlMainInfo.Size = new System.Drawing.Size(1313, 260);
             this.pnlMainInfo.TabIndex = 7;
+            // 
+            // cbMetroSongs
+            // 
+            this.cbMetroSongs.FormattingEnabled = true;
+            this.cbMetroSongs.ItemHeight = 24;
+            this.cbMetroSongs.Location = new System.Drawing.Point(387, 43);
+            this.cbMetroSongs.Name = "cbMetroSongs";
+            this.cbMetroSongs.PromptText = "Choose Song";
+            this.cbMetroSongs.Size = new System.Drawing.Size(213, 30);
+            this.cbMetroSongs.TabIndex = 57;
+            this.cbMetroSongs.UseSelectable = true;
+            this.cbMetroSongs.Visible = false;
+            this.cbMetroSongs.SelectedIndexChanged += new System.EventHandler(this.cbMetroSongs_SelectedIndexChanged);
+            // 
+            // LearnSongBtn
+            // 
+            this.LearnSongBtn.Location = new System.Drawing.Point(729, 43);
+            this.LearnSongBtn.Name = "LearnSongBtn";
+            this.LearnSongBtn.Size = new System.Drawing.Size(126, 28);
+            this.LearnSongBtn.TabIndex = 56;
+            this.LearnSongBtn.Text = "Learn Song";
+            this.LearnSongBtn.UseSelectable = true;
+            this.LearnSongBtn.Visible = false;
+            this.LearnSongBtn.Click += new System.EventHandler(this.LearnSongBtn_Click);
+            // 
+            // PreviewSongBtn
+            // 
+            this.PreviewSongBtn.Location = new System.Drawing.Point(607, 43);
+            this.PreviewSongBtn.Name = "PreviewSongBtn";
+            this.PreviewSongBtn.Size = new System.Drawing.Size(121, 28);
+            this.PreviewSongBtn.TabIndex = 55;
+            this.PreviewSongBtn.Text = "Preview Song";
+            this.PreviewSongBtn.UseSelectable = true;
+            this.PreviewSongBtn.Visible = false;
+            this.PreviewSongBtn.Click += new System.EventHandler(this.PreviewSongBtn_Click);
             // 
             // OctaveDownBtn
             // 
@@ -623,39 +658,6 @@
             // metroSMMainForm
             // 
             this.metroSMMainForm.Owner = this;
-            // 
-            // PreviewSongBtn
-            // 
-            this.PreviewSongBtn.Location = new System.Drawing.Point(607, 43);
-            this.PreviewSongBtn.Name = "PreviewSongBtn";
-            this.PreviewSongBtn.Size = new System.Drawing.Size(121, 28);
-            this.PreviewSongBtn.TabIndex = 55;
-            this.PreviewSongBtn.Text = "Preview Song";
-            this.PreviewSongBtn.UseSelectable = true;
-            this.PreviewSongBtn.Visible = false;
-            this.PreviewSongBtn.Click += new System.EventHandler(this.PreviewSongBtn_Click);
-            // 
-            // LearnSongBtn
-            // 
-            this.LearnSongBtn.Location = new System.Drawing.Point(729, 43);
-            this.LearnSongBtn.Name = "LearnSongBtn";
-            this.LearnSongBtn.Size = new System.Drawing.Size(126, 28);
-            this.LearnSongBtn.TabIndex = 56;
-            this.LearnSongBtn.Text = "Learn Song";
-            this.LearnSongBtn.UseSelectable = true;
-            this.LearnSongBtn.Visible = false;
-            // 
-            // cbMetroSongs
-            // 
-            this.cbMetroSongs.FormattingEnabled = true;
-            this.cbMetroSongs.ItemHeight = 24;
-            this.cbMetroSongs.Location = new System.Drawing.Point(387, 43);
-            this.cbMetroSongs.Name = "cbMetroSongs";
-            this.cbMetroSongs.Size = new System.Drawing.Size(213, 30);
-            this.cbMetroSongs.TabIndex = 57;
-            this.cbMetroSongs.UseSelectable = true;
-            this.cbMetroSongs.Visible = false;
-            this.cbMetroSongs.SelectedIndexChanged += new System.EventHandler(this.cbMetroSongs_SelectedIndexChanged);
             // 
             // frmMain
             // 

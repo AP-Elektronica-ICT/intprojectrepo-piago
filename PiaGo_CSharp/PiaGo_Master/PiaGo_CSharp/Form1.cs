@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -27,10 +28,14 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
-        //------------------------
+        //CODE FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
         Random rnd = new Random();
+        NoteScheduler noteScheduler;
+        List<PianoKey> pianoKeys;
+        LearnHandler learnHandler;
+        Thread learnThread;
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -61,9 +66,22 @@ namespace PiaGo_CSharp
                 cbMetroInstruments.Items.Add(listItem);
             }
             cbMetroInstruments.SelectedIndex = 0;
+            //Initialize song-list //TOEDIT
+            cbMetroSongs.Items.Add("Frere Jacques");
+            //cbMetroSongs.SelectedIndex = 0;
+
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
+            noteScheduler = new NoteScheduler(clock, outputDevice);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard);
+
+            //Initialize pianokeys
+            pianoKeys = new List<PianoKey>();
+            for (int i = 0; i < 32; i++)
+            {
+                pianoKeys.Add(new PianoKey(i));
+            }
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -137,8 +155,7 @@ namespace PiaGo_CSharp
         private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedInstrument = (string)cbMetroInstruments.SelectedItem;
-            int resultIndex;
-            resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
+            int resultIndex = cbMetroInstruments.FindStringExact(selectedInstrument);
             Instrument tempInstrument = (Instrument)resultIndex;
             outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
         }
@@ -158,10 +175,7 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[test];
 
             }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + test), 80, clock.Time + 1));
-
-            //keyBoard[test].MakeSound(37 + test * 37, 100);
+            noteScheduler.Play(test);
             canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
             test++;
             if (test >= 32)
@@ -176,164 +190,292 @@ namespace PiaGo_CSharp
         #endregion
 
         #region ALL DEBUG KEYS (32)
-        private void btnKey32_Click(object sender, EventArgs e)
+        private void btnKey32_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(31);
         }
+        private void btnKey32_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(31);
+        }
 
-        private void btnKey31_Click(object sender, EventArgs e)
+        private void btnKey31_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(30);
         }
+        private void btnKey31_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(30);
+        }
 
-        private void btnKey30_Click(object sender, EventArgs e)
+        private void btnKey30_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(29);
         }
+        private void btnKey30_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(29);
+        }
 
-        private void btnKey29_Click(object sender, EventArgs e)
+        private void btnKey29_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(28);
         }
+        private void btnKey29_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(28);
+        }
 
-        private void btnKey28_Click(object sender, EventArgs e)
+        private void btnKey28_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(27);
         }
+        private void btnKey28_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(27);
+        }
 
-        private void btnKey27_Click(object sender, EventArgs e)
+        private void btnKey27_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(26);
         }
+        private void btnKey27_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(26);
+        }
 
-        private void btnKey26_Click(object sender, EventArgs e)
+        private void btnKey26_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(25);
         }
+        private void btnKey26_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(25);
+        }
 
-        private void btnKey25_Click(object sender, EventArgs e)
+        private void btnKey25_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(24);
         }
+        private void btnKey25_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(24);
+        }
 
-        private void btnKey24_Click(object sender, EventArgs e)
+        private void btnKey24_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(23);
         }
+        private void btnKey24_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(23);
+        }
 
-        private void btnKey23_Click(object sender, EventArgs e)
+        private void btnKey23_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(22);
         }
+        private void btnKey23_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(22);
+        }
 
-        private void btnKey22_Click(object sender, EventArgs e)
+        private void btnKey22_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(21);
         }
+        private void btnKey22_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(21);
+        }
 
-        private void btnKey21_Click(object sender, EventArgs e)
+        private void btnKey21_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(20);
         }
+        private void btnKey21_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(20);
+        }
 
-        private void btnKey20_Click(object sender, EventArgs e)
+        private void btnKey20_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(19);
         }
+        private void btnKey20_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(19);
+        }
 
-        private void btnKey19_Click(object sender, EventArgs e)
+        private void btnKey19_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(18);
         }
+        private void btnKey19_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(18);
+        }
 
-        private void btnKey18_Click(object sender, EventArgs e)
+        private void btnKey18_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(17);
         }
+        private void btnKey18_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(17);
+        }
 
-        private void btnKey17_Click(object sender, EventArgs e)
+        private void btnKey17_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(16);
         }
+        private void btnKey17_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(16);
+        }
 
-        private void btnKey16_Click(object sender, EventArgs e)
+        private void btnKey16_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(15);
         }
+        private void btnKey16_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(15);
+        }
 
-        private void btnKey15_Click(object sender, EventArgs e)
+        private void btnKey15_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(14);
         }
+        private void btnKey15_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(14);
+        }
 
-        private void btnKey14_Click(object sender, EventArgs e)
+        private void btnKey14_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(13);
         }
+        private void btnKey14_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(13);
+        }
 
-        private void btnKey13_Click(object sender, EventArgs e)
+        private void btnKey13_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(12);
         }
+        private void btnKey13_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(12);
+        }
 
-        private void btnKey12_Click(object sender, EventArgs e)
+        private void btnKey12_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(11);
         }
-        private void btnKey11_Click(object sender, EventArgs e)
+        private void btnKey12_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(11);
+        }
+        private void btnKey11_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(10);
         }
+        private void btnKey11_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(10);
+        }
 
-        private void btnKey10_Click(object sender, EventArgs e)
+        private void btnKey10_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(9);
         }
+        private void btnKey10_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(9);
+        }
 
-        private void btnKey9_Click(object sender, EventArgs e)
+        private void btnKey9_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(8);
         }
+        private void btnKey9_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(8);
+        }
 
-        private void btnKey8_Click(object sender, EventArgs e)
+        private void btnKey8_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(7);
         }
+        private void btnKey8_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(7);
+        }
 
-        private void btnKey7_Click(object sender, EventArgs e)
+        private void btnKey7_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(6);
         }
+        private void btnKey7_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(6);
+        }
 
-        private void btnKey6_Click(object sender, EventArgs e)
+        private void btnKey6_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(5);
         }
+        private void btnKey6_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(5);
+        }
 
-        private void btnKey5_Click(object sender, EventArgs e)
+        private void btnKey5_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(4);
         }
+        private void btnKey5_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(4);
+        }
 
-        private void btnKey4_Click(object sender, EventArgs e)
+        private void btnKey4_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(3);
         }
-        private void btnKey3_Click(object sender, EventArgs e)
+        private void btnKey4_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(3);
+        }
+        private void btnKey3_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(2);
         }
+        private void btnKey3_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(2);
+        }
 
-        private void btnKey2_Click(object sender, EventArgs e)
+        private void btnKey2_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(1);
         }
+        private void btnKey2_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(1);
+        }
 
-        private void btnKey1_Click(object sender, EventArgs e)
+        private void btnKey1_MouseDown(object sender, EventArgs e)
         {
             ActivateKey(0);
         }
-        #endregion
+        private void btnKey1_MouseUp(object sender, EventArgs e)
+        {
+            DeActivateKey(0);
+        }
+
 
         #region Theme  
         private ThemeType mainTheme = ThemeType.LIGHT;
@@ -370,7 +512,7 @@ namespace PiaGo_CSharp
 
         private void ActivateKey(int key)
         {
-            if (prevKey == null)
+            /*if (prevKey == null)
             {
                 keyBoard[key].SetKeyFill(KeyColor.BLUE);
                 prevKey = keyBoard[key];
@@ -383,10 +525,21 @@ namespace PiaGo_CSharp
                 prevKey = keyBoard[key];
 
             }
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time + 1));
+            noteScheduler.Play(pianoKeys[key]);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier)); */
+            keyBoard[key].Clear();
+            keyBoard[key].SetKeyFill(KeyColor.BLUE);
+            noteScheduler.NoteOn(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
+
+        private void DeActivateKey(int key)
+        {
+            keyBoard[key].Clear();
+            noteScheduler.NoteOff(pianoKeys[key]);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+        }
+        #endregion
 
         public void ChangeControlPanelBGImage(string strFileName)
         {
@@ -421,9 +574,63 @@ namespace PiaGo_CSharp
             System.Environment.Exit(1);
         }
 
+
+
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
+            PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
+            LearnSongBtn.Visible = !LearnSongBtn.Visible;
+            OctaveDownBtn.Visible = !OctaveDownBtn.Visible;
+            OctaveUpBtn.Visible = !OctaveUpBtn.Visible;
+            cbMetroSongs.Visible = !cbMetroSongs.Visible;
+            foreach (var pianoKey in pianoKeys)
+            {
+                pianoKey.pitch = pianoKey.originalpitch;
+            }
+        }
 
+        private void OctaveUpBtn_Click_1(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch += 12;
+            }
+        }
+
+        private void OctaveDownBtn_Click_1(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch -= 12;
+            }
+        }
+        #region Learn Song
+        private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedSong = (string)cbMetroSongs.SelectedItem;
+            learnHandler.SelectSong(selectedSong);
+        }
+
+
+
+        private void PreviewSongBtn_Click(object sender, EventArgs e)
+        {
+            PreviewSongBtn.Text = learnHandler.HandlePreview();
+        }
+        #endregion
+
+        private void LearnSongBtn_Click(object sender, EventArgs e)
+        {
+            if (learnThread == null)
+            {
+                learnThread = new Thread(learnHandler.LearnSong);
+                learnThread.Start();
+                Console.WriteLine("Thread started");
+            }
+            if (!learnThread.IsAlive)
+            {
+                learnThread.Start();
+            } 
         }
     }
 }

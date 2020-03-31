@@ -39,20 +39,20 @@ void loop() {
    while(Serial.available()){
     bluetooth.print(Serial.read());
    }
-    delay(1000);
-    bluetooth.print("001101");
-    delay(100);
-    bluetooth.print("001101");
-    delay(100);
-    bluetooth.print("001101");
-    delay(100);
-    bluetooth.print("001011");
-    delay(1000);
-    bluetooth.print("001101");
-    delay(1000);
-    bluetooth.print("001111");
-    delay(1000);
-    bluetooth.print("001111");
+    delay(500);
+    bluetooth.print("000001");
+    delay(500);
+    bluetooth.print("000010");
+    delay(500);
+    bluetooth.print("000011");
+    delay(500);
+    bluetooth.print("000100");
+    delay(500);
+    bluetooth.print("000101");
+    delay(500);
+    bluetooth.print("000110");
+    delay(500);
+    bluetooth.print("000111");
     
     //bluetooth.print(tmp++);
     //if(tmp==10){

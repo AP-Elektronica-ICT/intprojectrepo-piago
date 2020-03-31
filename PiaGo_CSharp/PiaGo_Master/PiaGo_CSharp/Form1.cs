@@ -39,6 +39,8 @@ namespace PiaGo_CSharp
         Thread learnThread;
         //CODE FOR BLUETOOTH
         SerialPort sp1 = new SerialPort();
+        int prevBTKey = -1;
+
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -633,7 +635,40 @@ namespace PiaGo_CSharp
             } 
         }
         #endregion
+
         #region Bluetooth connection
+
+        private void btmMetroScan_Click(object sender, EventArgs e)
+        {
+            cbMetroDevices.Items.Clear();
+            // Get a list of serial port names.
+            string[] ports = SerialPort.GetPortNames();
+
+            // Display each port name to the console.
+            foreach (string port in ports)
+            {
+                cbMetroDevices.Items.Add(port);
+            }
+        }
+
+        private void btnMetroConnect_Click(object sender, EventArgs e)
+        {
+            if (sp1.IsOpen)
+                sp1.Close();
+            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
+            sp1.BaudRate = 9600;
+            try
+            {
+                if (!sp1.IsOpen)
+                    sp1.Open();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+        }
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -641,9 +676,7 @@ namespace PiaGo_CSharp
             //throw new NotImplementedException();
             try
             {
-                SerialPort sp1 = (SerialPort)sender;
-                //Console.WriteLine("Received data: " + sp1.ReadLine());
-                //dataIn = sp1.ReadLine().ToString(); 
+                SerialPort sp1 = (SerialPort)sender; 
                 dataIn = sp1.ReadExisting().ToString();
                 SetText(dataIn);
             }
@@ -668,39 +701,62 @@ namespace PiaGo_CSharp
             else
             {
                 this.txtMetroDataIn.Text = text;
+                PlayBTNote(text);
+
             }
         }
 
-        private void btmMetroScan_Click(object sender, EventArgs e)
+        private void PlayBTNote(string BTinput)
         {
-            cbMetroDevices.Items.Clear();
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            // Display each port name to the console.
-            foreach (string port in ports)
+            switch (BTinput)
             {
-                cbMetroDevices.Items.Add(port);
+                case "00001":                   
+                    ActivateKey(0);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 0;
+                    break;
+                case "00010":
+                    ActivateKey(1);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 1;
+                    break;
+                case "00011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(2);
+                    prevBTKey = 2;
+                    break;
+                case "00100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(3);
+                    prevBTKey = 3;
+                    break;
+                case "00101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(4);
+                    prevBTKey = 4;
+                    break;
+                case "00110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(5);
+                    prevBTKey = 5;
+                    break;
+                case "00111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(6);
+                    prevBTKey = 6;
+                    break;
+                default:
+                    break;
             }
         }
-
-        private void btnMetroConnect_Click(object sender, EventArgs e)
-        {
-            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
-            sp1.BaudRate = 9600;
-            try
-            {
-                if (!sp1.IsOpen)
-                    sp1.Open();
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
-        }
+        
         #endregion
     }
 }

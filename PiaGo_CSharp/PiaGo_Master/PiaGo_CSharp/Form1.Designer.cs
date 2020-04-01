@@ -47,7 +47,6 @@
             this.cbMetroInstruments = new MetroFramework.Controls.MetroComboBox();
             this.btnMetroSettings = new MetroFramework.Controls.MetroButton();
             this.tglMetroMode = new MetroFramework.Controls.MetroToggle();
-            this.btnMetroTest = new MetroFramework.Controls.MetroButton();
             this.btnKey11 = new System.Windows.Forms.Button();
             this.btnKey32 = new System.Windows.Forms.Button();
             this.btnKey31 = new System.Windows.Forms.Button();
@@ -121,7 +120,6 @@
             this.pnlMainInfo.Controls.Add(this.cbMetroInstruments);
             this.pnlMainInfo.Controls.Add(this.btnMetroSettings);
             this.pnlMainInfo.Controls.Add(this.tglMetroMode);
-            this.pnlMainInfo.Controls.Add(this.btnMetroTest);
             this.pnlMainInfo.Controls.Add(this.btnKey11);
             this.pnlMainInfo.Controls.Add(this.btnKey32);
             this.pnlMainInfo.Controls.Add(this.btnKey31);
@@ -298,7 +296,7 @@
             // 
             // btnMetroUser
             // 
-            this.btnMetroUser.Location = new System.Drawing.Point(3, 77);
+            this.btnMetroUser.Location = new System.Drawing.Point(875, 37);
             this.btnMetroUser.Name = "btnMetroUser";
             this.btnMetroUser.Size = new System.Drawing.Size(96, 23);
             this.btnMetroUser.TabIndex = 48;
@@ -320,7 +318,7 @@
             // 
             // btnMetroSettings
             // 
-            this.btnMetroSettings.Location = new System.Drawing.Point(878, 35);
+            this.btnMetroSettings.Location = new System.Drawing.Point(878, 8);
             this.btnMetroSettings.Name = "btnMetroSettings";
             this.btnMetroSettings.Size = new System.Drawing.Size(96, 23);
             this.btnMetroSettings.TabIndex = 45;
@@ -338,17 +336,6 @@
             this.tglMetroMode.Text = "Off";
             this.tglMetroMode.UseSelectable = true;
             this.tglMetroMode.CheckedChanged += new System.EventHandler(this.tglMetroMode_CheckedChanged);
-            // 
-            // btnMetroTest
-            // 
-            this.btnMetroTest.Enabled = false;
-            this.btnMetroTest.Location = new System.Drawing.Point(878, 8);
-            this.btnMetroTest.Name = "btnMetroTest";
-            this.btnMetroTest.Size = new System.Drawing.Size(96, 23);
-            this.btnMetroTest.TabIndex = 43;
-            this.btnMetroTest.Text = "TEST BUTTON";
-            this.btnMetroTest.UseSelectable = true;
-            this.btnMetroTest.Click += new System.EventHandler(this.btnMetroTest_Click);
             // 
             // btnKey11
             // 
@@ -790,7 +777,6 @@
         private System.Windows.Forms.Button btnKey1;
         private MetroFramework.Components.MetroStyleManager metroSMMainForm;
         private MetroFramework.Controls.MetroToggle tglMetroMode;
-        private MetroFramework.Controls.MetroButton btnMetroTest;
         private MetroFramework.Controls.MetroButton btnMetroSettings;
         private MetroFramework.Controls.MetroButton btnMetroUser;
         private MetroFramework.Controls.MetroComboBox cbMetroInstruments;

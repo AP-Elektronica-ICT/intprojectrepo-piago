@@ -17,9 +17,7 @@ namespace PiaGo_CSharp
 {
     public partial class frmMain : MetroFramework.Forms.MetroForm
     {
-        int test = 0;
-        OutputDevice outputDevice;
-        //CODE FOR GRAPHICAL PIANO
+        //PROPERTIES FOR GRAPHICAL PIANO
         int multiplier = 4;
         Key prevKey;
         int whiteKeySpace = 12;
@@ -29,7 +27,7 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
-        //CODE FOR SOUND AND SOUNDFILES
+        //PROPERTIES FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
         Random rnd = new Random();
@@ -37,7 +35,8 @@ namespace PiaGo_CSharp
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
         Thread learnThread;
-        //CODE FOR BLUETOOTH
+        OutputDevice outputDevice;
+        //PROPERTIES FOR BLUETOOTH
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
 
@@ -54,15 +53,15 @@ namespace PiaGo_CSharp
             //CODE FOR THEME
             this.StyleManager = metroSMMainForm;
             this.UpdateTheme();
+
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
-            //------------------------
+
             //CODE FOR GRAPHICAL PIANO            
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
             CreateKeyboard();
-            //------------------------
             
             //Initialize instrument-list
             for (int i = 0; i < 128; i++)
@@ -72,9 +71,9 @@ namespace PiaGo_CSharp
                 cbMetroInstruments.Items.Add(listItem);
             }
             cbMetroInstruments.SelectedIndex = 0;
+
             //Initialize song-list //TOEDIT
             cbMetroSongs.Items.Add("Frere Jacques");
-            //cbMetroSongs.SelectedIndex = 0;
 
             //Initialize Clock for piano
             clock = new Clock(120);
@@ -89,6 +88,207 @@ namespace PiaGo_CSharp
             {
                 pianoKeys.Add(new PianoKey(i));
             }
+        }
+
+        #region Bluetooth
+        private void btmMetroScan_Click(object sender, EventArgs e)
+        {
+            cbMetroDevices.Items.Clear();
+            // Get a list of serial port names.
+            string[] ports = SerialPort.GetPortNames();
+
+            // Display each port name to the console.
+            foreach (string port in ports)
+            {
+                cbMetroDevices.Items.Add(port);
+            }
+        }
+
+        private void btnMetroConnect_Click(object sender, EventArgs e)
+        {
+            if (sp1.IsOpen)
+                sp1.Close();
+            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
+            sp1.BaudRate = 9600;
+            try
+            {
+                if (!sp1.IsOpen)
+                    sp1.Open();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+        }
+
+        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string dataIn;
+            //throw new NotImplementedException();
+            try
+            {
+                SerialPort sp1 = (SerialPort)sender;
+                dataIn = sp1.ReadExisting().ToString();
+                SetText(dataIn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        delegate void SetTextCallBack(string Text);
+
+        private void SetText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.txtMetroDataIn.InvokeRequired)
+            {
+                SetTextCallBack d = new SetTextCallBack(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.txtMetroDataIn.Text = text;
+                PlayBTNote(text);
+
+            }
+        }
+
+        private void PlayBTNote(string BTinput)
+        {
+            switch (BTinput)
+            {
+                case "00001":
+                    ActivateKey(0);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 0;
+                    break;
+                case "00010":
+                    ActivateKey(1);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 1;
+                    break;
+                case "00011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(2);
+                    prevBTKey = 2;
+                    break;
+                case "00100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(3);
+                    prevBTKey = 3;
+                    break;
+                case "00101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(4);
+                    prevBTKey = 4;
+                    break;
+                case "00110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(5);
+                    prevBTKey = 5;
+                    break;
+                case "00111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(6);
+                    prevBTKey = 6;
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
+
+        #region Theme
+        private ThemeType mainTheme = ThemeType.LIGHT;
+
+        public ThemeType GetTheme()
+        {
+            return mainTheme;
+        }
+
+        public void SetTheme(ThemeType input)
+        {
+            mainTheme = input;
+        }
+
+        public void UpdateTheme()
+        {
+            switch (this.mainTheme)
+            {
+                case ThemeType.LIGHT:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+                case ThemeType.DARK:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
+                    canvas.BackColor = Color.Black;
+                    break;
+                default:
+                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
+                    canvas.BackColor = Color.White;
+                    break;
+            }
+        }
+
+        public void ChangeControlPanelBGImage(string strFileName)
+        {
+            try
+            {
+                pnlMainInfo.BackgroundImage = Image.FromFile(strFileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        public void ChangePianoBGImage(string strFileName)
+        {
+            try
+            {
+                canvas.BackgroundImage = Image.FromFile(strFileName);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+        #endregion
+
+        #region Piano
+
+        private void ActivateKey(int key)
+        {
+            if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
+            else keyBoard[key].SetKeyFill(KeyColor.BLUE);
+            noteScheduler.NoteOn(pianoKeys[key]);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+            learnHandler.LastKeyPlayed = key;
+        }
+
+        private void DeActivateKey(int key)
+        {
+            keyBoard[key].Clear();
+            noteScheduler.NoteOff(pianoKeys[key]);
+            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
+            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -146,14 +346,37 @@ namespace PiaGo_CSharp
 
             keyBoard.Add(new WhiteKey(keyboardX + (whiteKeySpace * whiteKeys), keyboardY, KeyColor.WHITE));
         }
+        #endregion
 
-        #region Buttons & combobox
-        private void btnMetroUser_Click(object sender, EventArgs e)
+        #region Instruments
+        private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
-            StartScreen strt = new StartScreen();
-            strt.ShowDialog();
+            PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
+            LearnSongBtn.Visible = !LearnSongBtn.Visible;
+            OctaveDownBtn.Visible = !OctaveDownBtn.Visible;
+            OctaveUpBtn.Visible = !OctaveUpBtn.Visible;
+            cbMetroSongs.Visible = !cbMetroSongs.Visible;
+            foreach (var pianoKey in pianoKeys)
+            {
+                pianoKey.pitch = pianoKey.originalpitch;
+            }
         }
 
+        private void OctaveUpBtn_Click_1(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch += 12;
+            }
+        }
+
+        private void OctaveDownBtn_Click_1(object sender, EventArgs e)
+        {
+            foreach (var pianokey in pianoKeys)
+            {
+                pianokey.pitch -= 12;
+            }
+        }
 
         private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -162,33 +385,27 @@ namespace PiaGo_CSharp
             Instrument tempInstrument = (Instrument)resultIndex;
             outputDevice.SendProgramChange(Channel.Channel1, tempInstrument);
         }
+        #endregion
 
-        private void btnMetroTest_Click(object sender, EventArgs e)
+        #region Learn Song
+        private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (prevKey == null)
-            {
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-            }
-            else
-            {
-                prevKey.Clear();
-                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[test].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[test];
-
-            }
-            noteScheduler.Play(test);
-            canvas.Invalidate(new Rectangle(keyBoard[test].X, keyBoard[test].Y, 12 * multiplier, 42 * multiplier));
-            test++;
-            if (test >= 32)
-                test = 0;
+            string selectedSong = (string)cbMetroSongs.SelectedItem;
+            learnHandler.SelectSong(selectedSong);
         }
 
-        private void btnMetroSettings_Click(object sender, EventArgs e)
+
+
+        private void PreviewSongBtn_Click(object sender, EventArgs e)
         {
-            SettingsScreen settings = new SettingsScreen();
-            settings.ShowDialog();
+            PreviewSongBtn.Text = learnHandler.HandlePreview();
+        }
+
+
+        private void LearnSongBtn_Click(object sender, EventArgs e)
+        {
+            learnHandler.LearnSongHandler();
+            LearnSongBtn.Text = learnHandler.LearnBtnText;
         }
         #endregion
 
@@ -478,266 +695,28 @@ namespace PiaGo_CSharp
         {
             DeActivateKey(0);
         }
+        #endregion]
 
-
-        #region Theme  
-        private ThemeType mainTheme = ThemeType.LIGHT;
-
-        public ThemeType GetTheme()
+        #region Form Functionality
+        private void btnMetroUser_Click(object sender, EventArgs e)
         {
-            return mainTheme;
+            StartScreen strt = new StartScreen();
+            strt.ShowDialog();
         }
 
-        public void SetTheme(ThemeType input)
+
+        private void btnMetroSettings_Click(object sender, EventArgs e)
         {
-            mainTheme = input;
-        }
-
-        public void UpdateTheme()
-        {
-            switch (this.mainTheme)
-            {
-                case ThemeType.LIGHT:
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
-                    canvas.BackColor = Color.White;
-                    break;
-                case ThemeType.DARK:
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
-                    canvas.BackColor = Color.Black;
-                    break;
-                default:
-                    metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
-                    canvas.BackColor = Color.White;
-                    break;
-            }
-        }
-        #endregion
-
-        private void ActivateKey(int key)
-        {
-            if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
-            else keyBoard[key].SetKeyFill(KeyColor.BLUE);
-            noteScheduler.NoteOn(pianoKeys[key]);
-            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-            learnHandler.LastKeyPlayed = key;
-        }
-
-        private void DeActivateKey(int key)
-        {
-            keyBoard[key].Clear();
-            noteScheduler.NoteOff(pianoKeys[key]);
-            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
-            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-        }
-        #endregion
-
-        public void ChangeControlPanelBGImage(string strFileName)
-        {
-            try
-            {
-                pnlMainInfo.BackgroundImage = Image.FromFile(strFileName);
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-        }
-
-        public void ChangePianoBGImage(string strFileName)
-        {
-            try
-            {
-                canvas.BackgroundImage = Image.FromFile(strFileName);
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
+            SettingsScreen settings = new SettingsScreen();
+            settings.ShowDialog();
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Environment.Exit(1);
         }
-
-
-
-        private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
-        {
-            PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
-            LearnSongBtn.Visible = !LearnSongBtn.Visible;
-            OctaveDownBtn.Visible = !OctaveDownBtn.Visible;
-            OctaveUpBtn.Visible = !OctaveUpBtn.Visible;
-            cbMetroSongs.Visible = !cbMetroSongs.Visible;
-            foreach (var pianoKey in pianoKeys)
-            {
-                pianoKey.pitch = pianoKey.originalpitch;
-            }
-        }
-
-        private void OctaveUpBtn_Click_1(object sender, EventArgs e)
-        {
-            foreach (var pianokey in pianoKeys)
-            {
-                pianokey.pitch += 12;
-            }
-        }
-
-        private void OctaveDownBtn_Click_1(object sender, EventArgs e)
-        {
-            foreach (var pianokey in pianoKeys)
-            {
-                pianokey.pitch -= 12;
-            }
-        }
-        
-        #region Learn Song
-        private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedSong = (string)cbMetroSongs.SelectedItem;
-            learnHandler.SelectSong(selectedSong);
-        }
-
-
-
-        private void PreviewSongBtn_Click(object sender, EventArgs e)
-        {
-            PreviewSongBtn.Text = learnHandler.HandlePreview();
-        }
-        
-
-        private void LearnSongBtn_Click(object sender, EventArgs e)
-        {
-            learnHandler.LearnSongHandler();
-            LearnSongBtn.Text = learnHandler.LearnBtnText;
-        }
         #endregion
 
-        #region Bluetooth connection
 
-        private void btmMetroScan_Click(object sender, EventArgs e)
-        {
-            cbMetroDevices.Items.Clear();
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            // Display each port name to the console.
-            foreach (string port in ports)
-            {
-                cbMetroDevices.Items.Add(port);
-            }
-        }
-
-        private void btnMetroConnect_Click(object sender, EventArgs e)
-        {
-            if (sp1.IsOpen)
-                sp1.Close();
-            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
-            sp1.BaudRate = 9600;
-            try
-            {
-                if (!sp1.IsOpen)
-                    sp1.Open();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
-        }
-
-        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            string dataIn;
-            //throw new NotImplementedException();
-            try
-            {
-                SerialPort sp1 = (SerialPort)sender; 
-                dataIn = sp1.ReadExisting().ToString();
-                SetText(dataIn);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        delegate void SetTextCallBack(string Text);
-
-        private void SetText(string text)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.txtMetroDataIn.InvokeRequired)
-            {
-                SetTextCallBack d = new SetTextCallBack(SetText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.txtMetroDataIn.Text = text;
-                PlayBTNote(text);
-
-            }
-        }
-
-        private void PlayBTNote(string BTinput)
-        {
-            switch (BTinput)
-            {
-                case "00001":                   
-                    ActivateKey(0);
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    prevBTKey = 0;
-                    break;
-                case "00010":
-                    ActivateKey(1);
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    prevBTKey = 1;
-                    break;
-                case "00011":
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    ActivateKey(2);
-                    prevBTKey = 2;
-                    break;
-                case "00100":
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    ActivateKey(3);
-                    prevBTKey = 3;
-                    break;
-                case "00101":
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    ActivateKey(4);
-                    prevBTKey = 4;
-                    break;
-                case "00110":
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    ActivateKey(5);
-                    prevBTKey = 5;
-                    break;
-                case "00111":
-                    if (prevBTKey != -1)
-                        DeActivateKey(prevBTKey);
-                    ActivateKey(6);
-                    prevBTKey = 6;
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        #endregion
     }
 }

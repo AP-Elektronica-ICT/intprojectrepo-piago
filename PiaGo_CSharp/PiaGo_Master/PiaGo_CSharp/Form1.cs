@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
+using System.IO.Ports;
 
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
@@ -36,6 +37,10 @@ namespace PiaGo_CSharp
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
         Thread learnThread;
+        //CODE FOR BLUETOOTH
+        SerialPort sp1 = new SerialPort();
+        int prevBTKey = -1;
+
 
         public frmMain(OutputDevice _outputDevice)
         {
@@ -147,10 +152,6 @@ namespace PiaGo_CSharp
             strt.ShowDialog();
         }
 
-        private void btnMetroCustomize_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void cbMetroInstruments_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -604,6 +605,7 @@ namespace PiaGo_CSharp
                 pianokey.pitch -= 12;
             }
         }
+        
         #region Learn Song
         private void cbMetroSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -617,7 +619,7 @@ namespace PiaGo_CSharp
         {
             PreviewSongBtn.Text = learnHandler.HandlePreview();
         }
-        #endregion
+        
 
         private void LearnSongBtn_Click(object sender, EventArgs e)
         {
@@ -632,5 +634,129 @@ namespace PiaGo_CSharp
                 learnThread.Start();
             } 
         }
+        #endregion
+
+        #region Bluetooth connection
+
+        private void btmMetroScan_Click(object sender, EventArgs e)
+        {
+            cbMetroDevices.Items.Clear();
+            // Get a list of serial port names.
+            string[] ports = SerialPort.GetPortNames();
+
+            // Display each port name to the console.
+            foreach (string port in ports)
+            {
+                cbMetroDevices.Items.Add(port);
+            }
+        }
+
+        private void btnMetroConnect_Click(object sender, EventArgs e)
+        {
+            if (sp1.IsOpen)
+                sp1.Close();
+            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
+            sp1.BaudRate = 9600;
+            try
+            {
+                if (!sp1.IsOpen)
+                    sp1.Open();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+        }
+
+        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string dataIn;
+            //throw new NotImplementedException();
+            try
+            {
+                SerialPort sp1 = (SerialPort)sender; 
+                dataIn = sp1.ReadExisting().ToString();
+                SetText(dataIn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        delegate void SetTextCallBack(string Text);
+
+        private void SetText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.txtMetroDataIn.InvokeRequired)
+            {
+                SetTextCallBack d = new SetTextCallBack(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.txtMetroDataIn.Text = text;
+                PlayBTNote(text);
+
+            }
+        }
+
+        private void PlayBTNote(string BTinput)
+        {
+            switch (BTinput)
+            {
+                case "00001":                   
+                    ActivateKey(0);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 0;
+                    break;
+                case "00010":
+                    ActivateKey(1);
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    prevBTKey = 1;
+                    break;
+                case "00011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(2);
+                    prevBTKey = 2;
+                    break;
+                case "00100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(3);
+                    prevBTKey = 3;
+                    break;
+                case "00101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(4);
+                    prevBTKey = 4;
+                    break;
+                case "00110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(5);
+                    prevBTKey = 5;
+                    break;
+                case "00111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(6);
+                    prevBTKey = 6;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        #endregion
     }
 }

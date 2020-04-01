@@ -63,6 +63,7 @@ namespace PiaGo_CSharp
             blackKeySpace *= multiplier;
             CreateKeyboard();
             //------------------------
+            
             //Initialize instrument-list
             for (int i = 0; i < 128; i++)
             {
@@ -79,7 +80,8 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas);
+            LearnSongBtn.Text = learnHandler.LearnBtnText;
 
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
@@ -513,31 +515,18 @@ namespace PiaGo_CSharp
 
         private void ActivateKey(int key)
         {
-            /*if (prevKey == null)
-            {
-                keyBoard[key].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[key];
-            }
-            else
-            {
-                prevKey.Clear();
-                canvas.Invalidate(new Rectangle(prevKey.X, prevKey.Y, 12 * multiplier, 42 * multiplier));
-                keyBoard[key].SetKeyFill(KeyColor.BLUE);
-                prevKey = keyBoard[key];
-
-            }
-            noteScheduler.Play(pianoKeys[key]);
-            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier)); */
-            keyBoard[key].Clear();
-            keyBoard[key].SetKeyFill(KeyColor.BLUE);
+            if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
+            else keyBoard[key].SetKeyFill(KeyColor.BLUE);
             noteScheduler.NoteOn(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+            learnHandler.LastKeyPlayed = key;
         }
 
         private void DeActivateKey(int key)
         {
             keyBoard[key].Clear();
             noteScheduler.NoteOff(pianoKeys[key]);
+            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
         #endregion
@@ -623,16 +612,8 @@ namespace PiaGo_CSharp
 
         private void LearnSongBtn_Click(object sender, EventArgs e)
         {
-            if (learnThread == null)
-            {
-                learnThread = new Thread(learnHandler.LearnSong);
-                learnThread.Start();
-                Console.WriteLine("Thread started");
-            }
-            if (!learnThread.IsAlive)
-            {
-                learnThread.Start();
-            } 
+            learnHandler.LearnSongHandler();
+            LearnSongBtn.Text = learnHandler.LearnBtnText;
         }
         #endregion
 

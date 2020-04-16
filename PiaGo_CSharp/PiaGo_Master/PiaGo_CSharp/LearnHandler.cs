@@ -7,11 +7,14 @@ using System.IO;
 using System.Reflection;
 using Midi;
 using System.Drawing;
+using MetroFramework.Controls;
+using System.Windows.Forms;
 
 namespace PiaGo_CSharp 
 {
     class LearnHandler // WARNING THE SONGLINE READER IS COMPENSATING FOR THE KEY IN WHICH BROTHER JAKOB IS WRITTEN!
     {
+        #region properties
         NoteScheduler noteScheduler;
         string MidiFileDirectory;
         string[] songlines; 
@@ -25,27 +28,63 @@ namespace PiaGo_CSharp
         public Boolean Learning = false;
         public string LearnBtnText = "Learn Song";
         Thread learnThread;
+        Thread previewThread;
+        private MetroButton LearnSongBtn;
+        private MetroButton PreviewSongBtn;
+        delegate void SetTextCallback(string text);
+        #endregion properties
 
-        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas)
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="ns">Notescheduler handles all the code for playing music</param>
+        /// <param name="_Keyboard">Keyboard to draw the keyboard</param>
+        /// <param name="_canvas">Canvas needed to draw and fill in the colors</param>
+        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn)
         {
             noteScheduler = ns;
             MidiFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "MidiTextFiles");
             keyBoard = _Keyboard;
             canvas = _canvas;
+            LearnSongBtn = _learnSongBtn;
+            PreviewSongBtn = _previewSongBtn;
             //songlines = File.ReadAllLines(Path.Combine(MidiFileDirectory, "SimpleBrotherJabok.txt"));
         }
+
+        /// <summary>
+        ///             ///DUMMYSYSTEM, TO CHANGE
+        /// Select the song to learn and preview
+        /// </summary>
+        /// <param name="song"></param>
         public void SelectSong(string song)
         {
-            ///DUMMYSYSTEM, TO CHANGE
+
             chosenSong = song;
-            string songpath = Path.Combine(MidiFileDirectory, "SimpleBrotherJakob.txt");
+            string songpath = Path.Combine(MidiFileDirectory, "SimpleBrotherJakob.txt"); //edit songpath
             songpath = new Uri(songpath).LocalPath;
             songlines = File.ReadAllLines(songpath);
+            Console.WriteLine("Brother Jakob selected");
         }
-        
-        public string HandlePreview()
+
+        private void SetPreviewText(string text)
         {
-            string buttontext = "Preview Song";
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.PreviewSongBtn.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetPreviewText);
+                PreviewSongBtn.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.PreviewSongBtn.Text = text;
+            }
+        }
+        public void PreviewSong()
+        {
+            
             if (previewing)
             {
                 noteScheduler.StopAll();
@@ -55,11 +94,14 @@ namespace PiaGo_CSharp
             {
                 if (songlines != null)
                 {
+                    Console.WriteLine("Scheduling notes");
                     previewing = true;
                     noteScheduler.clock.Stop();
                     noteScheduler.clock.Reset();
+                    
                     foreach (string songline in songlines)
                     {
+                        
                         string[] songinfo = songline.Split(' ');
                         Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0])+5; //THE BROTHER JAKOB FILE IS IN THE WRONG KEY!!!!
                         float noteStart = float.Parse(songinfo[1]) / 128;
@@ -67,11 +109,40 @@ namespace PiaGo_CSharp
                         noteScheduler.Schedule(pitch, noteStart, noteEnd);
                     }
                     noteScheduler.clock.Start();
-                    buttontext = "Stop Preview";
+                    //buttontext = "Stop Preview";
+                    SetPreviewText("Stop Preview");
+                    //PreviewSongBtn.Text = "Stop Preview";
                 }
+                else { Console.WriteLine("No songlines found"); }
             }
-            return buttontext;
+            //SetPreviewText("Preview song");
+            Console.WriteLine("previewthread ended");
         }
+        public void PreviewHandler()
+        {
+            if (previewing == false)
+            {
+                previewThread = new Thread(PreviewSong);
+                previewThread.Start();
+                Console.WriteLine("previewThread started");
+                //PreviewSongBtn.Text = "Stop Preview";
+            }
+            else
+            {
+                previewThread.Abort();
+                previewThread = null;
+                Learning = false;
+                Console.WriteLine("previewThread stopped");
+                PreviewSongBtn.Text = "Preview Song";
+                foreach (Key key in keyBoard)
+                {
+                    key.Clear();
+                }
+                canvas.Invalidate(new Rectangle(keyBoard[1].X, keyBoard[1].Y, 12 * multiplier, 42 * multiplier));
+
+            }
+        }
+        #region Learn-a-song methods
         public void LearnSong()
         {
             if (songlines != null)
@@ -118,10 +189,12 @@ namespace PiaGo_CSharp
                 foreach(Key key in keyBoard)
                 {
                     key.Clear();
-                    canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+
                 }
+                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
 
             }
         }
+        #endregion
     }
 }

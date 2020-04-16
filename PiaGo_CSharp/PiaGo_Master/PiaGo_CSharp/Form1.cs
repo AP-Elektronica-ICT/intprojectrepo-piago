@@ -79,7 +79,7 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn);
             LearnSongBtn.Text = learnHandler.LearnBtnText;
 
             //Initialize pianokeys
@@ -398,7 +398,7 @@ namespace PiaGo_CSharp
 
         private void PreviewSongBtn_Click(object sender, EventArgs e)
         {
-            PreviewSongBtn.Text = learnHandler.HandlePreview();
+            learnHandler.PreviewHandler();
         }
 
 

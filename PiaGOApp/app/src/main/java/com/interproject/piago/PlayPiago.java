@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
@@ -367,7 +368,8 @@ public class PlayPiago extends AppCompatActivity {
         //EditText eT = (EditText)findViewById(R.id.testValue);
         //ReceivedBluetoothSignal = eT.getText().toString();
         //playSound(ReceivedBluetoothSignal);
-        PlayFatherJacob(learn.FatherJacob);
+        //PlayFatherJacob(learn.FatherJacob);
+        ShowNotesToPlay(learn.FatherJacob);
 
 
 
@@ -488,10 +490,7 @@ public class PlayPiago extends AppCompatActivity {
             } catch (IOException e) { }
         }
     }
-
-
-
-
+    
     public Boolean notePlayed = false;
     //Learn
     public void PlayFatherJacob(byte[] array){
@@ -503,6 +502,32 @@ public class PlayPiago extends AppCompatActivity {
                 Thread.currentThread().interrupt();
             }
             notePlayed = false;
+        }
+    }
+
+    public void ShowNotesToPlay(byte[] array){
+        Button tileToPress;// = findViewById(learn.KeyArray[1]);
+
+        int index = 0;
+        for(int i = 0; i < array.length; i++){
+            for(int j = 0; j < octaveSelector.ActiveOctaveArray.length; j++){
+                if(array[i] == octaveSelector.ActiveOctaveArray[j]){
+                    index = j;
+                    //break;
+                }
+            }
+
+            piagoMidiDriver.playNote(array[i]);
+            tileToPress = findViewById(learn.KeyArray[index]);
+            Drawable OriginalBG = tileToPress.getBackground();
+            tileToPress.setBackgroundResource(R.drawable.tile_pressed);
+
+            try{
+                Thread.sleep(500);
+            }catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+            tileToPress.setBackground(OriginalBG);
         }
     }
 }

@@ -84,38 +84,51 @@ namespace PiaGo_CSharp
         }
         public void PreviewSong()
         {
-            
-            if (previewing)
-            {
-                noteScheduler.StopAll();
-                previewing = false;
-            }
-            else
-            {
-                if (songlines != null)
+             if (songlines != null) {
+                previewing = true;
+                SetPreviewText("Stop Preview");
+                Console.WriteLine("Scheduling notes");
+
+                for (int i = 0; i < songlines.Length - 1; i++)
                 {
-                    Console.WriteLine("Scheduling notes");
-                    previewing = true;
-                    noteScheduler.clock.Stop();
-                    noteScheduler.clock.Reset();
+
+                    string[] songinfo = songlines[i].Split(' ');  //[0] = Pitch, [1] = TimeStartStamp [2] = LengthOfNote
+                    string[] songinfo2 = songlines[i + 1].Split(' ');
+                    KeyToPlay = Convert.ToInt32(songinfo[0]) - 48;
+                    Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0]) + 5; //THE BROTHER JAKOB FILE IS IN THE WRONG KEY!!!!
                     
-                    foreach (string songline in songlines)
+                    //Start note and visualize
+                    keyBoard[KeyToPlay].SetKeyFill(KeyColor.YELLOW);
+                    canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                    noteScheduler.NoteOn(pitch);
+                    Thread.Sleep(Convert.ToInt32(songinfo[2])*3); //*3 for breathing room
+
+                    //Stop note and visualize
+                    noteScheduler.NoteOff(pitch);
+                    keyBoard[KeyToPlay].Clear();
+                    canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                    //Let some time between notes
+                    Thread.Sleep(((Convert.ToInt32(songinfo2[1]) - Convert.ToInt32(songinfo[1])) - Convert.ToInt32(songinfo[2]))*3);
+                    if (i == songlines.Length - 2)
                     {
-                        
-                        string[] songinfo = songline.Split(' ');
-                        Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0])+5; //THE BROTHER JAKOB FILE IS IN THE WRONG KEY!!!!
-                        float noteStart = float.Parse(songinfo[1]) / 128;
-                        float noteEnd = float.Parse(songinfo[2]) / 128 + noteStart;
-                        noteScheduler.Schedule(pitch, noteStart, noteEnd);
+
+                        KeyToPlay = Convert.ToInt32(songinfo2[0]) - 48;
+                        pitch = (Pitch)Convert.ToInt32(songinfo2[0]) + 5;
+
+                        keyBoard[KeyToPlay].SetKeyFill(KeyColor.YELLOW);
+                        canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                        noteScheduler.NoteOn(pitch);
+                        Thread.Sleep(Convert.ToInt32(songinfo2[2])*3);
+                        noteScheduler.NoteOff(pitch);
+                        keyBoard[KeyToPlay].Clear();
+                        canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                     }
-                    noteScheduler.clock.Start();
-                    //buttontext = "Stop Preview";
-                    SetPreviewText("Stop Preview");
-                    //PreviewSongBtn.Text = "Stop Preview";
+                }
+                SetPreviewText("Preview Song");
+                    previewing = false;
                 }
                 else { Console.WriteLine("No songlines found"); }
-            }
-            //SetPreviewText("Preview song");
+
             Console.WriteLine("previewthread ended");
         }
         public void PreviewHandler()
@@ -125,21 +138,20 @@ namespace PiaGo_CSharp
                 previewThread = new Thread(PreviewSong);
                 previewThread.Start();
                 Console.WriteLine("previewThread started");
-                //PreviewSongBtn.Text = "Stop Preview";
             }
             else
             {
                 previewThread.Abort();
                 previewThread = null;
-                Learning = false;
+                previewing = false;
                 Console.WriteLine("previewThread stopped");
                 PreviewSongBtn.Text = "Preview Song";
                 foreach (Key key in keyBoard)
                 {
                     key.Clear();
                 }
-                canvas.Invalidate(new Rectangle(keyBoard[1].X, keyBoard[1].Y, 12 * multiplier, 42 * multiplier));
-
+                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                noteScheduler.StopAll();
             }
         }
         #region Learn-a-song methods

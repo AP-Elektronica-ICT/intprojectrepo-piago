@@ -32,9 +32,17 @@ namespace PiaGo_CSharp
         {
             clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
         }
+        public void NoteOn(Pitch pitch)
+        {
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, pitch, 80, clock.Time));
+        }
         public void NoteOff(PianoKey key)
         {
             clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
+        }
+        public void NoteOff(Pitch pitch)
+        {
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, pitch, 80, clock.Time));
         }
 
     }

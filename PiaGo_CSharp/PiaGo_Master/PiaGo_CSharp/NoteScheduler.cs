@@ -16,17 +16,6 @@ namespace PiaGo_CSharp
             clock = _clock;
             outputDevice = _outputDevice;
         }
-
-        public void Play (int key)
-        {
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, (Pitch)(53 + key), 80, clock.Time + 1));
-        }
-        public void Play (PianoKey key)
-        {
-            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
-            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time + 1));
-        }
         public void Schedule(Pitch pitch, float noteStart, float noteEnd)
         {
             clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, pitch, 80, noteStart));
@@ -43,9 +32,17 @@ namespace PiaGo_CSharp
         {
             clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
         }
+        public void NoteOn(Pitch pitch)
+        {
+            clock.Schedule(new NoteOnMessage(outputDevice, Channel.Channel1, pitch, 80, clock.Time));
+        }
         public void NoteOff(PianoKey key)
         {
             clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, key.pitch, 80, clock.Time));
+        }
+        public void NoteOff(Pitch pitch)
+        {
+            clock.Schedule(new NoteOffMessage(outputDevice, Channel.Channel1, pitch, 80, clock.Time));
         }
 
     }

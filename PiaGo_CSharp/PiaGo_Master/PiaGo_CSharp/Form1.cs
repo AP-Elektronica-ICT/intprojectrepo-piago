@@ -79,7 +79,7 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn);
             LearnSongBtn.Text = learnHandler.LearnBtnText;
 
             //Initialize pianokeys
@@ -360,6 +360,10 @@ namespace PiaGo_CSharp
             {
                 pianoKey.pitch = pianoKey.originalpitch;
             }
+            if (!LearnSongBtn.Visible)
+            {
+                learnHandler.AbortAllThreads();
+            }
         }
 
         private void OctaveUpBtn_Click_1(object sender, EventArgs e)
@@ -398,14 +402,13 @@ namespace PiaGo_CSharp
 
         private void PreviewSongBtn_Click(object sender, EventArgs e)
         {
-            PreviewSongBtn.Text = learnHandler.HandlePreview();
+            learnHandler.PreviewHandler();
         }
 
 
         private void LearnSongBtn_Click(object sender, EventArgs e)
         {
             learnHandler.LearnSongHandler();
-            LearnSongBtn.Text = learnHandler.LearnBtnText;
         }
         #endregion
 

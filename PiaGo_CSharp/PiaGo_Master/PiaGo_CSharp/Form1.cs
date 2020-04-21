@@ -405,7 +405,6 @@ namespace PiaGo_CSharp
         private void LearnSongBtn_Click(object sender, EventArgs e)
         {
             learnHandler.LearnSongHandler();
-            LearnSongBtn.Text = learnHandler.LearnBtnText;
         }
         #endregion
 

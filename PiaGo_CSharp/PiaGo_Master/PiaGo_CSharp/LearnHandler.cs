@@ -19,7 +19,7 @@ namespace PiaGo_CSharp
         string MidiFileDirectory;
         string[] songlines; 
         string chosenSong;
-        public Boolean previewing = false;
+        public bool Previewing = false;
         List<Key> keyBoard;
         public int LastKeyPlayed = 0;
         System.Windows.Forms.Panel canvas;
@@ -82,10 +82,23 @@ namespace PiaGo_CSharp
                 this.PreviewSongBtn.Text = text;
             }
         }
+
+        private void SetLearnText(string text)
+        {
+            if (this.LearnSongBtn.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetLearnText);
+                LearnSongBtn.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.LearnSongBtn.Text = text;
+            }
+        }
         public void PreviewSong()
         {
              if (songlines != null) {
-                previewing = true;
+                Previewing = true;
                 SetPreviewText("Stop Preview");
                 Console.WriteLine("Scheduling notes");
 
@@ -125,7 +138,7 @@ namespace PiaGo_CSharp
                     }
                 }
                 SetPreviewText("Preview Song");
-                    previewing = false;
+                    Previewing = false;
                 }
                 else { Console.WriteLine("No songlines found"); }
 
@@ -133,7 +146,7 @@ namespace PiaGo_CSharp
         }
         public void PreviewHandler()
         {
-            if (previewing == false)
+            if (Previewing == false)
             {
                 previewThread = new Thread(PreviewSong);
                 previewThread.Start();
@@ -143,7 +156,7 @@ namespace PiaGo_CSharp
             {
                 previewThread.Abort();
                 previewThread = null;
-                previewing = false;
+                Previewing = false;
                 Console.WriteLine("previewThread stopped");
                 PreviewSongBtn.Text = "Preview Song";
                 foreach (Key key in keyBoard)
@@ -153,6 +166,19 @@ namespace PiaGo_CSharp
                 canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                 noteScheduler.StopAll();
             }
+            if (Learning == true)
+            {
+                learnThread.Abort();
+                learnThread = null;
+                Learning = false;
+                Console.Write("LearnThread stopped");
+                LearnSongBtn.Text = "Learn Song";
+                foreach (Key key in keyBoard)
+                {
+                    key.Clear();
+                }
+                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+            }
         }
         #region Learn-a-song methods
         public void LearnSong()
@@ -160,6 +186,7 @@ namespace PiaGo_CSharp
             if (songlines != null)
             {
                 Learning = true;
+                SetLearnText("Stop Learning");
                 foreach (string songline in songlines)
                 {
                     LastKeyPlayed = 50;
@@ -177,10 +204,10 @@ namespace PiaGo_CSharp
                     }
 
                 }
+                
             }
             Learning = false;
-            LearnBtnText = "Learn Song";
-            learnThread = null;
+            SetLearnText("Learn Song");
         }
         public void LearnSongHandler()
         {
@@ -188,23 +215,35 @@ namespace PiaGo_CSharp
             {
                 learnThread = new Thread(LearnSong);
                 learnThread.Start();
-                Console.WriteLine("Thread started");
-                Learning = true;
-                LearnBtnText = "Stop Learning";
+                Console.WriteLine("LearnThread started");
             }
             else
             {
                 learnThread.Abort();
                 learnThread = null;
                 Learning = false;
-                LearnBtnText = "Learn Song";
+                Console.Write("LearnThread stopped");
+                LearnSongBtn.Text = "Learn Song";
                 foreach(Key key in keyBoard)
                 {
                     key.Clear();
-
                 }
                 canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
 
+            }
+            if (Previewing == true)
+            {
+                previewThread.Abort();
+                previewThread = null;
+                Previewing = false;
+                Console.WriteLine("previewThread stopped");
+                PreviewSongBtn.Text = "Preview Song";
+                foreach (Key key in keyBoard)
+                {
+                    key.Clear();
+                }
+                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                noteScheduler.StopAll();
             }
         }
         #endregion

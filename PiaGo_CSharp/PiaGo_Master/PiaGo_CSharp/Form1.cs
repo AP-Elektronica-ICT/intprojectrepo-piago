@@ -360,6 +360,10 @@ namespace PiaGo_CSharp
             {
                 pianoKey.pitch = pianoKey.originalpitch;
             }
+            if (!LearnSongBtn.Visible)
+            {
+                learnHandler.AbortAllThreads();
+            }
         }
 
         private void OctaveUpBtn_Click_1(object sender, EventArgs e)

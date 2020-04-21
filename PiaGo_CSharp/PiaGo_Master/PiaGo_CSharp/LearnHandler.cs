@@ -146,6 +146,10 @@ namespace PiaGo_CSharp
         }
         public void PreviewHandler()
         {
+            if (Learning == true)
+            {
+                AbortThread(learnThread);
+            }
             if (Previewing == false)
             {
                 previewThread = new Thread(PreviewSong);
@@ -154,30 +158,7 @@ namespace PiaGo_CSharp
             }
             else
             {
-                previewThread.Abort();
-                previewThread = null;
-                Previewing = false;
-                Console.WriteLine("previewThread stopped");
-                PreviewSongBtn.Text = "Preview Song";
-                foreach (Key key in keyBoard)
-                {
-                    key.Clear();
-                }
-                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
-                noteScheduler.StopAll();
-            }
-            if (Learning == true)
-            {
-                learnThread.Abort();
-                learnThread = null;
-                Learning = false;
-                Console.Write("LearnThread stopped");
-                LearnSongBtn.Text = "Learn Song";
-                foreach (Key key in keyBoard)
-                {
-                    key.Clear();
-                }
-                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+                AbortThread(previewThread);
             }
         }
         #region Learn-a-song methods
@@ -211,6 +192,10 @@ namespace PiaGo_CSharp
         }
         public void LearnSongHandler()
         {
+            if (Previewing == true)
+            {
+                AbortThread(previewThread);
+            }
             if (Learning == false)
             {
                 learnThread = new Thread(LearnSong);
@@ -219,33 +204,36 @@ namespace PiaGo_CSharp
             }
             else
             {
-                learnThread.Abort();
-                learnThread = null;
-                Learning = false;
-                Console.Write("LearnThread stopped");
-                LearnSongBtn.Text = "Learn Song";
-                foreach(Key key in keyBoard)
-                {
-                    key.Clear();
-                }
-                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
-
+                AbortThread(learnThread);
             }
-            if (Previewing == true)
-            {
-                previewThread.Abort();
-                previewThread = null;
-                Previewing = false;
-                Console.WriteLine("previewThread stopped");
-                PreviewSongBtn.Text = "Preview Song";
-                foreach (Key key in keyBoard)
-                {
-                    key.Clear();
-                }
-                canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
-                noteScheduler.StopAll();
-            }
+            
         }
         #endregion
+
+        #region Abort Thread methods
+        private void AbortThread(Thread thread)
+        {
+            thread.Abort();
+            Console.WriteLine("Thread is stopped");
+            thread = null;
+            Learning = false; Previewing = false;
+            PreviewSongBtn.Text = "Preview Song";
+            LearnSongBtn.Text = "Learn Song";
+            foreach (Key key in keyBoard)
+            {
+                key.Clear();
+            }
+            canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
+            noteScheduler.StopAll();
+        }
+
+        public void AbortAllThreads()
+        {
+            if(learnThread != null) { AbortThread(learnThread); }
+            if(previewThread != null) { AbortThread(previewThread); }
+        }
+        #endregion
+
     }
+
 }

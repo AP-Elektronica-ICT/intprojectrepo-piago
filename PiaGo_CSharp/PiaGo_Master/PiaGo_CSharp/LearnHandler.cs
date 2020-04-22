@@ -67,6 +67,7 @@ namespace PiaGo_CSharp
             Console.WriteLine("Brother Jakob selected");
         }
 
+        #region methods to change buttons from threads
         private void SetPreviewText(string text)
         {
             // InvokeRequired required compares the thread ID of the
@@ -95,6 +96,9 @@ namespace PiaGo_CSharp
                 this.LearnSongBtn.Text = text;
             }
         }
+        #endregion
+
+        #region Preview Song methods
         public void PreviewSong()
         {
              if (songlines != null) {
@@ -161,6 +165,8 @@ namespace PiaGo_CSharp
                 AbortThread(previewThread);
             }
         }
+        #endregion
+
         #region Learn-a-song methods
         public void LearnSong()
         {

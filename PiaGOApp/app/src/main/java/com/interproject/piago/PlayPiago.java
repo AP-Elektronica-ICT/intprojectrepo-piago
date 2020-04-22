@@ -197,7 +197,7 @@ public class PlayPiago extends AppCompatActivity {
                 if(isChecked) {
                     LearningMode = true;
                     noteNumber = 0;
-                    LearnSong(learn.FatherJacob);
+                    ShowCurrentNote(learn.FatherJacob);
 
                 }
                 else {
@@ -215,6 +215,7 @@ public class PlayPiago extends AppCompatActivity {
         config = midiDriver.config();
 
         //LearnSong(learn.FatherJacob);
+        learnToggle.setChecked(false);
         sChecker.start();
     }
 
@@ -465,7 +466,7 @@ public class PlayPiago extends AppCompatActivity {
     }
 
 
-    private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus){
+    private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
         final Drawable tileDrawable = pressedTile.getBackground();
         pressedTile.setBackgroundResource(backgGroundStatus);
         new CountDownTimer(400, 100) {
@@ -474,6 +475,7 @@ public class PlayPiago extends AppCompatActivity {
                 // Execute your code here
                 //pressedTile.setBackground(notePlayedBackGround);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
+                ShowCurrentNote(array);
             }
 
             public void onTick(long millisUntilFinished) {
@@ -607,7 +609,7 @@ public class PlayPiago extends AppCompatActivity {
             Log.i("BT", "ShowCurrentNote method");
         }
         if(!notePlayed){
-            CheckNotePlayed();
+            CheckNotePlayed(noteArray);
             Log.i("BT", "CheckNote method");
         }
 
@@ -634,27 +636,44 @@ public class PlayPiago extends AppCompatActivity {
 
         noteIsShown = true;
         notePlayed = false;
+
+
     }
 
     //Check of er een bluetoothsignaal is, zo ja check of het overeenkomt met hetgene dat nodig is
-    public void CheckNotePlayed(){
+    public void CheckNotePlayed(final byte[] array){
         if(ReceivedBluetoothSignal != null) {
             playSound(ReceivedBluetoothSignal);
+            tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
             if(pressedTile == tileToPress){
                 //Is de noot correct, laat dan een groene background kort zien
-                PauseMethodLearn(pressedTile, R.drawable.tile_pressed);
+                PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
+                Log.i("BT", "Correct key");
             }else{
                 //is de noot incorrect, laat dan een rode achtergrond zien
-                PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault);
+                PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
             }
 
             //Reset background van noot die gespeeld moest worden
-            tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+
 
 
             notePlayed = true;
-            noteIsShown = false;
+            //noteIsShown = false;
             noteNumber++;
+
+            new CountDownTimer(500, 100) {
+                public void onFinish() {
+                    // When timer is finished
+                    // Execute your code here
+                    //pressedTile.setBackground(notePlayedBackGround);
+                    ShowCurrentNote(array);
+                }
+
+                public void onTick(long millisUntilFinished) {
+                    // millisUntilFinished    The amount of time until finished.
+                }
+            }.start();
         }
     }
 

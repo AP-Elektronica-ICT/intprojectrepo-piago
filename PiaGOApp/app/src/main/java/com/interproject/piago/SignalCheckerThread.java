@@ -18,6 +18,7 @@ public class SignalCheckerThread extends Thread {
         while(true){
             Log.i("BT", "Looking for signal .." + piago.ReceivedBluetoothSignal);
             if(piago.ReceivedBluetoothSignal != null){
+                Log.i("Debug_key", "BT signal != null, starting threads " + piago.ReceivedBluetoothSignal);
                 SystemClock.sleep(100);
                 if(piago.LearningMode)
                     piago.runThreadLearn();

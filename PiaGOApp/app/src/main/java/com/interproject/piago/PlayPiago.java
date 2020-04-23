@@ -424,15 +424,9 @@ public class PlayPiago extends AppCompatActivity {
                     PlayNotePause(octaveSelector.ActiveOctaveArray[29], R.drawable.tile_black, pressedTile);
                     break;
                 }
-
-
-
-
                 default:
                     break;
             }
-
-
             ReceivedBluetoothSignal = null;
         }
     }
@@ -447,14 +441,6 @@ public class PlayPiago extends AppCompatActivity {
         //playSound(ReceivedBluetoothSignal);
         //PlayFatherJacob(learn.FatherJacob);
         //ShowNotesToPlay(learn.FatherJacob);
-
-
-
-
-
-
-        //Intent intent = new Intent(getApplicationContext(), TestMidiActivity.class);
-        //startActivity(intent);
     }
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
@@ -475,15 +461,17 @@ public class PlayPiago extends AppCompatActivity {
 
 
     private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
-        final Drawable tileDrawable = pressedTile.getBackground();
         pressedTile.setBackgroundResource(backgGroundStatus);
-        new CountDownTimer(400, 100) {
+        Log.i("Debug_key", "Key pressedTile BG set to green or red");
+        new CountDownTimer(300, 100) {
             public void onFinish() {
                 // When timer is finished
                 // Execute your code here
                 //pressedTile.setBackground(notePlayedBackGround);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
+                tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
                 ShowCurrentNote(array);
+                Log.i("Debug_key", "Key pressedTile BG back to normal");
             }
 
             public void onTick(long millisUntilFinished) {
@@ -593,7 +581,6 @@ public class PlayPiago extends AppCompatActivity {
     
     public Boolean notePlayed = false;
 
-
     //Learn
     public void PlayFatherJacob(byte[] array){
         for(byte note : array){
@@ -606,10 +593,6 @@ public class PlayPiago extends AppCompatActivity {
             notePlayed = false;
         }
     }
-
-
-
-
 
     public void LearnSong(byte[] noteArray){
         if(!noteIsShown){
@@ -639,20 +622,19 @@ public class PlayPiago extends AppCompatActivity {
         tileToPress = findViewById(learn.KeyArray[noteIndex]);
         noteToPlayBackGround = tileToPress.getBackground();
 
-
         tileToPress.setBackgroundResource(R.drawable.tile_to_press);
+        Log.i("Debug_key", "Key tileToPress is set to Blue");
 
         noteIsShown = true;
         notePlayed = false;
-
-
     }
 
     //Check of er een bluetoothsignaal is, zo ja check of het overeenkomt met hetgene dat nodig is
     public void CheckNotePlayed(final byte[] array){
         if(ReceivedBluetoothSignal != null) {
             playSound(ReceivedBluetoothSignal);
-            tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+            //tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+            Log.i("Debug_key", "Key tileToPress OG background reset");
             if(pressedTile == tileToPress){
                 //Is de noot correct, laat dan een groene background kort zien
                 PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
@@ -664,24 +646,12 @@ public class PlayPiago extends AppCompatActivity {
 
             //Reset background van noot die gespeeld moest worden
 
-
-
             notePlayed = true;
             //noteIsShown = false;
             noteNumber++;
 
-            new CountDownTimer(500, 100) {
-                public void onFinish() {
-                    // When timer is finished
-                    // Execute your code here
-                    //pressedTile.setBackground(notePlayedBackGround);
-                    ShowCurrentNote(array);
-                }
 
-                public void onTick(long millisUntilFinished) {
-                    // millisUntilFinished    The amount of time until finished.
-                }
-            }.start();
+            Log.i("Debug_key", "ChecknotePLayed() executed");
         }
     }
 
@@ -722,6 +692,7 @@ public class PlayPiago extends AppCompatActivity {
             public void run() {
 
                     LearnSong(learn.FatherJacob);
+                Log.i("Debug_key", "LearnSong() executed");
 
                 }
 

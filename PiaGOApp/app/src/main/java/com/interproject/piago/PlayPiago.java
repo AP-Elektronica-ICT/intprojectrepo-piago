@@ -184,7 +184,7 @@ public class PlayPiago extends AppCompatActivity {
             }
         });
 
-        //ReceivedBluetoothSignal = null;
+        ReceivedBluetoothSignal = null;
         CheckReceived=null;
         Instrument = "piano";
 
@@ -236,7 +236,7 @@ public class PlayPiago extends AppCompatActivity {
     Button pressedTile;
 
     private void playSound(String sound){
-        if(CheckReceived != null){
+        if(ReceivedBluetoothSignal != null){
             switch (sound){
                 case "000000":{
                     pressedTile = findViewById(R.id.tile_white_0);
@@ -433,7 +433,7 @@ public class PlayPiago extends AppCompatActivity {
             }
 
 
-            CheckReceived = null;
+            ReceivedBluetoothSignal = null;
         }
     }
 

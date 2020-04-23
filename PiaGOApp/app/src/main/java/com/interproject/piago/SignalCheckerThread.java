@@ -1,5 +1,6 @@
 package com.interproject.piago;
 
+import android.os.SystemClock;
 import android.util.Log;
 
 public class SignalCheckerThread extends Thread {
@@ -17,11 +18,7 @@ public class SignalCheckerThread extends Thread {
         while(true){
             Log.i("BT", "Looking for signal .." + piago.ReceivedBluetoothSignal);
             if(piago.ReceivedBluetoothSignal != null){
-                try{
-                    Thread.sleep(100);
-                }catch (InterruptedException e){
-                    Thread.currentThread().interrupt();
-                }
+                SystemClock.sleep(100);
                 if(piago.LearningMode)
                     piago.runThreadLearn();
                 else
@@ -29,6 +26,10 @@ public class SignalCheckerThread extends Thread {
                 //piago.LearnSong(piago.learn.FatherJacob);
             }
         }
+
+    }
+
+    private void Debouncer(){
 
     }
 }

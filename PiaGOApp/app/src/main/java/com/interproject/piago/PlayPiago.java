@@ -436,7 +436,7 @@ public class PlayPiago extends AppCompatActivity {
 
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
-        Log.i("BT", "Bluetooth " + CheckReceived);
+        //Log.i("BT", "Bluetooth " + CheckReceived);
 
         //playSound(ReceivedBluetoothSignal);
         //PlayFatherJacob(learn.FatherJacob);
@@ -462,16 +462,17 @@ public class PlayPiago extends AppCompatActivity {
 
     private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
         pressedTile.setBackgroundResource(backgGroundStatus);
-        Log.i("Debug_key", "Key pressedTile BG set to green or red");
+        Log.i("Debugkey", "Key pressedTile BG set to green or red");
         new CountDownTimer(300, 100) {
             public void onFinish() {
                 // When timer is finished
                 // Execute your code here
                 //pressedTile.setBackground(notePlayedBackGround);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
+                Log.i("Debugkey", "PressedTile BG back to original");
                 tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+                Log.i("Debugkey", "TileToPress BG back to original");
                 ShowCurrentNote(array);
-                Log.i("Debug_key", "Key pressedTile BG back to normal");
             }
 
             public void onTick(long millisUntilFinished) {
@@ -597,11 +598,11 @@ public class PlayPiago extends AppCompatActivity {
     public void LearnSong(byte[] noteArray){
         if(!noteIsShown){
             ShowCurrentNote(noteArray);
-            Log.i("BT", "ShowCurrentNote method");
+            //Log.i("BT", "ShowCurrentNote method");
         }
         if(!notePlayed){
             CheckNotePlayed(noteArray);
-            Log.i("BT", "CheckNote method");
+            //Log.i("BT", "CheckNote method");
         }
 
         if(noteNumber >=  noteArray.length)
@@ -623,10 +624,11 @@ public class PlayPiago extends AppCompatActivity {
         noteToPlayBackGround = tileToPress.getBackground();
 
         tileToPress.setBackgroundResource(R.drawable.tile_to_press);
-        Log.i("Debug_key", "Key tileToPress is set to Blue");
+        Log.i("Debugkey", "Key tileToPress is set to Blue, key index "+noteIndex);
 
         noteIsShown = true;
         notePlayed = false;
+        Log.i("Debugkey", "ShowCurrentNote() executed");
     }
 
     //Check of er een bluetoothsignaal is, zo ja check of het overeenkomt met hetgene dat nodig is
@@ -634,11 +636,11 @@ public class PlayPiago extends AppCompatActivity {
         if(ReceivedBluetoothSignal != null) {
             playSound(ReceivedBluetoothSignal);
             //tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
-            Log.i("Debug_key", "Key tileToPress OG background reset");
+            //Log.i("Debugkey", "Key tileToPress OG background reset");
             if(pressedTile == tileToPress){
                 //Is de noot correct, laat dan een groene background kort zien
                 PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
-                Log.i("BT", "Correct key");
+                //Log.i("BT", "Correct key");
             }else{
                 //is de noot incorrect, laat dan een rode achtergrond zien
                 PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
@@ -651,7 +653,7 @@ public class PlayPiago extends AppCompatActivity {
             noteNumber++;
 
 
-            Log.i("Debug_key", "ChecknotePLayed() executed");
+            Log.i("Debugkey", "ChecknotePlayed() executed");
         }
     }
 
@@ -692,7 +694,7 @@ public class PlayPiago extends AppCompatActivity {
             public void run() {
 
                     LearnSong(learn.FatherJacob);
-                Log.i("Debug_key", "LearnSong() executed");
+                Log.i("Debugkey", "LearnSong() executed");
 
                 }
 
@@ -714,7 +716,7 @@ public class PlayPiago extends AppCompatActivity {
         for(int j = 0; j < learn.KeyArray.length; j++){
             if(learn.KeyArray[j] == tileResource) {
                 i = j;
-                Log.i("BT", "Tile number :" +j);
+                //Log.i("BT", "Tile number :" +j);
             }
         }
 

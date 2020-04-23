@@ -1,0 +1,13 @@
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.exe
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.csprojAssemblyReference.cache
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.AssemblyInfoInputs.cache
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.AssemblyInfo.cs
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.deps.json
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.runtimeconfig.json
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.runtimeconfig.dev.json
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.dll
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Midiparser.pdb
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\bin\Debug\netcoreapp3.1\Melanchall.DryWetMidi.dll
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.csproj.CopyComplete
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.dll
+C:\Users\arnau\Documents\Semester4\IntProject\Midiparser\Midiparser\obj\Debug\netcoreapp3.1\Midiparser.pdb

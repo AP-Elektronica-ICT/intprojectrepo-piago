@@ -68,6 +68,8 @@ public class PlayPiago extends AppCompatActivity {
 
     public String ReceivedBluetoothSignal;
 
+    public String CheckReceived;
+
     public OctaveSelector octaveSelector;
 
     //LearnSongs
@@ -103,8 +105,9 @@ public class PlayPiago extends AppCompatActivity {
                         boolean fail = false;
                         // Change adress to static MAC adress
                         // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+
                         BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
-                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83");
+                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83"); DEVICE FINLAND
 
                         try {
                             mBTSocket = createBluetoothSocket(device);
@@ -151,10 +154,14 @@ public class PlayPiago extends AppCompatActivity {
                     //mReadBuffer.setText(readMessage);
                     //int i = Integer.parseInt(readMessage);
                     //ReceivedBluetoothSignal=readMessage;
-                    String toneToPlay= (readMessage.substring(0,6));
-                    ReceivedBluetoothSignal="1";
-                    playSound(toneToPlay);
-                    Log.d("BTRECEIVED", "handleMessage: reveiving msg from arduino"+toneToPlay);
+//                    String toneToPlay= (readMessage.substring(0,6));
+//                    ReceivedBluetoothSignal="1";
+//                    playSound(toneToPlay);
+                    //String toneToPlay= (readMessage.substring(0,6));
+                    CheckReceived="1";
+                    ReceivedBluetoothSignal=(readMessage.substring(0,6));
+                    playSound(ReceivedBluetoothSignal);
+                    Log.d("BTRECEIVED", "handleMessage: reveiving msg from arduino"+ReceivedBluetoothSignal);
 
                 }
 
@@ -177,7 +184,8 @@ public class PlayPiago extends AppCompatActivity {
             }
         });
 
-        ReceivedBluetoothSignal = null;
+        //ReceivedBluetoothSignal = null;
+        CheckReceived=null;
         Instrument = "piano";
 
         //Midi-player
@@ -228,7 +236,7 @@ public class PlayPiago extends AppCompatActivity {
     Button pressedTile;
 
     private void playSound(String sound){
-        if(ReceivedBluetoothSignal != null){
+        if(CheckReceived != null){
             switch (sound){
                 case "000000":{
                     pressedTile = findViewById(R.id.tile_white_0);
@@ -425,7 +433,7 @@ public class PlayPiago extends AppCompatActivity {
             }
 
 
-            ReceivedBluetoothSignal = null;
+            CheckReceived = null;
         }
     }
 
@@ -434,7 +442,7 @@ public class PlayPiago extends AppCompatActivity {
 
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
-        Log.i("BT", "Bluetooth " + ReceivedBluetoothSignal);
+        Log.i("BT", "Bluetooth " + CheckReceived);
 
         //playSound(ReceivedBluetoothSignal);
         //PlayFatherJacob(learn.FatherJacob);

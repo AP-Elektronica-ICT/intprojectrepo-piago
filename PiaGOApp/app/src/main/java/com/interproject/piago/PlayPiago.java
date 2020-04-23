@@ -160,7 +160,7 @@ public class PlayPiago extends AppCompatActivity {
                     //String toneToPlay= (readMessage.substring(0,6));
                     CheckReceived="1";
                     ReceivedBluetoothSignal=(readMessage.substring(0,6));
-                    playSound(ReceivedBluetoothSignal);
+                    //playSound(ReceivedBluetoothSignal);
                     Log.d("BTRECEIVED", "handleMessage: reveiving msg from arduino"+ReceivedBluetoothSignal);
 
                 }

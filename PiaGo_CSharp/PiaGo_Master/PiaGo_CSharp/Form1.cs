@@ -27,6 +27,7 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
+        KeyColor mainKeyColor = KeyColor.BLUE;
         //PROPERTIES FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
@@ -53,7 +54,6 @@ namespace PiaGo_CSharp
             //CODE FOR THEME
             this.StyleManager = metroSMMainForm;
             this.UpdateTheme();
-
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
@@ -231,14 +231,17 @@ namespace PiaGo_CSharp
                 case ThemeType.LIGHT:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
                     canvas.BackColor = Color.White;
+                    pbLogo.Image = Properties.Resources.piago_logo_BLACK;
                     break;
                 case ThemeType.DARK:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
                     canvas.BackColor = Color.Black;
+                    pbLogo.Image = Properties.Resources.piago_logo_WHITE;
                     break;
                 default:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
                     canvas.BackColor = Color.White;
+                    pbLogo.Image = Properties.Resources.piago_logo_BLACK;
                     break;
             }
         }
@@ -272,12 +275,49 @@ namespace PiaGo_CSharp
         }
         #endregion
 
-        #region Piano
+        #region Color  
+        private MetroFramework.MetroColorStyle mainColor = MetroFramework.MetroColorStyle.Blue;
 
+        public MetroFramework.MetroColorStyle GetColor()
+        {
+            return mainColor;
+        }
+
+        public void SetColor(MetroFramework.MetroColorStyle input)
+        {
+            mainColor = input;
+            UpdateColor();
+        }
+
+        public void UpdateColor()
+        {
+            metroSMMainForm.Style = mainColor;
+            switch (mainColor)
+            {
+                case MetroFramework.MetroColorStyle.Red:
+                    mainKeyColor = KeyColor.RED;
+                    break;
+                case MetroFramework.MetroColorStyle.Green:
+                    mainKeyColor = KeyColor.GREEN;
+                    break;
+                case MetroFramework.MetroColorStyle.Blue:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+                case MetroFramework.MetroColorStyle.Yellow:
+                    mainKeyColor = KeyColor.YELLOW;
+                    break;
+                default:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+            }
+        }
+        #endregion
+
+        #region Piano
         private void ActivateKey(int key)
         {
             if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
-            else keyBoard[key].SetKeyFill(KeyColor.BLUE);
+            else keyBoard[key].SetKeyFill(mainKeyColor);
             noteScheduler.NoteOn(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
             learnHandler.LastKeyPlayed = key;
@@ -718,8 +758,8 @@ namespace PiaGo_CSharp
         {
             System.Environment.Exit(1);
         }
-        #endregion
 
+        #endregion
 
     }
 }

@@ -31,6 +31,7 @@ namespace PiaGo_CSharp
                 {
                     metroSMSettings.Theme = MetroFramework.MetroThemeStyle.Light;
                 }
+                this.UpdateColor(oForm1.GetColor());
             }
         }
 
@@ -50,23 +51,41 @@ namespace PiaGo_CSharp
             }
         }
 
+        public void UpdateColor(MetroFramework.MetroColorStyle input)
+        {
+            metroSMSettings.Style = input;
+            switch (input)
+            {
+                case MetroFramework.MetroColorStyle.Red:
+                    cbmetroColor.SelectedIndex = 0;
+                    break;
+                case MetroFramework.MetroColorStyle.Green:
+                    cbmetroColor.SelectedIndex = 1;
+                    break;
+                case MetroFramework.MetroColorStyle.Blue:
+                    cbmetroColor.SelectedIndex = 2;
+                    break;
+                case MetroFramework.MetroColorStyle.Yellow:
+                    cbmetroColor.SelectedIndex = 3;
+                    break;
+                default:
+                    cbmetroColor.SelectedIndex = 2;
+                    break;
+            }
+        }
+
         private void metroToggle1_CheckedChanged(object sender, EventArgs e)
         {
-                foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
-                {
-                    if (tglMetroTheme.Checked == true)
-                    {
-                        oForm1.SetTheme(ThemeType.DARK);
-                        oForm1.UpdateTheme();
-                        this.UpdateTheme(oForm1.GetTheme());
-                }
-                    else
-                    {
-                        oForm1.SetTheme(ThemeType.LIGHT);
-                        oForm1.UpdateTheme();
-                        this.UpdateTheme(oForm1.GetTheme());
-                    }
-                }
+            foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
+            {
+                if (tglMetroTheme.Checked == true)
+                    oForm1.SetTheme(ThemeType.DARK);
+                else
+                    oForm1.SetTheme(ThemeType.LIGHT);
+
+                oForm1.UpdateTheme();
+                this.UpdateTheme(oForm1.GetTheme());
+            }
         }
 
         private void btnMetroPiaonoBG_Click(object sender, EventArgs e)
@@ -95,6 +114,33 @@ namespace PiaGo_CSharp
                     oForm1.ChangeControlPanelBGImage(strFileName);
                 }
 
+            }
+        }
+
+        private void cbmetroColor_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
+            {
+                switch (cbmetroColor.SelectedIndex)
+                {
+                    case 0: //red
+                        oForm1.SetColor(MetroFramework.MetroColorStyle.Red);
+                        break;
+                    case 1: //green
+                        oForm1.SetColor(MetroFramework.MetroColorStyle.Green);
+                        break;
+                    case 2: //blue
+                        oForm1.SetColor(MetroFramework.MetroColorStyle.Blue);
+                        break;
+                    case 3: //yellow
+                        oForm1.SetColor(MetroFramework.MetroColorStyle.Yellow);
+                        break;
+                    default:
+                        oForm1.SetColor(MetroFramework.MetroColorStyle.White);
+                        break;
+                }
+                oForm1.UpdateColor();
+                this.UpdateColor(oForm1.GetColor());
             }
         }
     }

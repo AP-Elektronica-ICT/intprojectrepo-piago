@@ -29,13 +29,11 @@ namespace PiaGo_CSharp
             foreach (frmMain oForm1 in Application.OpenForms.OfType<frmMain>())
             {
                 if (oForm1.GetTheme() == ThemeType.DARK)
-                {
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Dark;
-                }
                 else
-                {
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
-                }
+
+                this.UpdateColor(oForm1.GetColor());
             }
         }
 
@@ -53,6 +51,11 @@ namespace PiaGo_CSharp
                     metroSMUser.Theme = MetroFramework.MetroThemeStyle.Light;
                     break;
             }
+        }
+
+        public void UpdateColor(MetroFramework.MetroColorStyle input)
+        {
+            metroSMUser.Style = input;
         }
 
         private void metroButton1_Click(object sender, EventArgs e)

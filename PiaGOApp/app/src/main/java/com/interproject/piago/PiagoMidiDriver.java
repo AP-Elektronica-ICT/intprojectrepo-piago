@@ -1,5 +1,6 @@
 package com.interproject.piago;
 import android.app.Activity;
+import android.util.Log;
 
 import org.billthefarmer.mididriver.MidiDriver;
 
@@ -79,5 +80,7 @@ public class PiagoMidiDriver {
 
         // Send the MIDI event to the synthesizer.
         midiDriver.write(event);
+
+        Log.i("Debugkey","Sound played");
     }
 }

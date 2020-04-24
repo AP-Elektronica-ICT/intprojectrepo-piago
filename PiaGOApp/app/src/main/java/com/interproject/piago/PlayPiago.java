@@ -40,7 +40,7 @@ public class PlayPiago extends AppCompatActivity {
 
     //For playing piano with different instruments in midi-player
     private MidiDriver midiDriver;
-    private PiagoMidiDriver piagoMidiDriver;
+    public PiagoMidiDriver piagoMidiDriver;
     private int[] config;
     private Button instrumentButton;
 
@@ -81,6 +81,7 @@ public class PlayPiago extends AppCompatActivity {
     //Switch learnToggle = findViewById(R.id.switch_piago);
     public Boolean noteIsShown = false;
     SignalCheckerThread sChecker;
+    PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
     public ToggleButton learnToggle;
 
@@ -436,11 +437,11 @@ public class PlayPiago extends AppCompatActivity {
 
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
-        //Log.i("BT", "Bluetooth " + CheckReceived);
 
-        //playSound(ReceivedBluetoothSignal);
-        //PlayFatherJacob(learn.FatherJacob);
-        //ShowNotesToPlay(learn.FatherJacob);
+       // PlayFatherJacob(learn.FatherJacob, learn.FatherJacobTiming);
+        //previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
+        //previewSongThread.start();
+
     }
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
@@ -451,28 +452,6 @@ public class PlayPiago extends AppCompatActivity {
                 // Execute your code here
                 //pressedTile.setBackgroundResource(tileDrawable);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
-            }
-
-            public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
-            }
-        }.start();
-    }
-
-
-    private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
-        pressedTile.setBackgroundResource(backgGroundStatus);
-        Log.i("Debugkey", "Key pressedTile BG set to green or red");
-        new CountDownTimer(300, 100) {
-            public void onFinish() {
-                // When timer is finished
-                // Execute your code here
-                //pressedTile.setBackground(notePlayedBackGround);
-                pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
-                Log.i("Debugkey", "PressedTile BG back to original");
-                tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
-                Log.i("Debugkey", "TileToPress BG back to original");
-                ShowCurrentNote(array);
             }
 
             public void onTick(long millisUntilFinished) {
@@ -583,18 +562,6 @@ public class PlayPiago extends AppCompatActivity {
     public Boolean notePlayed = false;
 
     //Learn
-    public void PlayFatherJacob(byte[] array){
-        for(byte note : array){
-            piagoMidiDriver.playNote(note);
-            try{
-                Thread.sleep(500);
-            }catch (InterruptedException e){
-                Thread.currentThread().interrupt();
-            }
-            notePlayed = false;
-        }
-    }
-
     public void LearnSong(byte[] noteArray){
         if(!noteIsShown){
             ShowCurrentNote(noteArray);
@@ -609,6 +576,28 @@ public class PlayPiago extends AppCompatActivity {
             noteNumber = 0;
 
         //sChecker.execute();
+    }
+
+    private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
+        pressedTile.setBackgroundResource(backgGroundStatus);
+        Log.i("Debugkey", "Key pressedTile BG set to green or red");
+        new CountDownTimer(300, 100) {
+            public void onFinish() {
+                // When timer is finished
+                // Execute your code here
+                //pressedTile.setBackground(notePlayedBackGround);
+                pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
+                Log.i("Debugkey", "PressedTile BG back to original");
+                tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+                Log.i("Debugkey", "TileToPress BG back to original");
+                ShowCurrentNote(array);
+
+            }
+
+            public void onTick(long millisUntilFinished) {
+                // millisUntilFinished    The amount of time until finished.
+            }
+        }.start();
     }
 
     //Laat de noot zien die gespeeld moet worden
@@ -641,6 +630,7 @@ public class PlayPiago extends AppCompatActivity {
                 //Is de noot correct, laat dan een groene background kort zien
                 PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
                 //Log.i("BT", "Correct key");
+                noteNumber++;
             }else{
                 //is de noot incorrect, laat dan een rode achtergrond zien
                 PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
@@ -650,45 +640,17 @@ public class PlayPiago extends AppCompatActivity {
 
             notePlayed = true;
             //noteIsShown = false;
-            noteNumber++;
+            //noteNumber++;
 
 
             Log.i("Debugkey", "ChecknotePlayed() executed");
         }
     }
 
-    public void ShowNotesToPlay(byte[] array){
-        Button tileToPress;// = findViewById(learn.KeyArray[1]);
-
-        //Drawable backGroundToPress = Drawable;
-        int index = 0;
-        for(int i = 0; i < array.length; i++){
-            for(int j = 0; j < octaveSelector.ActiveOctaveArray.length; j++){
-                if(array[i] == octaveSelector.ActiveOctaveArray[j]){
-                    index = j;
-                    //break;
-                }
-            }
-            tileToPress = findViewById(learn.KeyArray[index]);
-            piagoMidiDriver.playNote(array[i]);
-            ShowNotes sNotes = new ShowNotes(tileToPress);
-            sNotes.execute();
 
 
-            //Log.i("Index", "Index = " + index);
-            //Drawable OriginalBG = tileToPress.getBackground();
-            //tileToPress.setBackground(getResources().getDrawable(R.drawable.tile_pressed));
 
-            try{
-                Thread.sleep(1000);
-            }catch (InterruptedException e){
-                Thread.currentThread().interrupt();
-            }
-
-            //tileToPress.setBackground(OriginalBG);
-        }
-    }
-
+    //CLEANUP POSSIBLE
     public void runThreadLearn(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
@@ -701,6 +663,7 @@ public class PlayPiago extends AppCompatActivity {
         }));
     }
 
+    //CLEANUP POSSIBLE
     public void runThreadNormal(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {

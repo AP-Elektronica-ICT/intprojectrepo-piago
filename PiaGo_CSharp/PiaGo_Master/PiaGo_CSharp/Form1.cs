@@ -54,7 +54,6 @@ namespace PiaGo_CSharp
             //CODE FOR THEME
             this.StyleManager = metroSMMainForm;
             this.UpdateTheme();
-
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
@@ -232,14 +231,17 @@ namespace PiaGo_CSharp
                 case ThemeType.LIGHT:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
                     canvas.BackColor = Color.White;
+                    pbLogo.Image = Properties.Resources.piago_logo_BLACK;
                     break;
                 case ThemeType.DARK:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Dark;
                     canvas.BackColor = Color.Black;
+                    pbLogo.Image = Properties.Resources.piago_logo_WHITE;
                     break;
                 default:
                     metroSMMainForm.Theme = MetroFramework.MetroThemeStyle.Light;
                     canvas.BackColor = Color.White;
+                    pbLogo.Image = Properties.Resources.piago_logo_BLACK;
                     break;
             }
         }
@@ -756,8 +758,8 @@ namespace PiaGo_CSharp
         {
             System.Environment.Exit(1);
         }
-        #endregion
 
+        #endregion
 
     }
 }

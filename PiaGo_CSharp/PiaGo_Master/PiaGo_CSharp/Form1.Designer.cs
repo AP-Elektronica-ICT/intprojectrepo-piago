@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.canvas = new System.Windows.Forms.Panel();
-            this.btnUser = new System.Windows.Forms.Button();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
             this.txtMetroDataIn = new MetroFramework.Controls.MetroTextBox();
             this.cbMetroDevices = new MetroFramework.Controls.MetroComboBox();
@@ -96,13 +94,6 @@
             this.canvas.TabIndex = 6;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
             // 
-            // btnUser
-            // 
-            this.btnUser.Location = new System.Drawing.Point(0, 0);
-            this.btnUser.Name = "btnUser";
-            this.btnUser.Size = new System.Drawing.Size(75, 23);
-            this.btnUser.TabIndex = 49;
-            // 
             // pnlMainInfo
             // 
             this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -153,7 +144,6 @@
             this.pnlMainInfo.Controls.Add(this.btnKey3);
             this.pnlMainInfo.Controls.Add(this.btnKey1);
             this.pnlMainInfo.Controls.Add(this.pbLogo);
-            this.pnlMainInfo.Controls.Add(this.btnUser);
             this.pnlMainInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainInfo.Location = new System.Drawing.Point(20, 60);
             this.pnlMainInfo.Name = "pnlMainInfo";
@@ -704,7 +694,7 @@
             // 
             // pbLogo
             // 
-            this.pbLogo.Image = ((System.Drawing.Image)(resources.GetObject("pbLogo.Image")));
+            this.pbLogo.Image = global::PiaGo_CSharp.Properties.Resources.piago_logo_BLACK;
             this.pbLogo.Location = new System.Drawing.Point(3, 3);
             this.pbLogo.Name = "pbLogo";
             this.pbLogo.Size = new System.Drawing.Size(177, 68);
@@ -726,7 +716,6 @@
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Resizable = false;
-            this.Text = "PiaGo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.pnlMainInfo.ResumeLayout(false);
@@ -740,7 +729,6 @@
         #endregion
 
         private System.Windows.Forms.Panel canvas;
-        private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Panel pnlMainInfo;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Button btnKey11;

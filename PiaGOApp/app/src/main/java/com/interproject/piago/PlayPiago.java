@@ -40,7 +40,7 @@ public class PlayPiago extends AppCompatActivity {
 
     //For playing piano with different instruments in midi-player
     private MidiDriver midiDriver;
-    private PiagoMidiDriver piagoMidiDriver;
+    public PiagoMidiDriver piagoMidiDriver;
     private int[] config;
     private Button instrumentButton;
 
@@ -81,6 +81,7 @@ public class PlayPiago extends AppCompatActivity {
     //Switch learnToggle = findViewById(R.id.switch_piago);
     public Boolean noteIsShown = false;
     SignalCheckerThread sChecker;
+    PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
     public ToggleButton learnToggle;
 
@@ -434,13 +435,13 @@ public class PlayPiago extends AppCompatActivity {
     //Test method
     public void playSoundNow(View view) {
 
-        EditText eT = (EditText)findViewById(R.id.testValue);
-        ReceivedBluetoothSignal = eT.getText().toString();
-        //Log.i("BT", "Bluetooth " + CheckReceived);
+        //EditText eT = (EditText)findViewById(R.id.testValue);
+        //ReceivedBluetoothSignal = eT.getText().toString();
 
-        //playSound(ReceivedBluetoothSignal);
-        //PlayFatherJacob(learn.FatherJacob);
-        //ShowNotesToPlay(learn.FatherJacob);
+       // PlayFatherJacob(learn.FatherJacob, learn.FatherJacobTiming);
+        previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
+        previewSongThread.start();
+
     }
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
@@ -583,16 +584,17 @@ public class PlayPiago extends AppCompatActivity {
     public Boolean notePlayed = false;
 
     //Learn
-    public void PlayFatherJacob(byte[] array){
-        for(byte note : array){
-            piagoMidiDriver.playNote(note);
+    public void PlayFatherJacob(byte[] arrayNote, int[] timing){
+        for(int i = 0; i < arrayNote.length-1; i++){
+            piagoMidiDriver.playNote(arrayNote[i]);
             try{
-                Thread.sleep(500);
+                Thread.sleep((timing[i+1]-timing[i]));
             }catch (InterruptedException e){
                 Thread.currentThread().interrupt();
             }
-            notePlayed = false;
         }
+
+        piagoMidiDriver.playNote(arrayNote[arrayNote.length-1]);
     }
 
     public void LearnSong(byte[] noteArray){
@@ -689,6 +691,8 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
+
+    //CLEANUP POSSIBLE
     public void runThreadLearn(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
@@ -701,6 +705,7 @@ public class PlayPiago extends AppCompatActivity {
         }));
     }
 
+    //CLEANUP POSSIBLE
     public void runThreadNormal(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {

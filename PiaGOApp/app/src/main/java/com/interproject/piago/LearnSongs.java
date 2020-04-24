@@ -7,6 +7,7 @@ import java.security.Key;
 public class LearnSongs {
     public byte[] FatherJacob;
     public int[] KeyArray;
+    public int[] FatherJacobTiming;
 
     public LearnSongs(){
         initByteArrays();
@@ -48,6 +49,41 @@ public class LearnSongs {
                 (byte)0x3c,
                 (byte)0x41,
 
+        };
+
+        FatherJacobTiming = new int[]{
+                0,
+                600,
+                1200,
+                1800,
+                2400,
+                3000,
+                3600,
+                4200,
+                4800,
+                5400,
+                6000,
+                7200,
+                7800,
+                8400,
+                9600,
+                10050,
+                10200,
+                10500,
+                10800,
+                11400,
+                12000,
+                12450,
+                12600,
+                12900,
+                13200,
+                13800,
+                14400,
+                15000,
+                15600,
+                16800,
+                17400,
+                18000
         };
     }
 

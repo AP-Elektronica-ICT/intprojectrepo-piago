@@ -42,7 +42,7 @@ namespace PiaGo_CSharp
         /// <param name="ns">Notescheduler handles all the code for playing music</param>
         /// <param name="_Keyboard">Keyboard to draw the keyboard</param>
         /// <param name="_canvas">Canvas needed to draw and fill in the colors</param>
-        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn, KeyColor _mainKeyColor)
+        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn, KeyColor _mainKeyColor, frmMain form)
         {
             noteScheduler = ns;
             MidiFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "MidiTextFiles");
@@ -61,7 +61,6 @@ namespace PiaGo_CSharp
         /// <param name="song"></param>
         public void SelectSong(string song)
         {
-
             chosenSong = song;
             string songpath = Path.Combine(MidiFileDirectory, "SimpleBrotherJakob.txt"); //edit songpath
             songpath = new Uri(songpath).LocalPath;

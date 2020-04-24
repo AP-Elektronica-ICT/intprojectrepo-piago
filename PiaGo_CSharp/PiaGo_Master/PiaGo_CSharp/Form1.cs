@@ -19,7 +19,6 @@ namespace PiaGo_CSharp
     {
         //PROPERTIES FOR GRAPHICAL PIANO
         int multiplier = 4;
-        Key prevKey;
         int whiteKeySpace = 12;
         int blackKeySpace = 5;
         static int keyboardX = 35;
@@ -35,7 +34,6 @@ namespace PiaGo_CSharp
         NoteScheduler noteScheduler;
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
-        Thread learnThread;
         OutputDevice outputDevice;
         //PROPERTIES FOR BLUETOOTH
         SerialPort sp1 = new SerialPort();
@@ -47,6 +45,8 @@ namespace PiaGo_CSharp
             InitializeComponent();
             outputDevice = _outputDevice;
             outputDevice.SendProgramChange(Channel.Channel1, instrument);
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -74,6 +74,7 @@ namespace PiaGo_CSharp
 
             //Initialize song-list //TOEDIT
             cbMetroSongs.Items.Add("Frere Jacques");
+            cbMetroSongs.Items.Add("EmptySong");
 
             //Initialize Clock for piano
             clock = new Clock(120);
@@ -87,6 +88,7 @@ namespace PiaGo_CSharp
             {
                 pianoKeys.Add(new PianoKey(i));
             }
+            this.KeyPreview = true;
         }
 
         #region Bluetooth
@@ -327,7 +329,7 @@ namespace PiaGo_CSharp
         {
             keyBoard[key].Clear();
             noteScheduler.NoteOff(pianoKeys[key]);
-            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
+            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(mainKeyColor);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 
@@ -739,6 +741,126 @@ namespace PiaGo_CSharp
             DeActivateKey(0);
         }
         #endregion]
+
+        #region DebugPhysicalKeyboard
+        
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyValue + " " + e.KeyData + " was pressed");
+            switch (e.KeyValue)
+            {
+                case 81:
+                    ActivateKey(0);
+                    break;
+                case 83:
+                    ActivateKey(2);
+                    break;
+                case 68:
+                    ActivateKey(4);
+                    break;
+                case 70:
+                    ActivateKey(6);
+                    break;
+                case 71:
+                    ActivateKey(7);
+                    break;
+                case 72:
+                    ActivateKey(9);
+                    break;
+                case 74:
+                    ActivateKey(11);
+                    break;
+                case 75:
+                    ActivateKey(12);
+                    break;
+                case 76:
+                    ActivateKey(14);
+                    break;
+                case 77:
+                    ActivateKey(16);
+                    break;
+                case 90:
+                    ActivateKey(1);
+                    break;
+                case 69:
+                    ActivateKey(3);
+                    break;
+                case 82:
+                    ActivateKey(5);
+                    break;
+                case 89:
+                    ActivateKey(8);
+                    break;
+                case 85:
+                    ActivateKey(10);
+                    break;
+                case 79:
+                    ActivateKey(13);
+                    break;
+                case 80:
+                    ActivateKey(15);
+                    break;
+            }
+        }
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyValue + " " + e.KeyData + " was released");
+            switch (e.KeyValue)
+            {
+                case 81:
+                    DeActivateKey(0);
+                    break;
+                case 83:
+                    DeActivateKey(2);
+                    break;
+                case 68:
+                    DeActivateKey(4);
+                    break;
+                case 70:
+                    DeActivateKey(6);
+                    break;
+                case 71:
+                    DeActivateKey(7);
+                    break;
+                case 72:
+                    DeActivateKey(9);
+                    break;
+                case 74:
+                    DeActivateKey(11);
+                    break;
+                case 75:
+                    DeActivateKey(12);
+                    break;
+                case 76:
+                    DeActivateKey(14);
+                    break;
+                case 77:
+                    DeActivateKey(16);
+                    break;
+                case 90:
+                    DeActivateKey(1);
+                    break;
+                case 69:
+                    DeActivateKey(3);
+                    break;
+                case 82:
+                    DeActivateKey(5);
+                    break;
+                case 89:
+                    DeActivateKey(8);
+                    break;
+                case 85:
+                    DeActivateKey(10);
+                    break;
+                case 79:
+                    DeActivateKey(13);
+                    break;
+                case 80:
+                    DeActivateKey(15);
+                    break;
+            }
+        }
+        #endregion
 
         #region Form Functionality
         private void btnMetroUser_Click(object sender, EventArgs e)

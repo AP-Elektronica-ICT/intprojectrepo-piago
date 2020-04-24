@@ -51,7 +51,6 @@ namespace PiaGo_CSharp
             LearnSongBtn = _learnSongBtn;
             PreviewSongBtn = _previewSongBtn;
             mainKeyColor = _mainKeyColor;
-            //songlines = File.ReadAllLines(Path.Combine(MidiFileDirectory, "SimpleBrotherJabok.txt"));
         }
 
         /// <summary>

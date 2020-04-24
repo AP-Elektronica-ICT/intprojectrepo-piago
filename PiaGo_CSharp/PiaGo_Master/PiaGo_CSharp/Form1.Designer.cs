@@ -318,7 +318,7 @@
             // 
             // btnMetroSettings
             // 
-            this.btnMetroSettings.Location = new System.Drawing.Point(878, 8);
+            this.btnMetroSettings.Location = new System.Drawing.Point(875, 8);
             this.btnMetroSettings.Name = "btnMetroSettings";
             this.btnMetroSettings.Size = new System.Drawing.Size(96, 23);
             this.btnMetroSettings.TabIndex = 45;

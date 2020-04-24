@@ -79,7 +79,7 @@ namespace PiaGo_CSharp
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn, mainKeyColor);
             LearnSongBtn.Text = learnHandler.LearnBtnText;
 
             //Initialize pianokeys
@@ -317,6 +317,7 @@ namespace PiaGo_CSharp
         private void ActivateKey(int key)
         {
             if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
+            else if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
             else keyBoard[key].SetKeyFill(mainKeyColor);
             noteScheduler.NoteOn(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));

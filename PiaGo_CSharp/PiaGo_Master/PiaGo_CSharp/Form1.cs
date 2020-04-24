@@ -27,6 +27,7 @@ namespace PiaGo_CSharp
         Brush blackBrush = new SolidBrush(Color.Black);
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
+        KeyColor mainKeyColor = KeyColor.BLUE;
         //PROPERTIES FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
@@ -269,6 +270,43 @@ namespace PiaGo_CSharp
                 MessageBox.Show("Wrong image type", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
+        }
+        #endregion
+
+        #region Color  
+        private MetroFramework.MetroColorStyle mainColor = MetroFramework.MetroColorStyle.Blue;
+
+        public MetroFramework.MetroColorStyle GetColor()
+        {
+            return mainColor;
+        }
+
+        public void SetColor(MetroFramework.MetroColorStyle input)
+        {
+            mainColor = input;
+        }
+
+        public void UpdateColor()
+        {
+            metroSMMainForm.Style = mainColor;
+            switch (mainColor)
+            {
+                case MetroFramework.MetroColorStyle.Red:
+                    mainKeyColor = KeyColor.RED;
+                    break;
+                case MetroFramework.MetroColorStyle.Green:
+                    mainKeyColor = KeyColor.GREEN;
+                    break;
+                case MetroFramework.MetroColorStyle.Blue:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+                case MetroFramework.MetroColorStyle.Yellow:
+                    mainKeyColor = KeyColor.YELLOW;
+                    break;
+                default:
+                    mainKeyColor = KeyColor.BLUE;
+                    break;
+            }
         }
         #endregion
 

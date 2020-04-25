@@ -76,12 +76,12 @@ public class PlayPiago extends AppCompatActivity {
     public Drawable noteToPlayBackGround;
     public Drawable notePlayedBackGround;
     public Button tileToPress;
-    //Switch learnToggle = findViewById(R.id.switch_piago);
     public Boolean noteIsShown = false;
     SignalCheckerThread sChecker;
     PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
     public ToggleButton learnToggle;
+    CorrectNotePlayer cNotePlayer = new CorrectNotePlayer(this);
 
 
     //Buttons
@@ -450,6 +450,7 @@ public class PlayPiago extends AppCompatActivity {
     //Test method
     public void playSoundNow(View view) {
 
+        //cNotePlayer.start();
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
 

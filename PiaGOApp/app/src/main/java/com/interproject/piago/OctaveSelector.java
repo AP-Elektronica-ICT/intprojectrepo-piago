@@ -230,6 +230,9 @@ public class OctaveSelector {
                 (byte) 0x6A,
                 (byte) 0x6B
         };
+    }
 
+    public void SetOctaveLearn(){
+        ActiveOctaveArray = OctaveArray[2];
     }
 }

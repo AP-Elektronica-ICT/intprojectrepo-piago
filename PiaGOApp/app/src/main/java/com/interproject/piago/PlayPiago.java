@@ -210,6 +210,7 @@ public class PlayPiago extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     LearningMode = true;
+                    octaveSelector.SetOctaveLearn();
                     //noteNumber = 0;
                     //ShowCurrentNote(learn.FatherJacob);
 

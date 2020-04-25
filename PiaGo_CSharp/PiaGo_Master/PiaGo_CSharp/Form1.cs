@@ -164,47 +164,197 @@ namespace PiaGo_CSharp
         {
             switch (BTinput)
             {
-                case "00001":
+                case "00000":
                     ActivateKey(0);
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     prevBTKey = 0;
                     break;
-                case "00010":
+                case "00001":
                     ActivateKey(1);
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     prevBTKey = 1;
                     break;
-                case "00011":
+                case "00010":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(2);
                     prevBTKey = 2;
                     break;
-                case "00100":
+                case "00011":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(3);
                     prevBTKey = 3;
                     break;
-                case "00101":
+                case "00100":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(4);
                     prevBTKey = 4;
                     break;
-                case "00110":
+                case "00101":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(5);
                     prevBTKey = 5;
                     break;
-                case "00111":
+                case "00110":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(6);
                     prevBTKey = 6;
+                    break;
+                case "00111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(7);
+                    prevBTKey = 7;
+                    break;
+                case "01000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(8);
+                    prevBTKey = 8;
+                    break;
+                case "01001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(9);
+                    prevBTKey = 9;
+                    break;
+                case "01010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(10);
+                    prevBTKey = 10;
+                    break;
+                case "01011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(11);
+                    prevBTKey = 11;
+                    break;
+                case "01100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(12);
+                    prevBTKey = 12;
+                    break;
+                case "01101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(13);
+                    prevBTKey = 13;
+                    break;
+                case "01110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(14);
+                    prevBTKey = 14;
+                    break;
+                case "01111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(15);
+                    prevBTKey = 15;
+                    break;
+                case "10000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(16);
+                    prevBTKey = 16;
+                    break;
+                case "10001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(17);
+                    prevBTKey = 17;
+                    break;
+                case "10010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(18);
+                    prevBTKey = 18;
+                    break;
+                case "10011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(19);
+                    prevBTKey = 19;
+                    break;
+                case "10100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(20);
+                    prevBTKey = 20;
+                    break;
+                case "10101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(21);
+                    prevBTKey = 21;
+                    break;
+                case "10110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(22);
+                    prevBTKey = 22;
+                    break;
+                case "10111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(23);
+                    prevBTKey = 23;
+                    break;
+                case "11000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(24);
+                    prevBTKey = 24;
+                    break;
+                case "11001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(25);
+                    prevBTKey = 25;
+                    break;
+                case "11010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(26);
+                    prevBTKey = 26;
+                    break;
+                case "11011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(27);
+                    prevBTKey = 27;
+                    break;
+                case "11100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(28);
+                    prevBTKey = 28;
+                    break;
+                case "11101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(29);
+                    prevBTKey = 29;
+                    break;
+                case "11110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(30);
+                    prevBTKey = 30;
+                    break;
+                case "11111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(31);
+                    prevBTKey = 31;
                     break;
                 default:
                     break;

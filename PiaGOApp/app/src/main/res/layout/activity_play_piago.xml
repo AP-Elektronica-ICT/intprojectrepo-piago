@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayPiago">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Touch for sound"
-        android:textStyle="bold"
-        android:id="@+id/button_playSound"
+
+    <ImageView
+        android:id="@+id/mainscreen_logo"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/button_piago_main"
-        android:visibility="gone"/>
+        android:src="@drawable/piagologoblack"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

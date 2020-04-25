@@ -180,7 +180,7 @@ public class PlayPiago extends AppCompatActivity {
             }
         };
 
-        mPlaySound=findViewById(R.id.button_playSound);
+        /*mPlaySound=findViewById(R.id.button_playSound);
         mPlaySound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +188,7 @@ public class PlayPiago extends AppCompatActivity {
                 toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
 
             }
-        });
+        });*/
 
         ReceivedBluetoothSignal = null;
         CheckReceived=null;

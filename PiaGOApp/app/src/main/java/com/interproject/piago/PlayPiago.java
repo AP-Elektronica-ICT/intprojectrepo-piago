@@ -111,8 +111,9 @@ public class PlayPiago extends AppCompatActivity {
                         // Change adress to static MAC adress
                         // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
 
-                        BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
-                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83"); DEVICE FINLAND
+                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
+                        //DEVICE FINLAND
+                        BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83");
 
                         try {
                             mBTSocket = createBluetoothSocket(device);

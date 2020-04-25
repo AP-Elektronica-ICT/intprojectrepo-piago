@@ -12,13 +12,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/piago_logo_white"/>
+        android:src="@drawable/piagologoblack"/>
 
     <Button
         android:id="@+id/mainscreen_button_jam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textStyle="bold"
         android:padding="10dp"
         android:text="Start Playing"
         app:layout_constraintLeft_toLeftOf="parent"

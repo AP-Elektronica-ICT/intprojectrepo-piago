@@ -27,10 +27,9 @@
             android:name=".PlayPiago"
             android:screenOrientation="landscape" />
         <activity android:name=".BluetoothActivity" />
-        <activity android:name=".PiagoMainScreen" />
         <activity android:name=".TestMidiActivity"></activity>
         <activity android:name=".TestMidiDriver" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".PiagoMainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

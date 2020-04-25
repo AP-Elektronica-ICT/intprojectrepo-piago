@@ -81,6 +81,6 @@ public class PiagoMidiDriver {
         // Send the MIDI event to the synthesizer.
         midiDriver.write(event);
 
-        Log.i("Debugkey","Sound played");
+        Log.i("Debugkey","Sound played ______________________ " + chord);
     }
 }

@@ -26,6 +26,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Preview Song"
+        android:id="@+id/button_preview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="previewSong"
+        android:background="@drawable/button_piago_main"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Song"
+        android:id="@+id/button_start_song"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_preview"
+        android:onClick="startSong"
+        android:background="@drawable/button_piago_main"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Piano"
         android:id="@+id/button_change_instrument"
         app:layout_constraintTop_toTopOf="parent"

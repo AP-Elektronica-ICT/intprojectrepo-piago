@@ -62,7 +62,7 @@ public class PreviewSongThread extends Thread {
                     }
                 }
                 previewTile = piago.findViewById(piago.learn.KeyArray[index]);
-                previewTile.setBackgroundResource(R.drawable.tile_to_press);
+                previewTile.setBackgroundResource(R.drawable.tile_preview);
                 Log.i("Debugkey", "Tile preview "+index);
 
                 new CountDownTimer(120, 100) {

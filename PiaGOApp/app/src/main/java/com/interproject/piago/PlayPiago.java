@@ -45,8 +45,6 @@ public class PlayPiago extends AppCompatActivity {
     private Button instrumentButton;
 
 
-
-
     //BLUETOOTH STUFF
     private Handler mHandler;
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
@@ -84,6 +82,12 @@ public class PlayPiago extends AppCompatActivity {
     PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
     public ToggleButton learnToggle;
+
+
+    //Buttons
+    Button previewButton;
+    Button octaveHigher;
+    Button octaveLower;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,6 +202,7 @@ public class PlayPiago extends AppCompatActivity {
         octaveSelector = new OctaveSelector();
 
         //Learning
+        tileToPress = findViewById(R.id.tile_white_0);
         sChecker = new SignalCheckerThread(this);
         learnToggle = findViewById(R.id.switch_piago);
         learnToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -205,16 +210,23 @@ public class PlayPiago extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     LearningMode = true;
-                    noteNumber = 0;
-                    ShowCurrentNote(learn.FatherJacob);
+                    //noteNumber = 0;
+                    //ShowCurrentNote(learn.FatherJacob);
 
                 }
                 else {
                     LearningMode = false;
                     tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
                 }
+
+                ModeSwitcher(LearningMode);
             }
         });
+
+        //Buttons
+        previewButton = findViewById(R.id.button_preview);
+        octaveHigher = findViewById(R.id.button_octave_higher);
+        octaveLower = findViewById(R.id.button_octave_lower);
     }
 
     @Override
@@ -394,6 +406,7 @@ public class PlayPiago extends AppCompatActivity {
                     pressedTile = findViewById(R.id.tile_black_7);
                     notePlayedBackGround = pressedTile.getBackground();
                     PlayNotePause(octaveSelector.ActiveOctaveArray[17], R.drawable.tile_black, pressedTile);
+                    break;
                 }
                 case "011010":{
                     pressedTile = findViewById(R.id.tile_black_8);
@@ -438,6 +451,7 @@ public class PlayPiago extends AppCompatActivity {
         EditText eT = (EditText)findViewById(R.id.testValue);
         ReceivedBluetoothSignal = eT.getText().toString();
 
+
        // PlayFatherJacob(learn.FatherJacob, learn.FatherJacobTiming);
         //previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
         //previewSongThread.start();
@@ -446,7 +460,7 @@ public class PlayPiago extends AppCompatActivity {
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
         pressedTile.setBackgroundResource(R.drawable.tile_pressed);
-        new CountDownTimer(400, 100) {
+        new CountDownTimer(200, 100) {
             public void onFinish() {
                 // When timer is finished
                 // Execute your code here
@@ -475,6 +489,7 @@ public class PlayPiago extends AppCompatActivity {
 
     public void PlayNotePause(byte note, final int tileDrawable, final Button pressedTile){
         piagoMidiDriver.playNote(note);
+        Log.i("Debugkey", "_______________Note played through PlayNotePause");
         PauseMethod(tileDrawable, pressedTile);
     }
 
@@ -492,6 +507,22 @@ public class PlayPiago extends AppCompatActivity {
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
         //creates secure outgoing connection with BT device using UUID
+    }
+
+    public void previewSong(View view) {
+        tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+        songStarted = false;
+        noteNumber = 0;
+        previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
+        previewSongThread.start();
+    }
+
+    public Boolean songStarted = false;
+    public void startSong(View view) {
+        tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+        noteNumber = 0;
+        ShowCurrentNote(learn.FatherJacob);
+        songStarted = true;
     }
 
     private class ConnectedThread extends Thread {
@@ -572,8 +603,10 @@ public class PlayPiago extends AppCompatActivity {
             //Log.i("BT", "CheckNote method");
         }
 
-        if(noteNumber >=  noteArray.length)
+        if(noteNumber >=  noteArray.length) {
             noteNumber = 0;
+            songStarted = false;
+        }
 
         //sChecker.execute();
     }
@@ -581,7 +614,7 @@ public class PlayPiago extends AppCompatActivity {
     private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
         pressedTile.setBackgroundResource(backgGroundStatus);
         Log.i("Debugkey", "Key pressedTile BG set to green or red");
-        new CountDownTimer(300, 100) {
+        new CountDownTimer(200, 100) {
             public void onFinish() {
                 // When timer is finished
                 // Execute your code here
@@ -624,18 +657,18 @@ public class PlayPiago extends AppCompatActivity {
     public void CheckNotePlayed(final byte[] array){
         if(ReceivedBluetoothSignal != null) {
             playSound(ReceivedBluetoothSignal);
+            Log.i("Debugkey","Sound played through checknoteplayed()");
             //tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
             //Log.i("Debugkey", "Key tileToPress OG background reset");
-            if(pressedTile == tileToPress){
-                //Is de noot correct, laat dan een groene background kort zien
-                PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
-                //Log.i("BT", "Correct key");
-                noteNumber++;
-            }else{
-                //is de noot incorrect, laat dan een rode achtergrond zien
-                PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
-            }
-
+                if (pressedTile == tileToPress) {
+                    //Is de noot correct, laat dan een groene background kort zien
+                    PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
+                    //Log.i("BT", "Correct key");
+                    noteNumber++;
+                } else {
+                    //is de noot incorrect, laat dan een rode achtergrond zien
+                    PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
+                }
             //Reset background van noot die gespeeld moest worden
 
             notePlayed = true;
@@ -647,6 +680,18 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
+    private void ModeSwitcher(boolean learnModeOn){
+        if(learnModeOn){
+            octaveLower.setVisibility(View.GONE);
+            octaveHigher.setVisibility(View.GONE);
+            previewButton.setVisibility(View.VISIBLE);
+        }else{
+            previewButton.setVisibility(View.GONE);
+            octaveLower.setVisibility(View.VISIBLE);
+            octaveHigher.setVisibility(View.VISIBLE);
+        }
+    }
+
 
 
 
@@ -655,7 +700,13 @@ public class PlayPiago extends AppCompatActivity {
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
 
-                    LearnSong(learn.FatherJacob);
+                    if(songStarted) {
+                        LearnSong(learn.FatherJacob);
+                    }
+                    else {
+                        playSound(ReceivedBluetoothSignal);
+                        Log.i("Debugkey", "__________Sound played while songstarted was off");
+                    }
                 Log.i("Debugkey", "LearnSong() executed");
 
                 }
@@ -669,6 +720,7 @@ public class PlayPiago extends AppCompatActivity {
             public void run() {
 
                     playSound(ReceivedBluetoothSignal);
+                Log.i("Debugkey", "__________Sound played in runThreadNormal");
             }
 
         }));

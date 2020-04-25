@@ -1,13 +1,10 @@
 package com.interproject.piago;
 
-import android.widget.Button;
-
-import java.security.Key;
-
 public class LearnSongs {
     public byte[] FatherJacob;
     public int[] KeyArray;
     public int[] FatherJacobTiming;
+    public String[] FatherJacobInputSignals;
 
     public int[]WiiTiming;
     public byte[] WiiNotes;
@@ -18,6 +15,43 @@ public class LearnSongs {
     }
 
     private void initByteArrays(){
+        FatherJacobInputSignals = new String[]{
+                "01100",
+                "01110",
+                "10000",
+                "01100",
+                "01100",
+                "01110",
+                "10000",
+                "01100",
+                "10000",
+                "10001",
+                "10011",
+                "10000",
+                "10001",
+                "10011",
+                "10011",
+                "10101",
+                "10011",
+                "10001",
+                "10000",
+                "01100",
+                "10011",
+                "10101",
+                "10011",
+                "10001",
+                "10000",
+                "01100",
+                "01100",
+                "00111",
+                "01100",
+                "01100",
+                "00111",
+                "01100",
+                "01100"
+
+        };
+
         FatherJacob = new byte[]{
                 (byte)0x41,
                 (byte)0x43,

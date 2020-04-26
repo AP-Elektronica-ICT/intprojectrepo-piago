@@ -51,7 +51,7 @@
         android:id="@+id/button_change_instrument"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/switch_piago"
+        app:layout_constraintLeft_toRightOf="@id/learn_textView"
         android:onClick="changeInstrument"
         android:background="@drawable/button_piago_main"/>
     <Button
@@ -62,7 +62,7 @@
         android:id="@+id/button_autocnct"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/switch_piago"
+        app:layout_constraintLeft_toRightOf="@id/learn_textView"
         android:onClick="changeInstrument"
         android:background="@drawable/button_piago_main"/>
 
@@ -94,16 +94,27 @@
         android:onClick="octaveHigher"
         android:background="@drawable/button_piago_main"/>
 
-    <ToggleButton
-        android:id="@+id/switch_piago"
+    <TextView
+        android:id="@+id/learn_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/button_instrument"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="Learn"
+        android:textSize="25dp"
+        android:textStyle="bold"
+
+        />
+    <Switch
+        android:id="@+id/switch_piago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/button_instrument"
+        app:layout_constraintTop_toBottomOf="@+id/learn_textView"
         android:textStyle="bold"
         android:textOff="Jam"
         android:textOn="Learn"
-        android:background="@drawable/button_piago_main"/>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

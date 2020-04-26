@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.common.annotation.KeepForSdkWithFieldsAndMethods;
+
 import org.billthefarmer.mididriver.MidiDriver;
 
 import java.io.IOException;
@@ -82,7 +84,7 @@ public class PlayPiago extends AppCompatActivity {
     SignalCheckerThread sChecker;
     PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
-    public ToggleButton learnToggle;
+    public Switch learnToggle;
     CorrectNotePlayer cNotePlayer = new CorrectNotePlayer(this);
 
 

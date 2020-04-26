@@ -59,28 +59,22 @@ public class PiagoMidiDriver {
     public void playNote(byte chord){
         //Note on
         event = new byte[3];
-        event[0] = (byte) (0x90 | ActiveInstrument);  // 0x90 = note On, 0x00 = channel 1
+        event[0] = (byte) (0x90 | ActiveInstrument);  // 0x90 = note On
         event[1] = (byte) chord;  // 0x3C = middle C
         event[2] = MaxVelocity;  // 0x7F = the maximum velocity (127)
-
-        // Internally this just calls write() and can be considered obsoleted:
-        //midiDriver.queueEvent(event);
 
         // Send the MIDI event to the synthesizer.
         midiDriver.write(event);
 
         //Note off
         event = new byte[3];
-        event[0] = (byte) (0x80 | ActiveInstrument);  // 0x90 = note On, 0x00 = channel 1
+        event[0] = (byte) (0x80 | ActiveInstrument);  // 0x90 = note On
         event[1] = (byte) chord;  // 0x3C = middle C
         event[2] = MaxVelocity;  // 0x7F = the maximum velocity (127)
-
-        // Internally this just calls write() and can be considered obsoleted:
-        //midiDriver.queueEvent(event);
 
         // Send the MIDI event to the synthesizer.
         midiDriver.write(event);
 
-        Log.i("Debugkey","Sound played ______________________ " + chord);
+        Log.i("Debugkey","Sound played ___________ " + chord);
     }
 }

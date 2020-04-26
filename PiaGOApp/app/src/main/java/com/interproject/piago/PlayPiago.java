@@ -38,9 +38,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 public class PlayPiago extends AppCompatActivity {
-
-
-    Button mPlaySound;
     public String Instrument;
 
     //For playing piano with different instruments in midi-player
@@ -65,10 +62,6 @@ public class PlayPiago extends AppCompatActivity {
 
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
 
-
-
-
-
     public String ReceivedBluetoothSignal;
 
     public String CheckReceived;
@@ -86,21 +79,23 @@ public class PlayPiago extends AppCompatActivity {
     PreviewSongThread previewSongThread;
     public Boolean LearningMode = false;
     public Switch learnToggle;
-    CorrectNotePlayer cNotePlayer = new CorrectNotePlayer(this);
-
 
     //Buttons
     Button previewButton;
+    Button startButton;
     Button octaveHigher;
     Button octaveLower;
+    Button selectSong;
+
+    TextView activeSong;
+
+    byte[] activeSongByteArray = new byte[]{};
+    int[] activeSongIntArray = new int[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_piago);
-
-
-
         mButtonAutoCnct=(Button)findViewById(R.id.button_autocnct);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
@@ -186,16 +181,6 @@ public class PlayPiago extends AppCompatActivity {
             }
         };
 
-        /*mPlaySound=findViewById(R.id.button_playSound);
-        mPlaySound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-                toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
-
-            }
-        });*/
-
         ReceivedBluetoothSignal = null;
         CheckReceived=null;
         Instrument = "piano";
@@ -218,9 +203,6 @@ public class PlayPiago extends AppCompatActivity {
                 if(isChecked) {
                     LearningMode = true;
                     octaveSelector.SetOctaveLearn();
-                    //noteNumber = 0;
-                    //ShowCurrentNote(learn.FatherJacob);
-
                 }
                 else {
                     LearningMode = false;
@@ -233,8 +215,14 @@ public class PlayPiago extends AppCompatActivity {
 
         //Buttons
         previewButton = findViewById(R.id.button_preview);
+        startButton = findViewById(R.id.button_start_song);
         octaveHigher = findViewById(R.id.button_octave_higher);
         octaveLower = findViewById(R.id.button_octave_lower);
+        selectSong = findViewById(R.id.button_change_song);
+        activeSong = findViewById(R.id.textView_active_song);
+
+        activeSongByteArray = learn.FatherJacob;
+        activeSongIntArray = learn.FatherJacobTiming;
     }
 
     @Override
@@ -455,16 +443,15 @@ public class PlayPiago extends AppCompatActivity {
 
     //Test method
     public void playSoundNow(View view) {
-
-        //cNotePlayer.start();
         EditText eT = (EditText)findViewById(R.id.testValue);
-        ReceivedBluetoothSignal = eT.getText().toString();
-
-
-       // PlayFatherJacob(learn.FatherJacob, learn.FatherJacobTiming);
-        //previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
-        //previewSongThread.start();
-
+        if(eT.getText().toString().equals("11111")) {
+            CorrectNotePlayer correctNotePlayer = new CorrectNotePlayer(this);
+            correctNotePlayer.start();
+        }
+        else
+        {
+            ReceivedBluetoothSignal = eT.getText().toString();
+        }
     }
 
     private void PauseMethod(final int tileDrawable, final Button pressedTile){
@@ -485,6 +472,54 @@ public class PlayPiago extends AppCompatActivity {
 
     public void changeInstrument(View view) {
         showAlertDialogInstrument();
+    }
+
+    private void showAlertDialogSong(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlayPiago.this);
+        alertDialog.setTitle("Select your song");
+        String[] instruments={"Father Jacob", "Dummie 1", "Dummie 2"};
+        alertDialog.setSingleChoiceItems(instruments, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case 0: {
+                        activeSong.setText("Active song: Father Jacob");
+                        activeSongByteArray = learn.FatherJacob;
+                        activeSongIntArray = learn.FatherJacobTiming;
+                        break;
+                    }
+                    case 1: {
+                        activeSong.setText("Active song: Dummie 1");
+                        activeSongByteArray = learn.Dummie1Notes;
+                        activeSongIntArray = learn.Dummie1Timing;
+                        break;
+                    }
+                    case 2: {
+                        activeSong.setText("Active song: Dummie 2");
+                        activeSongByteArray = learn.Dummie2Notes;
+                        activeSongIntArray = learn.Dummie2Timing;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        });
+        alertDialog.setPositiveButton("Back to Keyboard", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if(songStarted) {
+                    tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
+                    noteNumber = 0;
+                    songStarted = false;
+                    //ShowCurrentNote(activeSongByteArray);
+                }
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
     }
 
     private void showAlertDialogInstrument(){
@@ -552,7 +587,7 @@ public class PlayPiago extends AppCompatActivity {
         tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
         songStarted = false;
         noteNumber = 0;
-        previewSongThread = new PreviewSongThread(this, learn.FatherJacob, learn.FatherJacobTiming);
+        previewSongThread = new PreviewSongThread(this, activeSongByteArray, activeSongIntArray);
         //previewSongThread = new PreviewSongThread(this, learn.WiiNotes, learn.WiiTiming);
         previewSongThread.start();
     }
@@ -561,8 +596,12 @@ public class PlayPiago extends AppCompatActivity {
     public void startSong(View view) {
         tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
         noteNumber = 0;
-        ShowCurrentNote(learn.FatherJacob);
+        ShowCurrentNote(activeSongByteArray);
         songStarted = true;
+    }
+
+    public void changeSong(View view) {
+        showAlertDialogSong();
     }
 
     private class ConnectedThread extends Thread {
@@ -725,8 +764,10 @@ public class PlayPiago extends AppCompatActivity {
             octaveLower.setVisibility(View.GONE);
             octaveHigher.setVisibility(View.GONE);
             previewButton.setVisibility(View.VISIBLE);
+            startButton.setVisibility(View.VISIBLE);
         }else{
             previewButton.setVisibility(View.GONE);
+            startButton.setVisibility(View.GONE);
             octaveLower.setVisibility(View.VISIBLE);
             octaveHigher.setVisibility(View.VISIBLE);
         }
@@ -741,7 +782,7 @@ public class PlayPiago extends AppCompatActivity {
             public void run() {
 
                     if(songStarted) {
-                        LearnSong(learn.FatherJacob);
+                        LearnSong(activeSongByteArray);
                     }
                     else {
                         playSound(ReceivedBluetoothSignal);

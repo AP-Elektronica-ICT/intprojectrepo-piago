@@ -29,7 +29,8 @@
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".TestMidiActivity"></activity>
         <activity android:name=".TestMidiDriver" />
-        <activity android:name=".PiagoMainScreen">
+        <activity android:name=".PiagoMainScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

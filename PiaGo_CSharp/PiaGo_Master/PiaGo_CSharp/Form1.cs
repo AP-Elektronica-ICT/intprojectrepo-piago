@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
 using System.IO.Ports;
-
+using System.Management;
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
@@ -28,6 +28,7 @@ namespace PiaGo_CSharp
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
         KeyColor mainKeyColor = KeyColor.BLUE;
+
         //PROPERTIES FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
@@ -37,7 +38,10 @@ namespace PiaGo_CSharp
         LearnHandler learnHandler;
         Thread learnThread;
         OutputDevice outputDevice;
+        
         //PROPERTIES FOR BLUETOOTH
+        string macAddress = "98D331FB1776";
+        string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
 
@@ -88,50 +92,47 @@ namespace PiaGo_CSharp
             {
                 pianoKeys.Add(new PianoKey(i));
             }
+
+            lblMetroConnection.BackColor = Color.Red;
+
+            //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]
+            ComPortInitialiser();
         }
 
         #region Bluetooth
-        private void btmMetroScan_Click(object sender, EventArgs e)
-        {
-            cbMetroDevices.Items.Clear();
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            // Display each port name to the console.
-            foreach (string port in ports)
-            {
-                cbMetroDevices.Items.Add(port);
-            }
-        }
-
+        
         private void btnMetroConnect_Click(object sender, EventArgs e)
         {
+
             if (sp1.IsOpen)
                 sp1.Close();
-            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
+            sp1.PortName = comport;
             sp1.BaudRate = 9600;
             try
             {
                 if (!sp1.IsOpen)
                     sp1.Open();
-
+                lblMetroConnection.Text = "Connected";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+ 
         }
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string dataIn;
-            //throw new NotImplementedException();
             try
             {
                 SerialPort sp1 = (SerialPort)sender;
                 dataIn = sp1.ReadExisting().ToString();
+                dataIn = "0" + dataIn;
+                System.Diagnostics.Debug.WriteLine(dataIn);
                 SetText(dataIn);
+                PlayBTNote(dataIn);
             }
             catch (Exception ex)
             {
@@ -154,8 +155,6 @@ namespace PiaGo_CSharp
             else
             {
                 this.txtMetroDataIn.Text = text;
-                PlayBTNote(text);
-
             }
         }
 
@@ -209,6 +208,39 @@ namespace PiaGo_CSharp
                     break;
             }
         }
+
+        private void ComPortInitialiser()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher =
+                    new ManagementObjectSearcher("root\\CIMV2",
+                    "SELECT * FROM Win32_SerialPort");
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    string pnpDeviceID = queryObj["PNPDeviceID"].ToString();
+                    List<int> ampersandsIndex = new List<int>();
+                    for (int i = 0; i < pnpDeviceID.Length; i++)
+                    {
+                        if (pnpDeviceID[i] == '&')
+                            ampersandsIndex.Add(i);
+                    }
+                    string tempMacAddress = pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12);
+                    if (tempMacAddress == macAddress)
+                    {
+                        //Console.WriteLine("Bluetooth Mac Address: " + pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12));
+                        //Console.WriteLine("DeviceID: {0}", queryObj["DeviceID"]);
+                        comport = queryObj["DeviceID"].ToString();
+                    }
+                }
+            }
+            catch (ManagementException ex)
+            {
+                MessageBox.Show("An error occurred while querying for WMI data: " + ex.Message);
+            }
+        }
+        
         #endregion
 
         #region Theme
@@ -760,6 +792,7 @@ namespace PiaGo_CSharp
         }
 
         #endregion
+
 
     }
 }

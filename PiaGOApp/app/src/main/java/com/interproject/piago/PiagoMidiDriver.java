@@ -28,11 +28,11 @@ public class PiagoMidiDriver {
                 event[1]=(byte)0x38;    //Trumpet
                 midiDriver.write(event);
                 break;
-            case "Harmonica":
+            case "Xylophone":
                 ActiveInstrument = (byte) 0x03;
                 event = new byte[2];
                 event[0]=(byte)0xC3;    //Channel 3
-                event[1]=(byte)0x77;    //Harmonica //CHANGED
+                event[1]=(byte)13;    //Harmonica //CHANGED
                 midiDriver.write(event);
                 break;
                 default:

@@ -481,15 +481,12 @@ public class PlayPiago extends AppCompatActivity {
 
     public void changeInstrument(View view) {
         showAlertDialogInstrument();
-
-
-
     }
 
     private void showAlertDialogInstrument(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlayPiago.this);
         alertDialog.setTitle("Select your instrument");
-        String[] instruments={"Piano", "Trumpet", "Harmonica"};
+        String[] instruments={"Piano", "Trumpet", "Xylophone"};
         alertDialog.setSingleChoiceItems(instruments, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -505,8 +502,8 @@ public class PlayPiago extends AppCompatActivity {
                         break;
                     }
                     case 2: {
-                        instrumentButton.setText("Harmonica");
-                        piagoMidiDriver.InstrumentSelection("Harmonica");
+                        instrumentButton.setText("Xylophone");
+                        piagoMidiDriver.InstrumentSelection("Xylophone");
                         break;
                     }
                     default:

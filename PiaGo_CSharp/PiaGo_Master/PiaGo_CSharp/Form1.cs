@@ -129,8 +129,6 @@ namespace PiaGo_CSharp
             {
                 SerialPort sp1 = (SerialPort)sender;
                 dataIn = sp1.ReadLine().Substring(0, 5);                
-                Console.WriteLine(dataIn);
-                Console.WriteLine("--" + dataIn.Length + "--");
                 SetText(dataIn);
                 PlayBTNote(dataIn);
             }

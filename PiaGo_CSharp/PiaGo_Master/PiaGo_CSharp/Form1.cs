@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Midi;
 using System.IO.Ports;
-
+using System.Management;
 public enum ThemeType { LIGHT, DARK }
 namespace PiaGo_CSharp
 {
@@ -28,6 +28,7 @@ namespace PiaGo_CSharp
         Graphics g = null;
         List<Key> keyBoard = new List<Key>();
         KeyColor mainKeyColor = KeyColor.BLUE;
+
         //PROPERTIES FOR SOUND AND SOUNDFILES
         Instrument instrument = (Instrument)0;
         Clock clock;
@@ -37,7 +38,10 @@ namespace PiaGo_CSharp
         LearnHandler learnHandler;
         Thread learnThread;
         OutputDevice outputDevice;
+        
         //PROPERTIES FOR BLUETOOTH
+        string macAddress = "98D331FB1776";
+        string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
 
@@ -88,54 +92,51 @@ namespace PiaGo_CSharp
             {
                 pianoKeys.Add(new PianoKey(i));
             }
+
+            lblMetroConnection.BackColor = Color.Red;
+
+            //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]
+            ComPortInitialiser();
         }
 
         #region Bluetooth
-        private void btmMetroScan_Click(object sender, EventArgs e)
-        {
-            cbMetroDevices.Items.Clear();
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            // Display each port name to the console.
-            foreach (string port in ports)
-            {
-                cbMetroDevices.Items.Add(port);
-            }
-        }
-
+        
         private void btnMetroConnect_Click(object sender, EventArgs e)
         {
+
             if (sp1.IsOpen)
                 sp1.Close();
-            sp1.PortName = cbMetroDevices.SelectedItem.ToString();
+            sp1.PortName = comport;
             sp1.BaudRate = 9600;
             try
             {
                 if (!sp1.IsOpen)
                     sp1.Open();
-
+                lblMetroConnection.Text = "Connected";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please restart your piano");
             }
             sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+ 
         }
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string dataIn;
-            //throw new NotImplementedException();
             try
             {
                 SerialPort sp1 = (SerialPort)sender;
-                dataIn = sp1.ReadExisting().ToString();
+                dataIn = sp1.ReadLine().Substring(0, 5);                
+                Console.WriteLine(dataIn);
+                Console.WriteLine("--" + dataIn.Length + "--");
                 SetText(dataIn);
+                PlayBTNote(dataIn);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -154,8 +155,6 @@ namespace PiaGo_CSharp
             else
             {
                 this.txtMetroDataIn.Text = text;
-                PlayBTNote(text);
-
             }
         }
 
@@ -163,52 +162,233 @@ namespace PiaGo_CSharp
         {
             switch (BTinput)
             {
-                case "00001":
-                    ActivateKey(0);
+                case "00000":                   
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
+                    ActivateKey(0);
                     prevBTKey = 0;
                     break;
-                case "00010":
-                    ActivateKey(1);
+                case "00001":                   
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
+                    ActivateKey(1);
                     prevBTKey = 1;
                     break;
-                case "00011":
+                case "00010":                  
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(2);
                     prevBTKey = 2;
                     break;
-                case "00100":
+                case "00011":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(3);
                     prevBTKey = 3;
                     break;
-                case "00101":
+                case "00100":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(4);
                     prevBTKey = 4;
                     break;
-                case "00110":
+                case "00101":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(5);
                     prevBTKey = 5;
                     break;
-                case "00111":
+                case "00110":
                     if (prevBTKey != -1)
                         DeActivateKey(prevBTKey);
                     ActivateKey(6);
                     prevBTKey = 6;
                     break;
-                default:
+                case "00111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(7);
+                    prevBTKey = 7;
+                    break;
+                case "01000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(8);
+                    prevBTKey = 8;
+                    break;
+                case "01001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(9);
+                    prevBTKey = 9;
+                    break;
+                case "01010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(10);
+                    prevBTKey = 10;
+                    break;
+                case "01011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(11);
+                    prevBTKey = 11;
+                    break;
+                case "01100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(12);
+                    prevBTKey = 12;
+                    break;
+                case "01101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(13);
+                    prevBTKey = 13;
+                    break;
+                case "01110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(14);
+                    prevBTKey = 14;
+                    break;
+                case "01111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(15);
+                    prevBTKey = 15;
+                    break;
+                case "10000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(16);
+                    prevBTKey = 16;
+                    break;
+                case "10001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(17);
+                    prevBTKey = 17;
+                    break;
+                case "10010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(18);
+                    prevBTKey = 18;
+                    break;
+                case "10011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(19);
+                    prevBTKey = 19;
+                    break;
+                case "10100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(20);
+                    prevBTKey = 20;
+                    break;
+                case "10101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(21);
+                    prevBTKey = 21;
+                    break;
+                case "10110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(22);
+                    prevBTKey = 22;
+                    break;
+                case "10111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(23);
+                    prevBTKey = 23;
+                    break;
+                case "11000":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(24);
+                    prevBTKey = 24;
+                    break;
+                case "11001":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(25);
+                    prevBTKey = 25;
+                    break;
+                case "11010":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(26);
+                    prevBTKey = 26;
+                    break;
+                case "11011":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(27);
+                    prevBTKey = 27;
+                    break;
+                case "11100":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(28);
+                    prevBTKey = 28;
+                    break;
+                case "11101":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(29);
+                    prevBTKey = 29;
+                    break;
+                case "11110":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(30);
+                    prevBTKey = 30;
+                    break;
+                case "11111":
+                    if (prevBTKey != -1)
+                        DeActivateKey(prevBTKey);
+                    ActivateKey(31);
+                    prevBTKey = 31;
                     break;
             }
         }
+
+        private void ComPortInitialiser()
+        {
+            try
+            {
+                ManagementObjectSearcher searcher =
+                    new ManagementObjectSearcher("root\\CIMV2",
+                    "SELECT * FROM Win32_SerialPort");
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    string pnpDeviceID = queryObj["PNPDeviceID"].ToString();
+                    List<int> ampersandsIndex = new List<int>();
+                    for (int i = 0; i < pnpDeviceID.Length; i++)
+                    {
+                        if (pnpDeviceID[i] == '&')
+                            ampersandsIndex.Add(i);
+                    }
+                    string tempMacAddress = pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12);
+                    if (tempMacAddress == macAddress)
+                    {
+                        //Console.WriteLine("Bluetooth Mac Address: " + pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12));
+                        //Console.WriteLine("DeviceID: {0}", queryObj["DeviceID"]);
+                        comport = queryObj["DeviceID"].ToString();
+                    }
+                }
+            }
+            catch (ManagementException ex)
+            {
+                MessageBox.Show("An error occurred while querying for WMI data: " + ex.Message);
+            }
+        }
+        
         #endregion
 
         #region Theme
@@ -760,6 +940,7 @@ namespace PiaGo_CSharp
         }
 
         #endregion
+
 
     }
 }

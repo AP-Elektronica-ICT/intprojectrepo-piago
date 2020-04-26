@@ -31,10 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.canvas = new System.Windows.Forms.Panel();
             this.pnlMainInfo = new System.Windows.Forms.Panel();
+            this.lblMetroConnection = new MetroFramework.Controls.MetroLabel();
             this.txtMetroDataIn = new MetroFramework.Controls.MetroTextBox();
-            this.cbMetroDevices = new MetroFramework.Controls.MetroComboBox();
-            this.btnMetroConnect = new MetroFramework.Controls.MetroButton();
-            this.btmMetroScan = new MetroFramework.Controls.MetroButton();
+            this.btnMetroAutoConnect = new MetroFramework.Controls.MetroButton();
             this.cbMetroSongs = new MetroFramework.Controls.MetroComboBox();
             this.LearnSongBtn = new MetroFramework.Controls.MetroButton();
             this.PreviewSongBtn = new MetroFramework.Controls.MetroButton();
@@ -97,10 +96,9 @@
             // pnlMainInfo
             // 
             this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlMainInfo.Controls.Add(this.lblMetroConnection);
             this.pnlMainInfo.Controls.Add(this.txtMetroDataIn);
-            this.pnlMainInfo.Controls.Add(this.cbMetroDevices);
-            this.pnlMainInfo.Controls.Add(this.btnMetroConnect);
-            this.pnlMainInfo.Controls.Add(this.btmMetroScan);
+            this.pnlMainInfo.Controls.Add(this.btnMetroAutoConnect);
             this.pnlMainInfo.Controls.Add(this.cbMetroSongs);
             this.pnlMainInfo.Controls.Add(this.LearnSongBtn);
             this.pnlMainInfo.Controls.Add(this.PreviewSongBtn);
@@ -150,13 +148,25 @@
             this.pnlMainInfo.Size = new System.Drawing.Size(985, 211);
             this.pnlMainInfo.TabIndex = 7;
             // 
+            // lblMetroConnection
+            // 
+            this.lblMetroConnection.AutoSize = true;
+            this.lblMetroConnection.BackColor = System.Drawing.Color.White;
+            this.lblMetroConnection.ForeColor = System.Drawing.Color.White;
+            this.lblMetroConnection.Location = new System.Drawing.Point(875, 8);
+            this.lblMetroConnection.Name = "lblMetroConnection";
+            this.lblMetroConnection.Size = new System.Drawing.Size(86, 19);
+            this.lblMetroConnection.TabIndex = 63;
+            this.lblMetroConnection.Text = "Disconnected";
+            this.lblMetroConnection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // txtMetroDataIn
             // 
             // 
             // 
             // 
             this.txtMetroDataIn.CustomButton.Image = null;
-            this.txtMetroDataIn.CustomButton.Location = new System.Drawing.Point(62, 1);
+            this.txtMetroDataIn.CustomButton.Location = new System.Drawing.Point(64, 1);
             this.txtMetroDataIn.CustomButton.Name = "";
             this.txtMetroDataIn.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtMetroDataIn.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -165,7 +175,7 @@
             this.txtMetroDataIn.CustomButton.UseSelectable = true;
             this.txtMetroDataIn.CustomButton.Visible = false;
             this.txtMetroDataIn.Lines = new string[0];
-            this.txtMetroDataIn.Location = new System.Drawing.Point(737, 41);
+            this.txtMetroDataIn.Location = new System.Drawing.Point(875, 35);
             this.txtMetroDataIn.MaxLength = 32767;
             this.txtMetroDataIn.Name = "txtMetroDataIn";
             this.txtMetroDataIn.PasswordChar = '\0';
@@ -175,45 +185,24 @@
             this.txtMetroDataIn.SelectionLength = 0;
             this.txtMetroDataIn.SelectionStart = 0;
             this.txtMetroDataIn.ShortcutsEnabled = true;
-            this.txtMetroDataIn.Size = new System.Drawing.Size(84, 23);
+            this.txtMetroDataIn.Size = new System.Drawing.Size(86, 23);
             this.txtMetroDataIn.TabIndex = 61;
+            this.txtMetroDataIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMetroDataIn.UseSelectable = true;
             this.txtMetroDataIn.WaterMark = "Data In";
             this.txtMetroDataIn.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtMetroDataIn.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // cbMetroDevices
+            // btnMetroAutoConnect
             // 
-            this.cbMetroDevices.ItemHeight = 23;
-            this.cbMetroDevices.Location = new System.Drawing.Point(737, 8);
-            this.cbMetroDevices.Margin = new System.Windows.Forms.Padding(2);
-            this.cbMetroDevices.Name = "cbMetroDevices";
-            this.cbMetroDevices.PromptText = "Devices";
-            this.cbMetroDevices.Size = new System.Drawing.Size(84, 29);
-            this.cbMetroDevices.TabIndex = 60;
-            this.cbMetroDevices.UseSelectable = true;
-            // 
-            // btnMetroConnect
-            // 
-            this.btnMetroConnect.Location = new System.Drawing.Point(668, 40);
-            this.btnMetroConnect.Margin = new System.Windows.Forms.Padding(2);
-            this.btnMetroConnect.Name = "btnMetroConnect";
-            this.btnMetroConnect.Size = new System.Drawing.Size(64, 24);
-            this.btnMetroConnect.TabIndex = 59;
-            this.btnMetroConnect.Text = "Connect";
-            this.btnMetroConnect.UseSelectable = true;
-            this.btnMetroConnect.Click += new System.EventHandler(this.btnMetroConnect_Click);
-            // 
-            // btmMetroScan
-            // 
-            this.btmMetroScan.Location = new System.Drawing.Point(667, 8);
-            this.btmMetroScan.Margin = new System.Windows.Forms.Padding(2);
-            this.btmMetroScan.Name = "btmMetroScan";
-            this.btmMetroScan.Size = new System.Drawing.Size(64, 24);
-            this.btmMetroScan.TabIndex = 58;
-            this.btmMetroScan.Text = "Scan";
-            this.btmMetroScan.UseSelectable = true;
-            this.btmMetroScan.Click += new System.EventHandler(this.btmMetroScan_Click);
+            this.btnMetroAutoConnect.Location = new System.Drawing.Point(783, 8);
+            this.btnMetroAutoConnect.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMetroAutoConnect.Name = "btnMetroAutoConnect";
+            this.btnMetroAutoConnect.Size = new System.Drawing.Size(86, 24);
+            this.btnMetroAutoConnect.TabIndex = 59;
+            this.btnMetroAutoConnect.Text = "AutoConnect";
+            this.btnMetroAutoConnect.UseSelectable = true;
+            this.btnMetroAutoConnect.Click += new System.EventHandler(this.btnMetroConnect_Click);
             // 
             // cbMetroSongs
             // 
@@ -286,12 +275,14 @@
             // 
             // btnMetroUser
             // 
-            this.btnMetroUser.Location = new System.Drawing.Point(875, 37);
+            this.btnMetroUser.Enabled = false;
+            this.btnMetroUser.Location = new System.Drawing.Point(875, 64);
             this.btnMetroUser.Name = "btnMetroUser";
-            this.btnMetroUser.Size = new System.Drawing.Size(96, 23);
+            this.btnMetroUser.Size = new System.Drawing.Size(86, 23);
             this.btnMetroUser.TabIndex = 48;
             this.btnMetroUser.Text = "User Info";
             this.btnMetroUser.UseSelectable = true;
+            this.btnMetroUser.Visible = false;
             this.btnMetroUser.Click += new System.EventHandler(this.btnMetroUser_Click);
             // 
             // cbMetroInstruments
@@ -308,9 +299,9 @@
             // 
             // btnMetroSettings
             // 
-            this.btnMetroSettings.Location = new System.Drawing.Point(875, 8);
+            this.btnMetroSettings.Location = new System.Drawing.Point(783, 35);
             this.btnMetroSettings.Name = "btnMetroSettings";
-            this.btnMetroSettings.Size = new System.Drawing.Size(96, 23);
+            this.btnMetroSettings.Size = new System.Drawing.Size(86, 23);
             this.btnMetroSettings.TabIndex = 45;
             this.btnMetroSettings.Text = "Settings";
             this.btnMetroSettings.UseSelectable = true;
@@ -774,10 +765,9 @@
         private MetroFramework.Controls.MetroButton LearnSongBtn;
         private MetroFramework.Controls.MetroButton PreviewSongBtn;
         private MetroFramework.Controls.MetroComboBox cbMetroSongs;
-        private MetroFramework.Controls.MetroComboBox cbMetroDevices;
-        private MetroFramework.Controls.MetroButton btnMetroConnect;
-        private MetroFramework.Controls.MetroButton btmMetroScan;
+        private MetroFramework.Controls.MetroButton btnMetroAutoConnect;
         private MetroFramework.Controls.MetroTextBox txtMetroDataIn;
+        private MetroFramework.Controls.MetroLabel lblMetroConnection;
     }
 }
 

@@ -14,12 +14,10 @@ public class SignalCheckerThread extends Thread {
     @Override
     public void run() {
         super.run();
-        //Log.i("BT", "Looking for signal ..");
         while(true){
-            //Log.i("BT", "Looking for signal .." + piago.ReceivedBluetoothSignal);
             if(piago.ReceivedBluetoothSignal != null){
-                Log.i("Debugkey", "BT signal != null, starting threads " + piago.ReceivedBluetoothSignal);
-                //SystemClock.sleep(100);
+                Log.i("Debugkey", "BT signal=" + piago.ReceivedBluetoothSignal);
+
                 if(piago.LearningMode)
                     piago.runThreadLearn();
                 else
@@ -29,10 +27,6 @@ public class SignalCheckerThread extends Thread {
                 //piago.LearnSong(piago.learn.FatherJacob);
             }
         }
-
-    }
-
-    private void Debouncer(){
 
     }
 }

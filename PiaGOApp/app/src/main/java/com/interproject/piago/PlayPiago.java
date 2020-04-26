@@ -1,7 +1,9 @@
 package com.interproject.piago;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -478,16 +480,46 @@ public class PlayPiago extends AppCompatActivity {
     }
 
     public void changeInstrument(View view) {
-        if(instrumentButton.getText().toString().equals("Piano")){
-            instrumentButton.setText("Trumpet");
-            piagoMidiDriver.InstrumentSelection("Trumpet");
-        }else if(instrumentButton.getText().toString().equals("Trumpet")){
-            instrumentButton.setText("Harmonica");                          //CHANGED, not harmonica
-            piagoMidiDriver.InstrumentSelection("Harmonica");
-        }else if(instrumentButton.getText().toString().equals("Harmonica")) {
-            instrumentButton.setText("Piano");
-            piagoMidiDriver.InstrumentSelection("Piano");
-        }
+        showAlertDialogInstrument();
+    }
+
+    private void showAlertDialogInstrument(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlayPiago.this);
+        alertDialog.setTitle("Select your instrument");
+        String[] instruments={"Piano", "Trumpet", "Xylophone"};
+        alertDialog.setSingleChoiceItems(instruments, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case 0: {
+                        instrumentButton.setText("Piano");
+                        piagoMidiDriver.InstrumentSelection("Piano");
+                        break;
+                    }
+                    case 1: {
+                        instrumentButton.setText("Trumpet");
+                        piagoMidiDriver.InstrumentSelection("Trumpet");
+                        break;
+                    }
+                    case 2: {
+                        instrumentButton.setText("Xylophone");
+                        piagoMidiDriver.InstrumentSelection("Xylophone");
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        });
+        alertDialog.setPositiveButton("Back to Keyboard", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
     }
 
     public void PlayNotePause(byte note, final int tileDrawable, final Button pressedTile){

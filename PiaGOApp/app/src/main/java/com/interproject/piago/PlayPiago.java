@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -103,7 +104,7 @@ public class PlayPiago extends AppCompatActivity {
         mButtonAutoCnct=(Button)findViewById(R.id.button_autocnct);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
-
+        mButtonAutoCnct.setBackgroundColor(Color.RED);
 
         mButtonAutoCnct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,9 +116,9 @@ public class PlayPiago extends AppCompatActivity {
                         // Change adress to static MAC adress
                         // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
 
-                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
+                        BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
                         //DEVICE FINLAND
-                        BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83");
+                        //BluetoothDevice device = mBTAdapter.getRemoteDevice("B4:E6:2D:DF:4B:83");
 
                         try {
                             mBTSocket = createBluetoothSocket(device);
@@ -145,6 +146,7 @@ public class PlayPiago extends AppCompatActivity {
 
                             mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, "Piago Keyboard")
                                     .sendToTarget();
+                            mButtonAutoCnct.setBackgroundColor(Color.GREEN);
                         }
                     }
                 }.start();

@@ -39,15 +39,15 @@ void loop() {
    if((millis()-lastDebounceTime)>debounceDelay){
     
    if(buttonState10==HIGH){
-    bluetooth.println("01100");
+    bluetooth.println("00010");
     lastDebounceTime = millis();
    }
    if(buttonState9==HIGH){
-    bluetooth.println("01110");
+    bluetooth.println("00001");
     lastDebounceTime = millis();
    }
    if(buttonState8==HIGH){
-    bluetooth.println("01000");
+    bluetooth.println("00000");
     lastDebounceTime = millis();
    }
 

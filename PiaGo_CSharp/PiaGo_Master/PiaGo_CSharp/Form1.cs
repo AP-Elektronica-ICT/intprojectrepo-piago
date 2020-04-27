@@ -533,8 +533,11 @@ namespace PiaGo_CSharp
         #region Piano
         private void ActivateKey(int key)
         {
-            if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
-            else if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
+            if (learnHandler.Learning == true)
+            {
+                if (key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
+                else keyBoard[key].SetKeyFill(KeyColor.GREEN);
+            }
             else keyBoard[key].SetKeyFill(mainKeyColor);
             noteScheduler.NoteOn(pianoKeys[key]);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
@@ -545,7 +548,10 @@ namespace PiaGo_CSharp
         {
             keyBoard[key].Clear();
             noteScheduler.NoteOff(pianoKeys[key]);
-            if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(mainKeyColor);
+            if (learnHandler.Learning == true)
+            {
+                if (key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(mainKeyColor);
+            }
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
         }
 

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -31,6 +32,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public class BTCommunication extends AppCompatActivity {
+
+
+    private Button mBtnAutoConnect;
+
 
     // GUI Components
     private TextView mBluetoothStatus;
@@ -64,6 +69,50 @@ public class BTCommunication extends AppCompatActivity {
         setContentView(R.layout.activity_btcommunication);
 
 
+        mBtnAutoConnect=(Button)findViewById(R.id.btnautoconnectbt);
+
+        mBtnAutoConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread()
+                {
+                    public void run() {
+                        boolean fail = false;
+                        // Change adress to static MAC adress
+                        // BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                        BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
+
+                        try {
+                            mBTSocket = createBluetoothSocket(device);
+                        } catch (IOException e) {
+                            fail = true;
+                            Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                        }
+                        // Establish the Bluetooth socket connection.
+                        try {
+                            mBTSocket.connect();
+                        } catch (IOException e) {
+                            try {
+                                fail = true;
+                                mBTSocket.close();
+                                mHandler.obtainMessage(CONNECTING_STATUS, -1, -1)
+                                        .sendToTarget();
+                            } catch (IOException e2) {
+                                //insert code to deal with this
+                                Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        if(!fail) {
+                            mConnectedThread = new ConnectedThread(mBTSocket);
+                            mConnectedThread.start();
+
+                            mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, "Piago Keyboard")
+                                    .sendToTarget();
+                        }
+                    }
+                }.start();
+            }
+        });
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
@@ -90,6 +139,7 @@ public class BTCommunication extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     mReadBuffer.setText(readMessage);
+                    //int i = Integer.parseInt(readMessage);
                     ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
                     toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
                 }
@@ -247,8 +297,9 @@ public class BTCommunication extends AppCompatActivity {
             {
                 public void run() {
                     boolean fail = false;
-
-                    BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                    // Change adress to static MAC adress
+                    //BluetoothDevice device = mBTAdapter.getRemoteDevice(address);
+                    BluetoothDevice device = mBTAdapter.getRemoteDevice("98:D3:31:FD:17:0A");
 
                     try {
                         mBTSocket = createBluetoothSocket(device);
@@ -309,6 +360,7 @@ public class BTCommunication extends AppCompatActivity {
         }
 
         public void run() {
+
             byte[] buffer = new byte[1024];  // buffer store for the stream
             int bytes; // bytes returned from read()
             // Keep listening to the InputStream until an exception occurs

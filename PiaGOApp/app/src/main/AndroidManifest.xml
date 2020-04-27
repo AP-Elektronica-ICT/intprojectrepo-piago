@@ -7,7 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+    <permission
+        android:name="android.permission.BLUETOOTH"
+        android:label="BLUETOOTH" />
     <permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -18,13 +20,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.interproject.piago.BTCommunication"></activity>
-        <activity android:name="com.interproject.piago.PlayPiago"
-            android:screenOrientation="landscape"/>
-        <activity android:name="com.interproject.piago.BluetoothActivity" />
-        <activity android:name="com.interproject.piago.PiagoMainScreen" />
-        <activity android:name="com.interproject.piago.MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".AutoConnectBT"></activity>
+        <activity android:name=".BTCommunication" />
+        <activity
+            android:name=".PlayPiago"
+            android:screenOrientation="landscape" />
+        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".TestMidiActivity"></activity>
+        <activity android:name=".TestMidiDriver" />
+        <activity android:name=".PiagoMainScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

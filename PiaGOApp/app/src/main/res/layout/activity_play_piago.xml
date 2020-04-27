@@ -5,48 +5,155 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlayPiago">
+
+    <ImageView
+        android:id="@+id/mainscreen_logo"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:src="@drawable/piagologoblack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Touch for sound"
-        android:id="@+id/button_playSound"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/button_piago_main"
-        android:visibility="gone"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Instrument"
         android:id="@+id/button_instrument"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_piago_main"
         android:onClick="playSoundNow"
-        android:background="@drawable/button_piago_main"/>
+        android:layout_marginLeft="30dp"
+        android:text="Debug"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/mainscreen_logo"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text=" Preview Song "
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:id="@+id/button_preview"
+        android:onClick="previewSong"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toRightOf="@id/button_change_instrument"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Start Song"
+        android:id="@+id/button_start_song"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:onClick="startSong"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toLeftOf="@id/button_preview"
+        app:layout_constraintTop_toBottomOf="@id/button_preview"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="  Customize Keys  "
-        android:id="@+id/button_customize_keys"
+        android:text="Piano"
+        android:id="@+id/button_change_instrument"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:onClick="changeInstrument"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toRightOf="@+id/learn_textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/switch_piago"
-        android:onClick="playSound"
-        android:background="@drawable/button_piago_main"/>
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song"
+        android:id="@+id/button_change_song"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:onClick="changeSong"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toLeftOf="@+id/button_change_instrument"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_instrument"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Active song: Father Jacob"
+        android:textSize="20dp"
+        android:id="@+id/textView_active_song"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_margin="5dp"
+        android:text="Connect"
+        android:id="@+id/button_autocnct"
+        android:textStyle="bold"
+        android:onClick="changeInstrument"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/testValue"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/button_customize_keys"/>
 
+        android:layout_marginLeft="30dp"
+        android:id="@+id/testValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_instrument"
+        />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text=" Octave Down "
+        android:layout_marginTop="5dp"
+        android:id="@+id/button_octave_lower"
+        android:textStyle="bold"
+        android:onClick="octaveLower"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toLeftOf="@id/button_octave_higher"
+        app:layout_constraintTop_toBottomOf="@id/button_octave_higher"/>
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="  Octave Up  "
+        android:id="@+id/button_octave_higher"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:onClick="octaveHigher"
+        android:background="@drawable/button_piago_main"
+        app:layout_constraintLeft_toRightOf="@id/button_change_instrument"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/learn_textView"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="Learn"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/mainscreen_logo"
+        app:layout_constraintTop_toTopOf="parent" />
     <Switch
         android:id="@+id/switch_piago"
+        android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/button_instrument"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Learn" />
+        app:layout_constraintLeft_toLeftOf="@id/learn_textView"
+        app:layout_constraintRight_toRightOf="@id/learn_textView"
+        app:layout_constraintTop_toBottomOf="@id/learn_textView"
+        android:textStyle="bold"
+        android:textOff="Regular"
+        android:textOn="Learn"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -193,7 +300,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="2">
-
 
 
         </LinearLayout>
@@ -433,7 +539,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/container1">
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

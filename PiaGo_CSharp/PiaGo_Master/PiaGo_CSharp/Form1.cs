@@ -39,9 +39,9 @@ namespace PiaGo_CSharp
         OutputDevice outputDevice;
         MidiFileHandler MFH;
         List<string> songlist;
-        
+
         //PROPERTIES FOR BLUETOOTH
-        string macAddress = "98D331FB1776";
+        string macAddress = "B4E62DDF4B83"; //BE: "98D331FB1776";
         string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
@@ -153,7 +153,7 @@ namespace PiaGo_CSharp
             try
             {
                 SerialPort sp1 = (SerialPort)sender;
-                dataIn = sp1.ReadLine().Substring(0, 5);                
+                dataIn = sp1.ReadLine(); //.Substring(0, 5);                
                 SetText(dataIn);
                 PlayBTNote(dataIn);
             }

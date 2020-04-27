@@ -7,7 +7,7 @@ int pin1 = 25;                                          // Parallel load
 int ledPin = 26;                                        // CLK
 int pin2 = 33;
 int incoming;
-String bin = "";                                        // Chars to store data
+String bin = "";                                        // Strings to store data
 String pack0 = "";
 String pack1 = "";
 /*String pack2 = "";
@@ -27,8 +27,8 @@ void callback(esp_spp_cb_event_t event, esp_spp_cb_param_t *param){
   }
 }
 
-void shiftToBin(){
-  // Keys 1 to 8
+void shiftToBin(){                                      // Function to assign binary values to the keys
+  // Keys 1 to 8                                        // given by the shift registers
   if(String(pack0[0]) == "0"){bin = bin + "00110 ";}
   if(String(pack0[1]) == "0"){bin = bin + "00101 ";}
   if(String(pack0[2]) == "0"){bin = bin + "00100 ";}
@@ -77,19 +77,18 @@ void keyReader(){
 }
 
 void btFunc(){
-  if (ESP_BT.available() != 0)                          // Check if we receive anything from Bluetooth
-  {
-    incoming = ESP_BT.read();                           // Read what we recevive
+  if (ESP_BT.available() != 0){                          // Check if we receive anything from Bluetooth
+    incoming = ESP_BT.read();                            // Read what we recevive
     Serial.print("Received:"); Serial.println(incoming);
   }
     ESP_BT.println(bin);
 }
 
 void setup() {
-  Serial.begin(115200);                                 // Start Serial monitor in 115200
+  Serial.begin(115200);                                 // Bauds for Serial monitor
   pinMode(sen0, INPUT);                                 // Pinmodes for the sensor pins
   pinMode(sen1, INPUT);
-/*  pinMode(sen2, INPUT);
+/*  pinMode(sen2, INPUT);                               // Support for more keys, not used in testing
   pinMode(sen3, INPUT);*/
   pinMode(pin1, OUTPUT);
   pinMode(pin2, OUTPUT);
@@ -103,24 +102,20 @@ void setup() {
 }
 
 void loop() {
-  digitalWrite(pin2, HIGH);
+  digitalWrite(pin2, HIGH);                             // Command signals to shift registers
   digitalWrite(pin1, LOW);
   delay(1);
   digitalWrite(pin1, HIGH);  
   digitalWrite(pin2, LOW);
-  for(int i = 0; i<8; i++){
-    ledcWrite(ledChannel, 255);
+  
+  for(int i = 0; i<8; i++){                             // The loop for gathering sensor data
+    ledcWrite(ledChannel, 255);                         // Clock used for shift registers
     delay(1);
     keyReader();
     ledcWrite(ledChannel, 0);
     delay(1);
   }
- // Serial.print("Pack0:\t");
-//  Serial.println(pack0);
-//  Serial.print("Pack1:\t");
- // Serial.println(pack1);
- // Serial.print("Binary:\t");
- // Serial.println(bin);
+
   shiftToBin();                                         // Turn the signals from the sensors into binaries
   btFunc();                                             // Call the function which sends the binary package
 

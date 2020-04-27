@@ -66,7 +66,7 @@ namespace PiaGo_CSharp
             //CODE FOR LOGO
             pbLogo.Width = 623 / 4;
             pbLogo.Height = 252 / 4;
-
+            
             //CODE FOR GRAPHICAL PIANO            
             whiteKeySpace *= multiplier;
             blackKeySpace *= multiplier;
@@ -1130,8 +1130,86 @@ namespace PiaGo_CSharp
             System.Environment.Exit(1);
         }
 
-        #endregion
+        private void btnMetroDebugging_Click(object sender, EventArgs e)
+        {
+            if (btnMetroUser.Visible == false)
+            {
+                btnMetroUser.Visible = true;
+                txtMetroDataIn.Visible = true;
+                btnKey1.Visible = true;
+                btnKey2.Visible = true;
+                btnKey3.Visible = true;
+                btnKey4.Visible = true;
+                btnKey5.Visible = true;
+                btnKey6.Visible = true;
+                btnKey7.Visible = true;
+                btnKey8.Visible = true;
+                btnKey9.Visible = true;
+                btnKey10.Visible = true;
+                btnKey11.Visible = true;
+                btnKey12.Visible = true;
+                btnKey13.Visible = true;
+                btnKey14.Visible = true;
+                btnKey15.Visible = true;
+                btnKey16.Visible = true;
+                btnKey17.Visible = true;
+                btnKey18.Visible = true;
+                btnKey19.Visible = true;
+                btnKey20.Visible = true;
+                btnKey21.Visible = true;
+                btnKey22.Visible = true;
+                btnKey23.Visible = true;
+                btnKey24.Visible = true;
+                btnKey25.Visible = true;
+                btnKey26.Visible = true;
+                btnKey27.Visible = true;
+                btnKey28.Visible = true;
+                btnKey29.Visible = true;
+                btnKey30.Visible = true;
+                btnKey31.Visible = true;
+                btnKey32.Visible = true;
+            }
+            else
+            {
+                btnMetroUser.Visible = false;
+                txtMetroDataIn.Visible = false;
+                btnKey1.Visible = false;
+                btnKey2.Visible = false;
+                btnKey3.Visible = false;
+                btnKey4.Visible = false;
+                btnKey5.Visible = false;
+                btnKey6.Visible = false;
+                btnKey7.Visible = false;
+                btnKey8.Visible = false;
+                btnKey9.Visible = false;
+                btnKey10.Visible = false;
+                btnKey11.Visible = false;
+                btnKey12.Visible = false;
+                btnKey13.Visible = false;
+                btnKey14.Visible = false;
+                btnKey15.Visible = false;
+                btnKey16.Visible = false;
+                btnKey17.Visible = false;
+                btnKey18.Visible = false;
+                btnKey19.Visible = false;
+                btnKey20.Visible = false;
+                btnKey21.Visible = false;
+                btnKey22.Visible = false;
+                btnKey23.Visible = false;
+                btnKey24.Visible = false;
+                btnKey25.Visible = false;
+                btnKey26.Visible = false;
+                btnKey27.Visible = false;
+                btnKey28.Visible = false;
+                btnKey29.Visible = false;
+                btnKey30.Visible = false;
+                btnKey31.Visible = false;
+                btnKey32.Visible = false;
+            }
 
+        }
+
+        #endregion
 
     }
 }

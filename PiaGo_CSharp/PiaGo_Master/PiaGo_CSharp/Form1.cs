@@ -392,19 +392,23 @@ namespace PiaGo_CSharp
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
                     string pnpDeviceID = queryObj["PNPDeviceID"].ToString();
-                    List<int> ampersandsIndex = new List<int>();
-                    for (int i = 0; i < pnpDeviceID.Length; i++)
+
+                    if (pnpDeviceID.IndexOf(macAddress) == -1)
                     {
-                        if (pnpDeviceID[i] == '&')
-                            ampersandsIndex.Add(i);
+                        //no mac address found
+                        //Console.WriteLine("no correct mac address");
                     }
-                    string tempMacAddress = pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12);
-                    if (tempMacAddress == macAddress)
+                    else
                     {
-                        //Console.WriteLine("Bluetooth Mac Address: " + pnpDeviceID.Substring(ampersandsIndex.Last() + 1, 12));
-                        //Console.WriteLine("DeviceID: {0}", queryObj["DeviceID"]);
+                        //mac address found
+                        //Console.WriteLine("----------------------------------");
+                        //Console.WriteLine("Correct mac address found");
+                        //Console.WriteLine(queryObj["DeviceID"].ToString());
+                        //Console.WriteLine("----------------------------------");
                         comport = queryObj["DeviceID"].ToString();
+                        break;
                     }
+
                 }
             }
             catch (ManagementException ex)

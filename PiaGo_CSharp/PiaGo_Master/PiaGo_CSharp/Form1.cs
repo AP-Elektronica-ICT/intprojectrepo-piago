@@ -93,7 +93,7 @@ namespace PiaGo_CSharp
                 pianoKeys.Add(new PianoKey(i));
             }
             this.KeyPreview = true;
-        }
+        
 
             lblMetroConnection.BackColor = Color.Red;
 

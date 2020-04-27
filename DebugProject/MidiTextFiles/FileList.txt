@@ -1,2 +1,0 @@
-Brother Jakob;SimpleBrotherJakob.txt
-Empty Song;EmptySong.txt

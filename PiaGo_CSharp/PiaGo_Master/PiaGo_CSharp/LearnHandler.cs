@@ -33,7 +33,7 @@ namespace PiaGo_CSharp
         private MetroButton LearnSongBtn;
         private MetroButton PreviewSongBtn;
         delegate void SetTextCallback(string text);
-        KeyColor mainKeyColor;
+        public KeyColor mainKeyColor;
         #endregion properties
 
 

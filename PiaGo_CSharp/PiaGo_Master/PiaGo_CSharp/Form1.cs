@@ -508,18 +508,23 @@ namespace PiaGo_CSharp
             {
                 case MetroFramework.MetroColorStyle.Red:
                     mainKeyColor = KeyColor.RED;
+                    learnHandler.mainKeyColor = KeyColor.RED;
                     break;
                 case MetroFramework.MetroColorStyle.Green:
                     mainKeyColor = KeyColor.GREEN;
+                    learnHandler.mainKeyColor = KeyColor.GREEN;
                     break;
                 case MetroFramework.MetroColorStyle.Blue:
                     mainKeyColor = KeyColor.BLUE;
+                    learnHandler.mainKeyColor = KeyColor.BLUE;
                     break;
                 case MetroFramework.MetroColorStyle.Yellow:
                     mainKeyColor = KeyColor.YELLOW;
+                    learnHandler.mainKeyColor = KeyColor.YELLOW;
                     break;
                 default:
                     mainKeyColor = KeyColor.BLUE;
+                    learnHandler.mainKeyColor = KeyColor.BLUE;
                     break;
             }
         }

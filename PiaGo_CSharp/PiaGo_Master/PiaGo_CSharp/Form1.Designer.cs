@@ -1,4 +1,4 @@
-﻿namespace PiaGo_CSharp
+namespace PiaGo_CSharp
 {
     partial class frmMain
     {

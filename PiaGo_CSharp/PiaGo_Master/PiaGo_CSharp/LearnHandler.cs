@@ -32,6 +32,7 @@ namespace PiaGo_CSharp
         private MetroButton LearnSongBtn;
         private MetroButton PreviewSongBtn;
         delegate void SetTextCallback(string text);
+        KeyColor mainKeyColor;
         #endregion properties
 
 
@@ -41,7 +42,7 @@ namespace PiaGo_CSharp
         /// <param name="ns">Notescheduler handles all the code for playing music</param>
         /// <param name="_Keyboard">Keyboard to draw the keyboard</param>
         /// <param name="_canvas">Canvas needed to draw and fill in the colors</param>
-        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn)
+        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn, KeyColor _mainKeyColor, frmMain form)
         {
             noteScheduler = ns;
             MidiFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "MidiTextFiles");
@@ -49,7 +50,7 @@ namespace PiaGo_CSharp
             canvas = _canvas;
             LearnSongBtn = _learnSongBtn;
             PreviewSongBtn = _previewSongBtn;
-            //songlines = File.ReadAllLines(Path.Combine(MidiFileDirectory, "SimpleBrotherJabok.txt"));
+            mainKeyColor = _mainKeyColor;
         }
 
         /// <summary>
@@ -59,7 +60,6 @@ namespace PiaGo_CSharp
         /// <param name="song"></param>
         public void SelectSong(string song)
         {
-
             chosenSong = song;
             string songpath = Path.Combine(MidiFileDirectory, "SimpleBrotherJakob.txt"); //edit songpath
             songpath = new Uri(songpath).LocalPath;
@@ -67,6 +67,7 @@ namespace PiaGo_CSharp
             Console.WriteLine("Brother Jakob selected");
         }
 
+        #region methods to change buttons from threads
         private void SetPreviewText(string text)
         {
             // InvokeRequired required compares the thread ID of the
@@ -95,6 +96,9 @@ namespace PiaGo_CSharp
                 this.LearnSongBtn.Text = text;
             }
         }
+        #endregion
+
+        #region Preview Song methods
         public void PreviewSong()
         {
              if (songlines != null) {
@@ -111,7 +115,7 @@ namespace PiaGo_CSharp
                     Pitch pitch = (Pitch)Convert.ToInt32(songinfo[0]) + 5; //THE BROTHER JAKOB FILE IS IN THE WRONG KEY!!!!
                     
                     //Start note and visualize
-                    keyBoard[KeyToPlay].SetKeyFill(KeyColor.YELLOW);
+                    keyBoard[KeyToPlay].SetKeyFill(mainKeyColor);
                     canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                     noteScheduler.NoteOn(pitch);
                     Thread.Sleep(Convert.ToInt32(songinfo[2])*3); //*3 for breathing room
@@ -128,7 +132,7 @@ namespace PiaGo_CSharp
                         KeyToPlay = Convert.ToInt32(songinfo2[0]) - 48;
                         pitch = (Pitch)Convert.ToInt32(songinfo2[0]) + 5;
 
-                        keyBoard[KeyToPlay].SetKeyFill(KeyColor.YELLOW);
+                        keyBoard[KeyToPlay].SetKeyFill(mainKeyColor);
                         canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                         noteScheduler.NoteOn(pitch);
                         Thread.Sleep(Convert.ToInt32(songinfo2[2])*3);
@@ -161,6 +165,8 @@ namespace PiaGo_CSharp
                 AbortThread(previewThread);
             }
         }
+        #endregion
+
         #region Learn-a-song methods
         public void LearnSong()
         {
@@ -174,7 +180,7 @@ namespace PiaGo_CSharp
                     string[] songinfo = songline.Split(' ');
                     KeyToPlay = Convert.ToInt32(songinfo[0]) - 48; //MODIFIED FOR BROTHER JAKOB IN WRONG KEY, IS NORMALLY 53
                     bool correct = false;
-                    keyBoard[KeyToPlay].SetKeyFill(KeyColor.GREEN);
+                    keyBoard[KeyToPlay].SetKeyFill(mainKeyColor);
                     canvas.Invalidate(new Rectangle(keyBoard[KeyToPlay].X, keyBoard[KeyToPlay].Y, 12 * multiplier, 42 * multiplier));
                     while (!correct)
                     {

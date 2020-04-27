@@ -105,22 +105,30 @@ namespace PiaGo_CSharp
         
         private void btnMetroConnect_Click(object sender, EventArgs e)
         {
-
-            if (sp1.IsOpen)
-                sp1.Close();
-            sp1.PortName = comport;
-            sp1.BaudRate = 9600;
             try
             {
-                if (!sp1.IsOpen)
-                    sp1.Open();
-                lblMetroConnection.Text = "Connected";
+                if (sp1.IsOpen)
+                    sp1.Close();
+                sp1.PortName = comport;
+                sp1.BaudRate = 9600;
+                try
+                {
+                    if (!sp1.IsOpen)
+                        sp1.Open();
+                    lblMetroConnection.Text = "Connected";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please restart your piano");
+                }
+                sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Please restart your piano");
+
+                MessageBox.Show("Have you turned on Bluetooth?","Device not found!");
             }
-            sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
+            
  
         }
 

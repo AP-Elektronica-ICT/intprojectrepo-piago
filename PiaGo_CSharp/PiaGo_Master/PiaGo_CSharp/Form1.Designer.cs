@@ -678,7 +678,6 @@ namespace PiaGo_CSharp
             // 
             // pnlMainInfo
             // 
-            this.pnlMainInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pnlMainInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMainInfo.Controls.Add(this.pbLogo);
             this.pnlMainInfo.Controls.Add(this.btnMetroDebugging);
@@ -736,7 +735,6 @@ namespace PiaGo_CSharp
             // canvas
             // 
             this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(20, 215);
             this.canvas.Name = "canvas";

@@ -142,6 +142,7 @@
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.tglMetroTheme);
             this.Name = "SettingsScreen";
+            this.Resizable = false;
             this.Text = "SettingsScreen";
             this.Load += new System.EventHandler(this.SettingsScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.metroSMSettings)).EndInit();

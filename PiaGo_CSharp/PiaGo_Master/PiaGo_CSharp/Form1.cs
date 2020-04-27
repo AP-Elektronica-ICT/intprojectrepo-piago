@@ -36,6 +36,8 @@ namespace PiaGo_CSharp
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
         OutputDevice outputDevice;
+        MidiFileHandler MFH;
+        List<string> songlist;
         
         //PROPERTIES FOR BLUETOOTH
         string macAddress = "98D331FB1776";
@@ -77,14 +79,18 @@ namespace PiaGo_CSharp
             cbMetroInstruments.SelectedIndex = 0;
 
             //Initialize song-list //TOEDIT
-            cbMetroSongs.Items.Add("Frere Jacques");
-            cbMetroSongs.Items.Add("EmptySong");
+            MFH = new MidiFileHandler();
+            songlist = MFH.GetSongNames();
+            foreach(string name in songlist)
+            {
+                cbMetroSongs.Items.Add(name);
+            }
 
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn, mainKeyColor, this);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn, mainKeyColor, MFH);
 
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
@@ -93,7 +99,6 @@ namespace PiaGo_CSharp
                 pianoKeys.Add(new PianoKey(i));
             }
             this.KeyPreview = true;
-        }
 
             lblMetroConnection.BackColor = Color.Red;
 

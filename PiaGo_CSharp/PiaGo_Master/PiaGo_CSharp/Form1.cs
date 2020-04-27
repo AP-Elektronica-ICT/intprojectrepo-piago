@@ -102,7 +102,7 @@ namespace PiaGo_CSharp
                 pianoKeys.Add(new PianoKey(i));
             }
             this.KeyPreview = true;
-            bool BTButtonPressed = false;
+            BTButtonPressed = false;
             lblMetroConnection.BackColor = Color.Red;
 
             //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]

@@ -45,6 +45,7 @@ namespace PiaGo_CSharp
         string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
+        bool BTButtonPressed;
         #endregion
 
         #region Initializers
@@ -101,7 +102,7 @@ namespace PiaGo_CSharp
                 pianoKeys.Add(new PianoKey(i));
             }
             this.KeyPreview = true;
-
+            bool BTButtonPressed = false;
             lblMetroConnection.BackColor = Color.Red;
 
             //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]
@@ -182,6 +183,7 @@ namespace PiaGo_CSharp
 
         private void PlayBTNote(string BTinput)
         {
+            BTButtonPressed = true;
             switch (BTinput)
             {
                 case "00000":                   
@@ -408,6 +410,14 @@ namespace PiaGo_CSharp
             catch (ManagementException ex)
             {
                 MessageBox.Show("An error occurred while querying for WMI data: " + ex.Message);
+            }
+        }
+        private void BTButtonCleaner()
+        {
+            if(BTButtonPressed == true)
+            {
+                learnHandler.CleanScreen();
+                BTButtonPressed = false;
             }
         }
         
@@ -659,6 +669,7 @@ namespace PiaGo_CSharp
         #region ALL DEBUG KEYS (32)
         private void btnKey32_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(31);
         }
         private void btnKey32_MouseUp(object sender, EventArgs e)
@@ -668,6 +679,7 @@ namespace PiaGo_CSharp
 
         private void btnKey31_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(30);
         }
         private void btnKey31_MouseUp(object sender, EventArgs e)
@@ -677,6 +689,7 @@ namespace PiaGo_CSharp
 
         private void btnKey30_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(29);
         }
         private void btnKey30_MouseUp(object sender, EventArgs e)
@@ -686,6 +699,7 @@ namespace PiaGo_CSharp
 
         private void btnKey29_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(28);
         }
         private void btnKey29_MouseUp(object sender, EventArgs e)
@@ -695,6 +709,7 @@ namespace PiaGo_CSharp
 
         private void btnKey28_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(27);
         }
         private void btnKey28_MouseUp(object sender, EventArgs e)
@@ -704,6 +719,7 @@ namespace PiaGo_CSharp
 
         private void btnKey27_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(26);
         }
         private void btnKey27_MouseUp(object sender, EventArgs e)
@@ -713,6 +729,7 @@ namespace PiaGo_CSharp
 
         private void btnKey26_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(25);
         }
         private void btnKey26_MouseUp(object sender, EventArgs e)
@@ -722,6 +739,7 @@ namespace PiaGo_CSharp
 
         private void btnKey25_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(24);
         }
         private void btnKey25_MouseUp(object sender, EventArgs e)
@@ -731,6 +749,7 @@ namespace PiaGo_CSharp
 
         private void btnKey24_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(23);
         }
         private void btnKey24_MouseUp(object sender, EventArgs e)
@@ -740,6 +759,7 @@ namespace PiaGo_CSharp
 
         private void btnKey23_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(22);
         }
         private void btnKey23_MouseUp(object sender, EventArgs e)
@@ -749,6 +769,7 @@ namespace PiaGo_CSharp
 
         private void btnKey22_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(21);
         }
         private void btnKey22_MouseUp(object sender, EventArgs e)
@@ -758,6 +779,7 @@ namespace PiaGo_CSharp
 
         private void btnKey21_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(20);
         }
         private void btnKey21_MouseUp(object sender, EventArgs e)
@@ -767,6 +789,7 @@ namespace PiaGo_CSharp
 
         private void btnKey20_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(19);
         }
         private void btnKey20_MouseUp(object sender, EventArgs e)
@@ -776,6 +799,7 @@ namespace PiaGo_CSharp
 
         private void btnKey19_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(18);
         }
         private void btnKey19_MouseUp(object sender, EventArgs e)
@@ -785,6 +809,7 @@ namespace PiaGo_CSharp
 
         private void btnKey18_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(17);
         }
         private void btnKey18_MouseUp(object sender, EventArgs e)
@@ -794,6 +819,7 @@ namespace PiaGo_CSharp
 
         private void btnKey17_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(16);
         }
         private void btnKey17_MouseUp(object sender, EventArgs e)
@@ -803,6 +829,7 @@ namespace PiaGo_CSharp
 
         private void btnKey16_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(15);
         }
         private void btnKey16_MouseUp(object sender, EventArgs e)
@@ -812,6 +839,7 @@ namespace PiaGo_CSharp
 
         private void btnKey15_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(14);
         }
         private void btnKey15_MouseUp(object sender, EventArgs e)
@@ -821,6 +849,7 @@ namespace PiaGo_CSharp
 
         private void btnKey14_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(13);
         }
         private void btnKey14_MouseUp(object sender, EventArgs e)
@@ -830,6 +859,7 @@ namespace PiaGo_CSharp
 
         private void btnKey13_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(12);
         }
         private void btnKey13_MouseUp(object sender, EventArgs e)
@@ -839,6 +869,7 @@ namespace PiaGo_CSharp
 
         private void btnKey12_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(11);
         }
         private void btnKey12_MouseUp(object sender, EventArgs e)
@@ -847,6 +878,7 @@ namespace PiaGo_CSharp
         }
         private void btnKey11_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(10);
         }
         private void btnKey11_MouseUp(object sender, EventArgs e)
@@ -856,6 +888,7 @@ namespace PiaGo_CSharp
 
         private void btnKey10_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(9);
         }
         private void btnKey10_MouseUp(object sender, EventArgs e)
@@ -865,6 +898,7 @@ namespace PiaGo_CSharp
 
         private void btnKey9_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(8);
         }
         private void btnKey9_MouseUp(object sender, EventArgs e)
@@ -874,6 +908,7 @@ namespace PiaGo_CSharp
 
         private void btnKey8_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(7);
         }
         private void btnKey8_MouseUp(object sender, EventArgs e)
@@ -883,6 +918,7 @@ namespace PiaGo_CSharp
 
         private void btnKey7_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(6);
         }
         private void btnKey7_MouseUp(object sender, EventArgs e)
@@ -892,6 +928,7 @@ namespace PiaGo_CSharp
 
         private void btnKey6_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(5);
         }
         private void btnKey6_MouseUp(object sender, EventArgs e)
@@ -901,6 +938,7 @@ namespace PiaGo_CSharp
 
         private void btnKey5_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(4);
         }
         private void btnKey5_MouseUp(object sender, EventArgs e)
@@ -910,6 +948,7 @@ namespace PiaGo_CSharp
 
         private void btnKey4_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(3);
         }
         private void btnKey4_MouseUp(object sender, EventArgs e)
@@ -918,6 +957,7 @@ namespace PiaGo_CSharp
         }
         private void btnKey3_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(2);
         }
         private void btnKey3_MouseUp(object sender, EventArgs e)
@@ -927,6 +967,7 @@ namespace PiaGo_CSharp
 
         private void btnKey2_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(1);
         }
         private void btnKey2_MouseUp(object sender, EventArgs e)
@@ -936,6 +977,7 @@ namespace PiaGo_CSharp
 
         private void btnKey1_MouseDown(object sender, EventArgs e)
         {
+            BTButtonCleaner();
             ActivateKey(0);
         }
         private void btnKey1_MouseUp(object sender, EventArgs e)

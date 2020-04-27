@@ -128,7 +128,7 @@ namespace PiaGo_CSharp
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Please restart your piano","Piano connection error");
+                    MessageBox.Show("Please reboot your piano","Piano connection error");
                 }
                 sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
             }

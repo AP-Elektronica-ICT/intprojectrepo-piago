@@ -119,17 +119,23 @@ namespace PiaGo_CSharp
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Please restart your piano");
+                    MessageBox.Show("Please restart your piano","Piano connection error");
                 }
                 sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(DataReceived);
             }
             catch (Exception)
             {
 
-                MessageBox.Show("Have you turned on Bluetooth?","Device not found!");
+                DialogResult dialogResult = MessageBox.Show("Have you turned on Bluetooth? If not turn it on now and press OK","Device not found!",MessageBoxButtons.OK);
+                if (dialogResult == DialogResult.OK)
+                {
+                    dialogResult = MessageBox.Show("Searching device addresses...", "searching");
+                    if (dialogResult == DialogResult.OK)
+
+                    ComPortInitialiser();
+                    MessageBox.Show("Please restart your piano now and try to connect", "Search complete!");
+                }     
             }
-            
- 
         }
 
         private void DataReceived(object sender, SerialDataReceivedEventArgs e)

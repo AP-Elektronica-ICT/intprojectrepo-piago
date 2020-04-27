@@ -17,6 +17,7 @@ namespace PiaGo_CSharp
 {
     public partial class frmMain : MetroFramework.Forms.MetroForm
     {
+        #region Properties
         //PROPERTIES FOR GRAPHICAL PIANO
         int multiplier = 4;
         int whiteKeySpace = 12;
@@ -36,14 +37,17 @@ namespace PiaGo_CSharp
         List<PianoKey> pianoKeys;
         LearnHandler learnHandler;
         OutputDevice outputDevice;
+        MidiFileHandler MFH;
+        List<string> songlist;
         
         //PROPERTIES FOR BLUETOOTH
         string macAddress = "98D331FB1776";
         string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
+        #endregion
 
-
+        #region Initializers
         public frmMain(OutputDevice _outputDevice)
         {
             InitializeComponent();
@@ -77,14 +81,18 @@ namespace PiaGo_CSharp
             cbMetroInstruments.SelectedIndex = 0;
 
             //Initialize song-list //TOEDIT
-            cbMetroSongs.Items.Add("Frere Jacques");
-            cbMetroSongs.Items.Add("EmptySong");
+            MFH = new MidiFileHandler();
+            songlist = MFH.GetSongNames();
+            foreach(string name in songlist)
+            {
+                cbMetroSongs.Items.Add(name);
+            }
 
             //Initialize Clock for piano
             clock = new Clock(120);
             clock.Start();
             noteScheduler = new NoteScheduler(clock, outputDevice);
-            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn, mainKeyColor, this);
+            learnHandler = new LearnHandler(noteScheduler, keyBoard, canvas, LearnSongBtn, PreviewSongBtn, mainKeyColor, MFH);
 
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
@@ -93,16 +101,16 @@ namespace PiaGo_CSharp
                 pianoKeys.Add(new PianoKey(i));
             }
             this.KeyPreview = true;
-        
 
             lblMetroConnection.BackColor = Color.Red;
 
             //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]
             ComPortInitialiser();
         }
+        #endregion
 
         #region Bluetooth
-        
+
         private void btnMetroConnect_Click(object sender, EventArgs e)
         {
             try
@@ -586,6 +594,7 @@ namespace PiaGo_CSharp
         #region Instruments
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
+            learnHandler.CleanScreen(); //To Delete if bluetooth works with 64bits
             PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
             LearnSongBtn.Visible = !LearnSongBtn.Visible;
             OctaveDownBtn.Visible = !OctaveDownBtn.Visible;

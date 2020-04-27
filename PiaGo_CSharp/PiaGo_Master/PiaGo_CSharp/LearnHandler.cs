@@ -16,6 +16,7 @@ namespace PiaGo_CSharp
     {
         #region properties
         NoteScheduler noteScheduler;
+        MidiFileHandler MFH;
         string MidiFileDirectory;
         string[] songlines; 
         string chosenSong;
@@ -42,8 +43,9 @@ namespace PiaGo_CSharp
         /// <param name="ns">Notescheduler handles all the code for playing music</param>
         /// <param name="_Keyboard">Keyboard to draw the keyboard</param>
         /// <param name="_canvas">Canvas needed to draw and fill in the colors</param>
-        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn, KeyColor _mainKeyColor, frmMain form)
+        public LearnHandler(NoteScheduler ns, List<Key> _Keyboard, System.Windows.Forms.Panel _canvas, MetroButton _learnSongBtn, MetroButton _previewSongBtn, KeyColor _mainKeyColor, MidiFileHandler mfh)
         {
+            MFH = mfh;
             noteScheduler = ns;
             MidiFileDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "MidiTextFiles");
             keyBoard = _Keyboard;
@@ -54,17 +56,12 @@ namespace PiaGo_CSharp
         }
 
         /// <summary>
-        ///             ///DUMMYSYSTEM, TO CHANGE
         /// Select the song to learn and preview
         /// </summary>
         /// <param name="song"></param>
         public void SelectSong(string song)
         {
-            chosenSong = song;
-            string songpath = Path.Combine(MidiFileDirectory, "SimpleBrotherJakob.txt"); //edit songpath
-            songpath = new Uri(songpath).LocalPath;
-            songlines = File.ReadAllLines(songpath);
-            Console.WriteLine("Brother Jakob selected");
+            songlines = MFH.GetSongFile(song);
         }
 
         #region methods to change buttons from threads
@@ -150,6 +147,7 @@ namespace PiaGo_CSharp
         }
         public void PreviewHandler()
         {
+            CleanScreen();//To Delete if bluetooth works with 64bits
             if (Learning == true)
             {
                 AbortThread(learnThread);
@@ -198,6 +196,7 @@ namespace PiaGo_CSharp
         }
         public void LearnSongHandler()
         {
+            CleanScreen();//To Delete if bluetooth works with 64bits
             if (Previewing == true)
             {
                 AbortThread(previewThread);
@@ -237,6 +236,17 @@ namespace PiaGo_CSharp
         {
             if(learnThread != null) { AbortThread(learnThread); }
             if(previewThread != null) { AbortThread(previewThread); }
+        }
+
+        public void CleanScreen() //should some Canvas method though.
+        {
+            int i = 0;
+            foreach (Key key in keyBoard)
+            {
+                key.Clear();
+                canvas.Invalidate(new Rectangle(keyBoard[i].X, keyBoard[i].Y, 12 * multiplier, 42 * multiplier));
+                i++;
+            }
         }
         #endregion
 

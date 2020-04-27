@@ -39,8 +39,10 @@ namespace PiaGo_CSharp
         }
         public string[] GetSongFile(string songName)
         {
+            Console.WriteLine(songName + " selected");
             string[] songlines;
             string songFile = songlist[songName];
+            Console.WriteLine(songFile + " loaded");
             string songFilePath = Path.Combine(MidiFileDirectory, songFile);
             songFilePath = new Uri(songFilePath).LocalPath;
             songlines = File.ReadAllLines(songFilePath);

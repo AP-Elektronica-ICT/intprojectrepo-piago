@@ -62,7 +62,6 @@ namespace PiaGo_CSharp
         public void SelectSong(string song)
         {
             songlines = MFH.GetSongFile(song);
-            Console.WriteLine(song + "selected");
         }
 
         #region methods to change buttons from threads
@@ -148,6 +147,7 @@ namespace PiaGo_CSharp
         }
         public void PreviewHandler()
         {
+            CleanScreen();//To Delete if bluetooth works with 64bits
             if (Learning == true)
             {
                 AbortThread(learnThread);
@@ -196,6 +196,7 @@ namespace PiaGo_CSharp
         }
         public void LearnSongHandler()
         {
+            CleanScreen();//To Delete if bluetooth works with 64bits
             if (Previewing == true)
             {
                 AbortThread(previewThread);
@@ -235,6 +236,17 @@ namespace PiaGo_CSharp
         {
             if(learnThread != null) { AbortThread(learnThread); }
             if(previewThread != null) { AbortThread(previewThread); }
+        }
+
+        public void CleanScreen() //should some Canvas method though.
+        {
+            int i = 0;
+            foreach (Key key in keyBoard)
+            {
+                key.Clear();
+                canvas.Invalidate(new Rectangle(keyBoard[i].X, keyBoard[i].Y, 12 * multiplier, 42 * multiplier));
+                i++;
+            }
         }
         #endregion
 

@@ -17,6 +17,7 @@ namespace PiaGo_CSharp
 {
     public partial class frmMain : MetroFramework.Forms.MetroForm
     {
+        #region Properties
         //PROPERTIES FOR GRAPHICAL PIANO
         int multiplier = 4;
         int whiteKeySpace = 12;
@@ -44,8 +45,9 @@ namespace PiaGo_CSharp
         string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
+        #endregion
 
-
+        #region Initializers
         public frmMain(OutputDevice _outputDevice)
         {
             InitializeComponent();
@@ -105,9 +107,10 @@ namespace PiaGo_CSharp
             //Find correct COM port for BT MAC ADDRESS [MAKES APP LOAD SLOWER AT STARTUP!!!]
             ComPortInitialiser();
         }
+        #endregion
 
         #region Bluetooth
-        
+
         private void btnMetroConnect_Click(object sender, EventArgs e)
         {
 
@@ -577,6 +580,7 @@ namespace PiaGo_CSharp
         #region Instruments
         private void tglMetroMode_CheckedChanged(object sender, EventArgs e)
         {
+            learnHandler.CleanScreen(); //To Delete if bluetooth works with 64bits
             PreviewSongBtn.Visible = !PreviewSongBtn.Visible;
             LearnSongBtn.Visible = !LearnSongBtn.Visible;
             OctaveDownBtn.Visible = !OctaveDownBtn.Visible;

@@ -35,6 +35,7 @@ namespace PiaGo_CSharp
         Random rnd = new Random();
         NoteScheduler noteScheduler;
         List<PianoKey> pianoKeys;
+        List<bool> IsKeyPressed;
         LearnHandler learnHandler;
         OutputDevice outputDevice;
         MidiFileHandler MFH;
@@ -97,9 +98,11 @@ namespace PiaGo_CSharp
 
             //Initialize pianokeys
             pianoKeys = new List<PianoKey>();
+            IsKeyPressed = new List<bool>();
             for (int i = 0; i < 32; i++)
             {
                 pianoKeys.Add(new PianoKey(i));
+                IsKeyPressed.Add(false);
             }
             this.KeyPreview = true;
             BTButtonPressed = false;
@@ -533,12 +536,16 @@ namespace PiaGo_CSharp
         #region Piano
         private void ActivateKey(int key)
         {
-            if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
-            else if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
-            else keyBoard[key].SetKeyFill(mainKeyColor);
-            noteScheduler.NoteOn(pianoKeys[key]);
-            canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
-            learnHandler.LastKeyPlayed = key;
+            if (!IsKeyPressed[key])
+            {
+                if (learnHandler.Learning == true && key != learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.RED);
+                else if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(KeyColor.GREEN);
+                else keyBoard[key].SetKeyFill(mainKeyColor);
+                noteScheduler.NoteOn(pianoKeys[key]);
+                canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+                learnHandler.LastKeyPlayed = key;
+                IsKeyPressed[key] = true;
+            }
         }
 
         private void DeActivateKey(int key)
@@ -547,6 +554,7 @@ namespace PiaGo_CSharp
             noteScheduler.NoteOff(pianoKeys[key]);
             if (learnHandler.Learning == true && key == learnHandler.KeyToPlay) keyBoard[key].SetKeyFill(mainKeyColor);
             canvas.Invalidate(new Rectangle(keyBoard[key].X, keyBoard[key].Y, 12 * multiplier, 42 * multiplier));
+            IsKeyPressed[key] = false;
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)

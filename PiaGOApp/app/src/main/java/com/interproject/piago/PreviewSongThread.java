@@ -6,15 +6,14 @@ import android.widget.Button;
 
 public class PreviewSongThread extends Thread {
     PlayPiago piago;
-    byte[] arrayNote;
-    int[] timing;
-    Button previewTile;
+    private byte[] arrayNote;
+    private int[] timing;
+    private Button previewTile;
 
     public PreviewSongThread(PlayPiago piago, byte[] arrayNote, int[] timing){
         this.piago = piago;
         this.arrayNote = arrayNote;
         this.timing = timing;
-        //this.piago.LearnSong(piago.learn.FatherJacob);
     }
 
     @Override
@@ -34,8 +33,6 @@ public class PreviewSongThread extends Thread {
                 Thread.currentThread().interrupt();
             }
         }
-
-
         piago.piagoMidiDriver.playNote(arrayNote[arrayNote.length-1]);
         BackgroundChanger(arrayNote.length-1);
     }
@@ -58,7 +55,6 @@ public class PreviewSongThread extends Thread {
                 for(int i = 0; i < piago.octaveSelector.ActiveOctaveArray.length; i++) {
                     if (arrayNote[j] == piago.octaveSelector.ActiveOctaveArray[i]) {
                         index = i;
-                        //break;
                     }
                 }
                 previewTile = piago.findViewById(piago.learn.KeyArray[index]);
@@ -67,15 +63,10 @@ public class PreviewSongThread extends Thread {
 
                 new CountDownTimer(120, 100) {
                     public void onFinish() {
-                        // When timer is finished
-                        // Execute your code here
-                        //pressedTile.setBackgroundResource(tileDrawable);
                         previewTile.setBackground(piago.OriginalBackground(previewTile.getId()));
                         Log.i("Debugkey", "Tile reset ");
                     }
-
                     public void onTick(long millisUntilFinished) {
-                        // millisUntilFinished    The amount of time until finished.
                     }
                 }.start();
 

@@ -19,9 +19,4 @@ public class PiagoMainScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void launchLearn(View view) {
-    }
-
-    public void launchCustomize(View view) {
-    }
 }

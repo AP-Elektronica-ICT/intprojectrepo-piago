@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arnau\\Documents\\Semester4\\IntProject\\Midiparser\\Midiparser\\Midiparser.csproj": {}
+    "C:\\Users\\arnau\\Documents\\Semester4\\International Project\\intprojectrepo-piago\\Midiparser\\Midiparser\\Midiparser.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arnau\\Documents\\Semester4\\IntProject\\Midiparser\\Midiparser\\Midiparser.csproj": {
+    "C:\\Users\\arnau\\Documents\\Semester4\\International Project\\intprojectrepo-piago\\Midiparser\\Midiparser\\Midiparser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arnau\\Documents\\Semester4\\IntProject\\Midiparser\\Midiparser\\Midiparser.csproj",
+        "projectUniqueName": "C:\\Users\\arnau\\Documents\\Semester4\\International Project\\intprojectrepo-piago\\Midiparser\\Midiparser\\Midiparser.csproj",
         "projectName": "Midiparser",
-        "projectPath": "C:\\Users\\arnau\\Documents\\Semester4\\IntProject\\Midiparser\\Midiparser\\Midiparser.csproj",
+        "projectPath": "C:\\Users\\arnau\\Documents\\Semester4\\International Project\\intprojectrepo-piago\\Midiparser\\Midiparser\\Midiparser.csproj",
         "packagesPath": "C:\\Users\\arnau\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arnau\\Documents\\Semester4\\IntProject\\Midiparser\\Midiparser\\obj\\",
+        "outputPath": "C:\\Users\\arnau\\Documents\\Semester4\\International Project\\intprojectrepo-piago\\Midiparser\\Midiparser\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

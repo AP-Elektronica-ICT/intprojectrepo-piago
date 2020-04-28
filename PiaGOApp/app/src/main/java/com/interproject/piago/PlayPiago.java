@@ -232,7 +232,7 @@ public class PlayPiago extends AppCompatActivity {
 
     Button pressedTile;
 
-    private void playSound(String sound) {
+    public void playSound(String sound) {
         if (ReceivedBluetoothSignal != null) {
             switch (sound) {
                 case "00000": {
@@ -421,6 +421,12 @@ public class PlayPiago extends AppCompatActivity {
         }.start();
     }
 
+    public void PlayNotePause(byte note, final Button pressedTile) {
+        piagoMidiDriver.playNote(note);
+        Log.i("Debugkey", "_______________Note played through PlayNotePause");
+        PauseMethod(pressedTile);
+    }
+
     public void changeInstrument(View view) {
         alertDialog.showAlertDialogInstrument(PlayPiago.this, instrumentButton, piagoMidiDriver);
     }
@@ -428,13 +434,7 @@ public class PlayPiago extends AppCompatActivity {
     public void changeSong(View view) {
         alertDialog.showAlertDialogSong(PlayPiago.this, this);
     }
-
-    public void PlayNotePause(byte note, final Button pressedTile) {
-        piagoMidiDriver.playNote(note);
-        Log.i("Debugkey", "_______________Note played through PlayNotePause");
-        PauseMethod(pressedTile);
-    }
-
+    
     public void octaveLower(View view) {
         octaveSelector.OctaveDown();
     }
@@ -613,38 +613,7 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
-    //CLEANUP POSSIBLE
-    public void runThreadLearn() {
-        runOnUiThread(new Thread(new Runnable() {
-            public void run() {
-                if (songStarted) {
-                    LearnSong(activeSongByteArray);
-                } else {
-                    playSound(ReceivedBluetoothSignal);
-                    Log.i("Debugkey", "__________Sound played while songstarted was off");
-                }
-                Log.i("Debugkey", "LearnSong() executed");
-            }
-        }));
-    }
-
-    //CLEANUP POSSIBLE
-    public void runThreadNormal() {
-        runOnUiThread(new Thread(new Runnable() {
-            public void run() {
-                playSound(ReceivedBluetoothSignal);
-                Log.i("Debugkey", "__________Sound played in runThreadNormal");
-            }
-        }));
-    }
-
     public Drawable OriginalBackground(int tileResource) {
         return BGHandler.Original(tileResource, this);
     }
 }
-
-
-
-
-
-

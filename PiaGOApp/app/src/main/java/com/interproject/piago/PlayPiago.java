@@ -48,7 +48,7 @@ public class PlayPiago extends AppCompatActivity {
     private MidiDriver midiDriver;
     public PiagoMidiDriver piagoMidiDriver;
     private int[] config;
-    private Button instrumentButton;
+    public Button instrumentButton;
 
 
     //BLUETOOTH STUFF
@@ -94,6 +94,8 @@ public class PlayPiago extends AppCompatActivity {
 
     byte[] activeSongByteArray = new byte[]{};
     int[] activeSongIntArray = new int[]{};
+
+    AlertDialogBuilder alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +213,8 @@ public class PlayPiago extends AppCompatActivity {
 
         activeSongByteArray = learn.FatherJacob;
         activeSongIntArray = learn.FatherJacobTiming;
+
+        alertDialog = new AlertDialogBuilder();
     }
 
     @Override
@@ -422,94 +426,11 @@ public class PlayPiago extends AppCompatActivity {
     }
 
     public void changeInstrument(View view) {
-        showAlertDialogInstrument();
+        alertDialog.showAlertDialogInstrument(PlayPiago.this, instrumentButton, piagoMidiDriver);
     }
 
-    private void showAlertDialogSong(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlayPiago.this);
-        alertDialog.setTitle("Select your song");
-        String[] instruments={"Father Jacob", "Dummie 1", "Dummie 2"};
-        alertDialog.setSingleChoiceItems(instruments, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case 0: {
-                        activeSong.setText("Active song: Father Jacob");
-                        activeSongByteArray = learn.FatherJacob;
-                        activeSongIntArray = learn.FatherJacobTiming;
-                        break;
-                    }
-                    case 1: {
-                        activeSong.setText("Active song: Dummie 1");
-                        activeSongByteArray = learn.Dummie1Notes;
-                        activeSongIntArray = learn.Dummie1Timing;
-                        break;
-                    }
-                    case 2: {
-                        activeSong.setText("Active song: Dummie 2");
-                        activeSongByteArray = learn.Dummie2Notes;
-                        activeSongIntArray = learn.Dummie2Timing;
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            }
-        });
-        alertDialog.setPositiveButton("Back to Keyboard", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                if(songStarted) {
-                    tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
-                    noteNumber = 0;
-                    songStarted = false;
-                    //ShowCurrentNote(activeSongByteArray);
-                }
-            }
-        });
-        AlertDialog alert = alertDialog.create();
-        alert.setCanceledOnTouchOutside(false);
-        alert.show();
-    }
-
-    private void showAlertDialogInstrument(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PlayPiago.this);
-        alertDialog.setTitle("Select your instrument");
-        String[] instruments={"Piano", "Trumpet", "Xylophone"};
-        alertDialog.setSingleChoiceItems(instruments, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case 0: {
-                        instrumentButton.setText("Piano");
-                        piagoMidiDriver.InstrumentSelection("Piano");
-                        break;
-                    }
-                    case 1: {
-                        instrumentButton.setText("Trumpet");
-                        piagoMidiDriver.InstrumentSelection("Trumpet");
-                        break;
-                    }
-                    case 2: {
-                        instrumentButton.setText("Xylophone");
-                        piagoMidiDriver.InstrumentSelection("Xylophone");
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            }
-        });
-        alertDialog.setPositiveButton("Back to Keyboard", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog alert = alertDialog.create();
-        alert.setCanceledOnTouchOutside(false);
-        alert.show();
+    public void changeSong(View view) {
+        alertDialog.showAlertDialogSong(PlayPiago.this, this);
     }
 
     public void PlayNotePause(byte note, final Button pressedTile){
@@ -526,9 +447,7 @@ public class PlayPiago extends AppCompatActivity {
         octaveSelector.OctaveUp();
     }
 
-
     // BLUETOOTH STUFF
-
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
         //creates secure outgoing connection with BT device using UUID
@@ -547,10 +466,6 @@ public class PlayPiago extends AppCompatActivity {
         noteNumber = 0;
         ShowCurrentNote(activeSongByteArray);
         songStarted = true;
-    }
-
-    public void changeSong(View view) {
-        showAlertDialogSong();
     }
 
     private class ConnectedThread extends Thread {

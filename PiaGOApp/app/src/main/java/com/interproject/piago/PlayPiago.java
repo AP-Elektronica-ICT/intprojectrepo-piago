@@ -73,10 +73,9 @@ public class PlayPiago extends AppCompatActivity {
     public OctaveSelector octaveSelector;
 
     //LearnSongs
+    public Boolean songStarted = false;
     public LearnSongs learn = new LearnSongs();
     public Integer noteNumber = 0;
-    public Drawable noteToPlayBackGround;
-    public Drawable notePlayedBackGround;
     public Button tileToPress;
     public Boolean noteIsShown = false;
     SignalCheckerThread sChecker;
@@ -219,8 +218,6 @@ public class PlayPiago extends AppCompatActivity {
         super.onResume();
         midiDriver.start();
         config = midiDriver.config();
-
-        //LearnSong(learn.FatherJacob);
         learnToggle.setChecked(false);
         sChecker.start();
     }
@@ -416,13 +413,10 @@ public class PlayPiago extends AppCompatActivity {
         pressedTile.setBackgroundResource(R.drawable.tile_pressed);
         new CountDownTimer(200, 100) {
             public void onFinish() {
-                // When timer is finished
-                // Execute your code here
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
             }
 
             public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
             }
         }.start();
     }
@@ -545,11 +539,9 @@ public class PlayPiago extends AppCompatActivity {
         songStarted = false;
         noteNumber = 0;
         previewSongThread = new PreviewSongThread(this, activeSongByteArray, activeSongIntArray);
-        //previewSongThread = new PreviewSongThread(this, learn.WiiNotes, learn.WiiTiming);
         previewSongThread.start();
     }
 
-    public Boolean songStarted = false;
     public void startSong(View view) {
         tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
         noteNumber = 0;
@@ -632,19 +624,14 @@ public class PlayPiago extends AppCompatActivity {
     public void LearnSong(byte[] noteArray){
         if(!noteIsShown){
             ShowCurrentNote(noteArray);
-            //Log.i("BT", "ShowCurrentNote method");
         }
         if(!notePlayed){
             CheckNotePlayed(noteArray);
-            //Log.i("BT", "CheckNote method");
         }
-
         if(noteNumber >=  noteArray.length) {
             noteNumber = 0;
             songStarted = false;
         }
-
-        //sChecker.execute();
     }
 
     private void PauseMethodLearn(final Button pressedTile, final int backgGroundStatus, final byte[] array){
@@ -652,19 +639,13 @@ public class PlayPiago extends AppCompatActivity {
         Log.i("Debugkey", "Key pressedTile BG set to green or red");
         new CountDownTimer(200, 100) {
             public void onFinish() {
-                // When timer is finished
-                // Execute your code here
-                //pressedTile.setBackground(notePlayedBackGround);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
                 Log.i("Debugkey", "PressedTile BG back to original");
                 tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
                 Log.i("Debugkey", "TileToPress BG back to original");
                 ShowCurrentNote(array);
-
             }
-
             public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
             }
         }.start();
     }
@@ -672,18 +653,13 @@ public class PlayPiago extends AppCompatActivity {
     //Laat de noot zien die gespeeld moet worden
     public void ShowCurrentNote(byte[] noteArray){
         Integer noteIndex = 0;
-
         for(int i = 0; i < octaveSelector.ActiveOctaveArray.length; i++){
             if(noteArray[noteNumber] == octaveSelector.ActiveOctaveArray[i])
                 noteIndex = i;
         }
-
         tileToPress = findViewById(learn.KeyArray[noteIndex]);
-        noteToPlayBackGround = tileToPress.getBackground();
-
         tileToPress.setBackgroundResource(R.drawable.tile_to_press);
         Log.i("Debugkey", "Key tileToPress is set to Blue, key index "+noteIndex);
-
         noteIsShown = true;
         notePlayed = false;
         Log.i("Debugkey", "ShowCurrentNote() executed");
@@ -694,8 +670,6 @@ public class PlayPiago extends AppCompatActivity {
         if(ReceivedBluetoothSignal != null) {
             playSound(ReceivedBluetoothSignal);
             Log.i("Debugkey","Sound played through checknoteplayed()");
-            //tileToPress.setBackground(OriginalBackground(tileToPress.getId()));
-            //Log.i("Debugkey", "Key tileToPress OG background reset");
                 if (pressedTile == tileToPress) {
                     //Is de noot correct, laat dan een groene background kort zien
                     PauseMethodLearn(pressedTile, R.drawable.tile_pressed, array);
@@ -705,13 +679,7 @@ public class PlayPiago extends AppCompatActivity {
                     //is de noot incorrect, laat dan een rode achtergrond zien
                     PauseMethodLearn(pressedTile, R.drawable.tile_pressed_fault, array);
                 }
-            //Reset background van noot die gespeeld moest worden
-
             notePlayed = true;
-            //noteIsShown = false;
-            //noteNumber++;
-
-
             Log.i("Debugkey", "ChecknotePlayed() executed");
         }
     }
@@ -730,14 +698,10 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
-
-
-
     //CLEANUP POSSIBLE
     public void runThreadLearn(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
-
                     if(songStarted) {
                         LearnSong(activeSongByteArray);
                     }
@@ -746,9 +710,7 @@ public class PlayPiago extends AppCompatActivity {
                         Log.i("Debugkey", "__________Sound played while songstarted was off");
                     }
                 Log.i("Debugkey", "LearnSong() executed");
-
                 }
-
         }));
     }
 
@@ -756,11 +718,9 @@ public class PlayPiago extends AppCompatActivity {
     public void runThreadNormal(){
         runOnUiThread (new Thread(new Runnable() {
             public void run() {
-
-                    playSound(ReceivedBluetoothSignal);
+                playSound(ReceivedBluetoothSignal);
                 Log.i("Debugkey", "__________Sound played in runThreadNormal");
             }
-
         }));
     }
 
@@ -769,10 +729,8 @@ public class PlayPiago extends AppCompatActivity {
         for(int j = 0; j < learn.KeyArray.length; j++){
             if(learn.KeyArray[j] == tileResource) {
                 i = j;
-                //Log.i("BT", "Tile number :" +j);
             }
         }
-
         switch (i){
             case 0:
                 return getResources().getDrawable(R.drawable.tile_white);

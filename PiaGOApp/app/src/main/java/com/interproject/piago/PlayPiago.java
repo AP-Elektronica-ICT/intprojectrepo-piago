@@ -150,7 +150,6 @@ public class PlayPiago extends AppCompatActivity {
                         }
                     }
                 }.start();
-                //mButtonAutoCnct.setBackgroundColor(Color.GREEN);
             }
         });
 
@@ -625,11 +624,9 @@ public class PlayPiago extends AppCompatActivity {
                     bytes = mmInStream.available();
                     if(bytes != 0) {
                         SystemClock.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
-                        bytes = mmInStream.available(); // how many bytes are ready to be read?
+                        //bytes = mmInStream.available(); // how many bytes are ready to be read?
                         bytes = mmInStream.read(buffer);
-                        //bytes = mmInStream.read(buffer, 1, bytes); // record how many bytes we actually read
-                        /*mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
-                                .sendToTarget(); // Send the obtained bytes to the UI activity*/
+
 
                         mHandler.obtainMessage(MESSAGE_READ, bytes, 1, buffer)
                                 .sendToTarget(); // Send the obtained bytes to the UI activity

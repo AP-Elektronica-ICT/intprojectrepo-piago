@@ -41,7 +41,8 @@ namespace PiaGo_CSharp
         List<string> songlist;
 
         //PROPERTIES FOR BLUETOOTH
-        string macAddress = "B4E62DDF4B83"; //BE: "98D331FB1776";
+        string BTmacFIN = "B4E62DDF4B83"; 
+        string BTmacBE = "98D331FB1776";
         string comport = "";
         SerialPort sp1 = new SerialPort();
         int prevBTKey = -1;
@@ -153,7 +154,7 @@ namespace PiaGo_CSharp
             try
             {
                 SerialPort sp1 = (SerialPort)sender;
-                dataIn = sp1.ReadLine(); //.Substring(0, 5);                
+                dataIn = sp1.ReadLine().Substring(0, 5);                
                 SetText(dataIn);
                 PlayBTNote(dataIn);
             }
@@ -392,19 +393,26 @@ namespace PiaGo_CSharp
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
                     string pnpDeviceID = queryObj["PNPDeviceID"].ToString();
-
-                    if (pnpDeviceID.IndexOf(macAddress) == -1)
+                    //check for Belgian bluetooth mac address (Benoît's HC-05 module)
+                    if (pnpDeviceID.IndexOf(BTmacBE) == -1)
                     {
                         //no mac address found
-                        //Console.WriteLine("no correct mac address");
                     }
                     else
                     {
                         //mac address found
-                        //Console.WriteLine("----------------------------------");
-                        //Console.WriteLine("Correct mac address found");
-                        //Console.WriteLine(queryObj["DeviceID"].ToString());
-                        //Console.WriteLine("----------------------------------");
+                        comport = queryObj["DeviceID"].ToString();
+                        break;
+                    }
+
+                    //check for Finnish bluetooth mac address (PiaGo prototype)
+                    if (pnpDeviceID.IndexOf(BTmacFIN) == -1)
+                    {
+                        //no mac address found
+                    }
+                    else
+                    {
+                        //mac address found
                         comport = queryObj["DeviceID"].ToString();
                         break;
                     }

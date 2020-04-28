@@ -12,14 +12,10 @@ namespace Midiparser
         static void Main(string[] args)
         {
             var midiFile = MidiFile.Read("jacob.midi");
-
-            File.WriteAllLines("testmidifilewii.txt",
+ 
+            File.WriteAllLines("parsedJacob.txt",
                       midiFile.GetNotes()
                               .Select(n => $"{n.NoteNumber} {n.Time} {n.Length}"));
-            
-
-
-
         }
     }
 }

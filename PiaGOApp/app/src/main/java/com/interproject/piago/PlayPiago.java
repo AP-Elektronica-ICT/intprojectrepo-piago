@@ -3,11 +3,15 @@ package com.interproject.piago;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -136,15 +140,17 @@ public class PlayPiago extends AppCompatActivity {
                             }
                         }
                         if(fail == false) {
+
                             mConnectedThread = new ConnectedThread(mBTSocket);
                             mConnectedThread.start();
-
+                            mButtonAutoCnct.setBackgroundColor(Color.GREEN);
                             mHandler.obtainMessage(CONNECTING_STATUS, 1, -1, "Piago Keyboard")
                                     .sendToTarget();
-                            mButtonAutoCnct.setBackgroundColor(Color.GREEN);
+
                         }
                     }
                 }.start();
+                //mButtonAutoCnct.setBackgroundColor(Color.GREEN);
             }
         });
 
@@ -157,27 +163,10 @@ public class PlayPiago extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    //String info = ((TextView) v).getText().toString();
-                    //mReadBuffer.setText(readMessage);
-                    //int i = Integer.parseInt(readMessage);
-                    //ReceivedBluetoothSignal=readMessage;
-//                    String toneToPlay= (readMessage.substring(0,6));
-//                    ReceivedBluetoothSignal="1";
-//                    playSound(toneToPlay);
-                    //String toneToPlay= (readMessage.substring(0,6));
                     CheckReceived="1";
                     ReceivedBluetoothSignal=(readMessage.substring(0,5));
-                    //playSound(ReceivedBluetoothSignal);
-                    Log.d("BTRECEIVED", "handleMessage: reveiving msg from arduino"+ReceivedBluetoothSignal);
-
+                    Log.d("BTRECEIVED", "handleMessage: receiving msg from arduino"+ReceivedBluetoothSignal);
                 }
-
-//                if(msg.what == CONNECTING_STATUS){
-//                    /*if(msg.arg1 == 1)
-//                        //mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-//                    else
-//                        //mBluetoothStatus.setText("Connection Failed");*/
-//                }
             }
         };
 

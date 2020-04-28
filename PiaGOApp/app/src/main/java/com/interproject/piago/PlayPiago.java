@@ -238,189 +238,158 @@ public class PlayPiago extends AppCompatActivity {
             switch (sound){
                 case "00000":{
                     pressedTile = findViewById(R.id.tile_white_0);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[0], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[0], pressedTile);
                     break;
                 }
                 case "00010":{
                     pressedTile = findViewById(R.id.tile_white_1);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[2], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[2], pressedTile);
 
                     break;
                 }
                 case "00100":{
                     pressedTile = findViewById(R.id.tile_white_2);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[4], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[4], pressedTile);
                     break;
                 }
                 case "00110":{
                     pressedTile = findViewById(R.id.tile_white_3);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[6], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[6], pressedTile);
                     break;
                 }
                 case "00111":{
                     pressedTile = findViewById(R.id.tile_white_4);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[7], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[7], pressedTile);
                     break;
                 }
                 case "01001":{
                     pressedTile = findViewById(R.id.tile_white_5);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[9], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[9], pressedTile);
                     break;
                 }
                 case "01011":{
                     pressedTile = findViewById(R.id.tile_white_6);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[11], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[11], pressedTile);
                     break;
                 }
                 case "01100":{
                     pressedTile = findViewById(R.id.tile_white_7);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[12], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[12], pressedTile);
                     break;
                 }
                 case "01110":{
                     pressedTile = findViewById(R.id.tile_white_8);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[14], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[14], pressedTile);
                     break;
                 }
                 case "10000":{
                     pressedTile = findViewById(R.id.tile_white_9);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[16], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[16], pressedTile);
                     break;
                 }
                 case "10010":{
                     pressedTile = findViewById(R.id.tile_white_10);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[18], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[18], pressedTile);
                     break;
                 }
                 case "10011":{
                     pressedTile = findViewById(R.id.tile_white_11);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[19], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[19], pressedTile);
                     break;
                 }
                 case "10101":{
                     pressedTile = findViewById(R.id.tile_white_12);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[21], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[21], pressedTile);
                     break;
                 }
                 case "10111":{
                     pressedTile = findViewById(R.id.tile_white_13);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[23], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[23], pressedTile);
                     break;
                 }
                 case "11000":{
                     pressedTile = findViewById(R.id.tile_white_14);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[24], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[24], pressedTile);
                     break;
                 }
                 case "11010":{
                     pressedTile = findViewById(R.id.tile_white_15);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[26], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[26], pressedTile);
                     break;
                 }
                 case "11100":{
                     pressedTile = findViewById(R.id.tile_white_16);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[28], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[28], pressedTile);
                     break;
                 }
                 case "11110":{
                     pressedTile = findViewById(R.id.tile_white_17);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[30], R.drawable.tile_white, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[30], pressedTile);
                     break;
                 }
                 case "00001":{
                     pressedTile = findViewById(R.id.tile_black_0);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[1], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[1], pressedTile);
                     break;
                 }
                 case "00011":{
                     pressedTile = findViewById(R.id.tile_black_1);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[3], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[3], pressedTile);
                     break;
                 }
                 case "00101":{
                     pressedTile = findViewById(R.id.tile_black_2);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[5], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[5], pressedTile);
                     break;
                 }
                 case "01000":{
                     pressedTile = findViewById(R.id.tile_black_3);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[8], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[8], pressedTile);
                     break;
                 }
                 case "01010":{
                     pressedTile = findViewById(R.id.tile_black_4);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[10], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[10], pressedTile);
                     break;
                 }
                 case "01101":{
                     pressedTile = findViewById(R.id.tile_black_5);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[13], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[13], pressedTile);
                     break;
                 }
                 case "01111":{
                     pressedTile = findViewById(R.id.tile_black_6);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[15], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[15], pressedTile);
                     break;
                 }
                 case "10001":{
                     pressedTile = findViewById(R.id.tile_black_7);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[17], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[17], pressedTile);
                     break;
                 }
                 case "10100":{
                     pressedTile = findViewById(R.id.tile_black_8);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[20], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[20], pressedTile);
                     break;
                 }
                 case "10110":{
                     pressedTile = findViewById(R.id.tile_black_9);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[22], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[22], pressedTile);
                     break;
                 }
                 case "11001":{
                     pressedTile = findViewById(R.id.tile_black_10);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[25], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[25], pressedTile);
                     break;
                 }
                 case "11011":{
                     pressedTile = findViewById(R.id.tile_black_11);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[27], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[27], pressedTile);
                     break;
                 }
                 case "11101":{
                     pressedTile = findViewById(R.id.tile_black_12);
-                    notePlayedBackGround = pressedTile.getBackground();
-                    PlayNotePause(octaveSelector.ActiveOctaveArray[29], R.drawable.tile_black, pressedTile);
+                    PlayNotePause(octaveSelector.ActiveOctaveArray[29], pressedTile);
                     break;
                 }
                 default:
@@ -443,13 +412,12 @@ public class PlayPiago extends AppCompatActivity {
         }
     }
 
-    private void PauseMethod(final int tileDrawable, final Button pressedTile){
+    private void PauseMethod(final Button pressedTile){
         pressedTile.setBackgroundResource(R.drawable.tile_pressed);
         new CountDownTimer(200, 100) {
             public void onFinish() {
                 // When timer is finished
                 // Execute your code here
-                //pressedTile.setBackgroundResource(tileDrawable);
                 pressedTile.setBackground(OriginalBackground(pressedTile.getId()));
             }
 
@@ -550,10 +518,10 @@ public class PlayPiago extends AppCompatActivity {
         alert.show();
     }
 
-    public void PlayNotePause(byte note, final int tileDrawable, final Button pressedTile){
+    public void PlayNotePause(byte note, final Button pressedTile){
         piagoMidiDriver.playNote(note);
         Log.i("Debugkey", "_______________Note played through PlayNotePause");
-        PauseMethod(tileDrawable, pressedTile);
+        PauseMethod(pressedTile);
     }
 
     public void octaveLower(View view) {
